@@ -1,4 +1,4 @@
-package com.oldnum7;
+package com.oldnum7.mvp;
 
 /**
  * <pre>
@@ -9,4 +9,5 @@ package com.oldnum7;
  * </pre>
  */
 public interface IMainPresenter extends MvpPresenter<IMainView> {
+    void getUsers(int since, int per_page);
 }

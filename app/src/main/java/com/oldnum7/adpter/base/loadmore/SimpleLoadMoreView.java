@@ -1,7 +1,7 @@
 package com.oldnum7.adpter.base.loadmore;
 
 
-import com.chad.library.R;
+import com.oldnum7.R;
 
 /**
  * Created by BlingBling on 2016/10/11.

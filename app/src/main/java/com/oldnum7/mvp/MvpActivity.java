@@ -1,4 +1,4 @@
-package com.oldnum7;
+package com.oldnum7.mvp;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -25,6 +25,11 @@ public class MvpActivity<V extends MvpView, P extends MvpPresenter<V>> extends A
         return presenter;
     }
 
+
+    public void setPresenter(@NonNull P presenter) {
+        this.presenter = presenter;
+    }
+
     @NonNull
     public V getMvpView() {
         return (V) this;
@@ -33,7 +38,9 @@ public class MvpActivity<V extends MvpView, P extends MvpPresenter<V>> extends A
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getPresenter() != null) {
+
+        if (createPresenter() != null) {
+            setPresenter(createPresenter());
             getPresenter().attachView(getPresenter().getView());
         }
     }
@@ -45,6 +52,4 @@ public class MvpActivity<V extends MvpView, P extends MvpPresenter<V>> extends A
             getPresenter().detachView();
         }
     }
-
-
 }

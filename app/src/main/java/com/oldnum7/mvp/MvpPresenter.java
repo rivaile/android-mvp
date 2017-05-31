@@ -1,4 +1,4 @@
-package com.oldnum7;
+package com.oldnum7.mvp;
 
 import android.support.annotation.UiThread;
 

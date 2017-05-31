@@ -8,10 +8,9 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.chad.library.R;
-import com.chad.library.adapter.base.callback.ItemDragAndSwipeCallback;
-import com.chad.library.adapter.base.listener.OnItemDragListener;
-import com.chad.library.adapter.base.listener.OnItemSwipeListener;
+import com.oldnum7.R;
+import com.oldnum7.adpter.base.listener.OnItemDragListener;
+import com.oldnum7.adpter.base.listener.OnItemSwipeListener;
 
 import java.util.Collections;
 import java.util.List;

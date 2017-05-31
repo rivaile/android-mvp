@@ -4,7 +4,7 @@ import android.support.annotation.LayoutRes;
 import android.util.SparseArray;
 import android.view.ViewGroup;
 
-import com.chad.library.adapter.base.entity.MultiItemEntity;
+import com.oldnum7.adpter.base.entity.MultiItemEntity;
 
 import java.util.List;
 

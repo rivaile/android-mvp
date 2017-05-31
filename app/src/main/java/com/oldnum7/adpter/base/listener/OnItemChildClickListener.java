@@ -2,7 +2,8 @@ package com.oldnum7.adpter.base.listener;
 
 import android.view.View;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.oldnum7.adpter.base.BaseQuickAdapter;
+
 
 /**
  * Created by AllenCoder on 2016/8/03.

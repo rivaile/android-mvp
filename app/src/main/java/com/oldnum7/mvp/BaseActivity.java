@@ -1,10 +1,11 @@
-package com.oldnum7;
+package com.oldnum7.mvp;
 
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.widget.LinearLayout;
 
+import com.oldnum7.R;
 import com.oldnum7.status.StatusLayoutManager;
 
 /**
@@ -18,7 +19,7 @@ import com.oldnum7.status.StatusLayoutManager;
 public class BaseActivity<V extends MvpView, P extends MvpPresenter<V>> extends MvpActivity<V, P> {
 
     protected StatusLayoutManager statusLayoutManager;
-    private LinearLayout mRootLayout;
+    protected LinearLayout mRootLayout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,19 +52,19 @@ public class BaseActivity<V extends MvpView, P extends MvpPresenter<V>> extends 
 
     }
 
-    private void loadData() {
+    protected void loadData() {
 
     }
 
-    private void initViews() {
+    protected void initViews() {
 
     }
 
-    private void initVariables() {
+    protected void initVariables() {
 
     }
 
-    private void initToolbar() {
+    protected void initToolbar() {
 
     }
 
