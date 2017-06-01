@@ -1,11 +1,14 @@
 package com.oldnum7.data.local;
 
+import android.content.Context;
+import android.support.annotation.NonNull;
+
 import com.oldnum7.data.TasksDataSource;
 import com.oldnum7.data.UserEntity;
 
 import java.util.List;
 
-import io.reactivex.Observable;
+import io.reactivex.Single;
 
 /**
  * <pre>
@@ -16,8 +19,23 @@ import io.reactivex.Observable;
  * </pre>
  */
 public class TasksLocalDataSource implements TasksDataSource {
+
+    private static TasksLocalDataSource INSTANCE;
+
+    // Prevent direct instantiation.
+    private TasksLocalDataSource(@NonNull Context context) {
+
+    }
+
+    public static TasksLocalDataSource getInstance(@NonNull Context context) {
+        if (INSTANCE == null) {
+            INSTANCE = new TasksLocalDataSource(context);
+        }
+        return INSTANCE;
+    }
+
     @Override
-    public Observable<List<UserEntity>> users(int since, int page) {
+    public Single<List<UserEntity>> getUsers(int since, int page) {
         return null;
     }
 }

@@ -1,4 +1,4 @@
-package com.oldnum7.net;
+package com.oldnum7.data.net;
 
 import com.oldnum7.Constants;
 

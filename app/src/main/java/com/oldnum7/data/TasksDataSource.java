@@ -17,5 +17,5 @@ public interface TasksDataSource {
     /**
      * Get an {@link Observable} which will emit a List of {@link UserEntity}.
      */
-    Observable<List<UserEntity>> users(int since, int page);
+    Observable<List<UserEntity>> getUsers(int since, int page);
 }

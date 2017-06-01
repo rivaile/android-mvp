@@ -6,7 +6,7 @@ import com.oldnum7.data.UserEntity;
 import com.oldnum7.mvp.BaseMvpPresenter;
 import com.oldnum7.mvp.IMainPresenter;
 import com.oldnum7.mvp.IMainView;
-import com.oldnum7.net.HttpFactory;
+import com.oldnum7.data.net.HttpFactory;
 
 import java.util.List;
 
@@ -24,12 +24,12 @@ public class MainPresenter extends BaseMvpPresenter<IMainView> implements IMainP
 
     private final String TAG = getClass().getSimpleName();
     private final HttpFactory mHttpFactory;
-    private final UserService mUserService;
+    private final ApiService mUserService;
 
     public MainPresenter() {
         mHttpFactory = new HttpFactory.Builder()
                 .build();
-        mUserService = mHttpFactory.createService(UserService.class);
+        mUserService = mHttpFactory.createService(ApiService.class);
     }
 
     @Override
