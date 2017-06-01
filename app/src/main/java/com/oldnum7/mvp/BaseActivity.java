@@ -8,6 +8,8 @@ import android.widget.LinearLayout;
 import com.oldnum7.R;
 import com.oldnum7.status.StatusLayoutManager;
 
+import butterknife.ButterKnife;
+
 /**
  * <Pre>
  * author : denglin
@@ -47,10 +49,17 @@ public class BaseActivity<V extends MvpView, P extends MvpPresenter<V>> extends 
 
         mRootLayout.addView(statusLayoutManager.getRootLayout());
 
+        ButterKnife.bind(this);
+
         initViews();
         loadData();
+        initEvent();
+    }
+
+    protected void initEvent() {
 
     }
+
 
     protected void loadData() {
 
@@ -68,4 +77,7 @@ public class BaseActivity<V extends MvpView, P extends MvpPresenter<V>> extends 
 
     }
 
+    public StatusLayoutManager getStatusLayoutManager() {
+        return statusLayoutManager;
+    }
 }

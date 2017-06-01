@@ -41,7 +41,7 @@ public class MvpActivity<V extends MvpView, P extends MvpPresenter<V>> extends A
 
         if (createPresenter() != null) {
             setPresenter(createPresenter());
-            getPresenter().attachView(getPresenter().getView());
+            getPresenter().attachView((V) this);
         }
     }
 

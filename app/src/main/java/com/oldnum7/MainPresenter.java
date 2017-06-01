@@ -40,11 +40,13 @@ public class MainPresenter extends BaseMvpPresenter<IMainView> implements IMainP
             @Override
             public void onResponse(Call<List<UserEntity>> call, Response<List<UserEntity>> response) {
                 Log.e(TAG, "onResponse: " + response.body().toString());
+                getView().getUsers(response.body());
             }
 
             @Override
             public void onFailure(Call<List<UserEntity>> call, Throwable t) {
                 Log.e(TAG, "onResponse: " + t.toString());
+                getView().showNetWorkError();
             }
         });
 
