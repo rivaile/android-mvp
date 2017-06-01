@@ -1,6 +1,6 @@
 package com.oldnum7.mvp;
 
-import com.oldnum7.UserEntity;
+import com.oldnum7.data.UserEntity;
 
 import java.util.List;
 

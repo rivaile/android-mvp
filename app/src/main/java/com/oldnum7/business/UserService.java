@@ -1,4 +1,6 @@
-package com.oldnum7;
+package com.oldnum7.business;
+
+import com.oldnum7.data.UserEntity;
 
 import java.util.List;
 

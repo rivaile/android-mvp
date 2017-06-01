@@ -6,7 +6,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.oldnum7.R;
-import com.oldnum7.UserEntity;
+import com.oldnum7.data.UserEntity;
 import com.oldnum7.adpter.base.BaseQuickAdapter;
 import com.oldnum7.adpter.base.BaseViewHolder;
 import com.oldnum7.base.App;

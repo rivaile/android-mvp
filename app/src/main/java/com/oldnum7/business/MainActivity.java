@@ -1,4 +1,4 @@
-package com.oldnum7;
+package com.oldnum7.business;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -6,8 +6,10 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.oldnum7.R;
 import com.oldnum7.adpter.UserAdapter;
 import com.oldnum7.adpter.base.BaseQuickAdapter;
+import com.oldnum7.data.UserEntity;
 import com.oldnum7.mvp.BaseActivity;
 import com.oldnum7.mvp.IMainPresenter;
 import com.oldnum7.mvp.IMainView;

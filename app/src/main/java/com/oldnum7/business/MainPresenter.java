@@ -1,7 +1,8 @@
-package com.oldnum7;
+package com.oldnum7.business;
 
 import android.util.Log;
 
+import com.oldnum7.data.UserEntity;
 import com.oldnum7.mvp.BaseMvpPresenter;
 import com.oldnum7.mvp.IMainPresenter;
 import com.oldnum7.mvp.IMainView;
@@ -29,7 +30,6 @@ public class MainPresenter extends BaseMvpPresenter<IMainView> implements IMainP
         mHttpFactory = new HttpFactory.Builder()
                 .build();
         mUserService = mHttpFactory.createService(UserService.class);
-
     }
 
     @Override
