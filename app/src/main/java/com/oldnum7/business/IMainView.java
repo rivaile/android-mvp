@@ -1,6 +1,7 @@
-package com.oldnum7.mvp;
+package com.oldnum7.business;
 
 import com.oldnum7.data.UserEntity;
+import com.oldnum7.mvp.MvpView;
 
 import java.util.List;
 

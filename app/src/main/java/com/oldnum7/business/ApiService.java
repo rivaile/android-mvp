@@ -4,7 +4,7 @@ import com.oldnum7.data.UserEntity;
 
 import java.util.List;
 
-import io.reactivex.Single;
+import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
@@ -19,5 +19,5 @@ import retrofit2.http.Query;
 public interface ApiService {
     //https://api.github.com/users?since=1&per_page=10
     @GET("getUsers")
-    Single<List<UserEntity>> getUsers(@Query("since") int since, @Query("per_page") int per_page);
+    Observable<List<UserEntity>> getUsers(@Query("since") int since, @Query("per_page") int per_page);
 }

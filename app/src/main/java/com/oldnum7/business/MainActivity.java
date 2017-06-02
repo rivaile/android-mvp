@@ -11,14 +11,12 @@ import com.oldnum7.adpter.UserAdapter;
 import com.oldnum7.adpter.base.BaseQuickAdapter;
 import com.oldnum7.data.UserEntity;
 import com.oldnum7.mvp.BaseActivity;
-import com.oldnum7.mvp.IMainPresenter;
-import com.oldnum7.mvp.IMainView;
 
 import java.util.List;
 
 import butterknife.BindView;
 
-public class MainActivity extends BaseActivity<IMainView, IMainPresenter> implements IMainView, BaseQuickAdapter.RequestLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
+public class MainActivity extends BaseActivity<IMainContract.View, IMainContract.Presenter> implements IMainContract.View, BaseQuickAdapter.RequestLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.rv_list)
     RecyclerView mRvList;
@@ -38,7 +36,7 @@ public class MainActivity extends BaseActivity<IMainView, IMainPresenter> implem
 
     @NonNull
     @Override
-    public IMainPresenter createPresenter() {
+    public IMainContract.Presenter createPresenter() {
         mMainPresenter = new MainPresenter();
         return mMainPresenter;
     }
@@ -56,6 +54,17 @@ public class MainActivity extends BaseActivity<IMainView, IMainPresenter> implem
     }
 
     @Override
+    public void setLoadingIndicator(final boolean active) {
+        
+        mSrRefresh.post(new Runnable() {
+            @Override
+            public void run() {
+                mSrRefresh.setRefreshing(active);
+            }
+        });
+    }
+
+    @Override
     public void getUsers(List<UserEntity> users) {
         getStatusLayoutManager().showContent();
 
@@ -64,7 +73,7 @@ public class MainActivity extends BaseActivity<IMainView, IMainPresenter> implem
             mSrRefresh.setRefreshing(false);
             mUserAdapter.setNewData(users);
         } else { //不是刷新...
-            if (users.size()<10){
+            if (users.size() < 10) {
                 mUserAdapter.loadMoreEnd(true);
             }
             mUserAdapter.addData(users);
@@ -113,5 +122,10 @@ public class MainActivity extends BaseActivity<IMainView, IMainPresenter> implem
         mUserAdapter.setEnableLoadMore(false);
         mSince = 1;
         mMainPresenter.getUsers(mSince, 10);
+    }
+
+    @Override
+    public void setPresenter(Object presenter) {
+
     }
 }

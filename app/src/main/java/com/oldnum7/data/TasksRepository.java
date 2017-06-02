@@ -9,7 +9,10 @@ import java.util.Map;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
+import io.reactivex.functions.Predicate;
 
 /**
  * <pre>
@@ -70,11 +73,20 @@ public class TasksRepository implements TasksDataSource {
     public static void destroyInstance() {
         INSTANCE = null;
     }
+
+    public void refreshTasks() {
+        mCacheIsDirty = true;
+    }
+
     //TODO....
 
     /**
      * Gets tasks from cache, local data source (SQLite) or remote data source, whichever is
      * available first.
+     * 缓存情况:
+     * 1. 死的列表:
+     * 2. 登录与否:
+     * 3. 分页加载:
      */
     @Override
     public Observable<List<UserEntity>> getUsers(int since, int page) {
@@ -86,7 +98,7 @@ public class TasksRepository implements TasksDataSource {
                     .toList()
                     .flatMapObservable(new Function<List<UserEntity>, ObservableSource<? extends List<UserEntity>>>() {
                         @Override
-                        public ObservableSource<? extends List<UserEntity>> apply(@io.reactivex.annotations.NonNull List<UserEntity> userEntities) throws Exception {
+                        public ObservableSource<? extends List<UserEntity>> apply(List<UserEntity> userEntities) throws Exception {
                             return Observable.just(userEntities);
                         }
                     });
@@ -96,39 +108,85 @@ public class TasksRepository implements TasksDataSource {
 
         Observable<List<UserEntity>> remoteTasks = getAndSaveRemoteTasks();
 
-        return null;
+        if (mCacheIsDirty) {
+            return remoteTasks;
+        } else {
+            // Query the local storage if available. If not, query the network.
+            Observable<List<UserEntity>> localTasks = getAndCacheLocalTasks();
+            return Observable.concat(localTasks, remoteTasks)
+                    .filter(new Predicate<List<UserEntity>>() {
+                        @Override
+                        public boolean test(List<UserEntity> userEntities) throws Exception {
+                            return !userEntities.isEmpty();
+                        }
+                    })
+                    .first(localTasks.blockingFirst())
+                    .flatMapObservable(new Function<List<UserEntity>, ObservableSource<List<UserEntity>>>() {
+                        @Override
+                        public ObservableSource<List<UserEntity>> apply(List<UserEntity> userEntities) throws Exception {
+                            return Observable.just(userEntities);
+                        }
+                    });
+        }
     }
-
 
     private Observable<List<UserEntity>> getAndSaveRemoteTasks() {
-//        return mTasksRemoteDataSource
-//                .getUsers(10,10)
-//                .flatMap(new Function<List<UserEntity>, ObservableSource<?>>() {
-//                    @Override
-//                    public ObservableSource<?> apply(@io.reactivex.annotations.NonNull List<UserEntity> userEntities) throws Exception {
-//                        return null;
-//                    }
-//                })
-//                .flatMap(new Func1<List<Task>, Observable<List<Task>>>() {
-//                    @Override
-//                    public Observable<List<Task>> call(List<Task> tasks) {
-//                        return Observable.from(tasks).doOnNext(new Action1<Task>() {
-//                            @Override
-//                            public void call(Task task) {
-//                                mTasksLocalDataSource.saveTask(task);
-//                                mCachedTasks.put(task.getId(), task);
-//                            }
-//                        }).toList();
-//                    }
-//                })
-//                .doOnCompleted(new Action0() {
-//                    @Override
-//                    public void call() {
-//                        mCacheIsDirty = false;
-//                    }
-//                });
-        return null;
+        return mTasksRemoteDataSource
+                .getUsers(10, 10)
+                .flatMap(new Function<List<UserEntity>, ObservableSource<List<UserEntity>>>() {
+                    @Override
+                    public ObservableSource<List<UserEntity>> apply(List<UserEntity> userEntities) throws Exception {
+
+                        return Observable.fromIterable(userEntities)
+                                .doOnNext(new Consumer<UserEntity>() {
+                                    @Override
+                                    public void accept(UserEntity userEntity) throws Exception {
+                                        mTasksLocalDataSource.saveTask(userEntity);
+                                        mCachedTasks.put(userEntity.getId() + "", userEntity);
+                                    }
+                                }).toList()
+                                .flatMapObservable(new Function<List<UserEntity>, ObservableSource<? extends List<UserEntity>>>() {
+                                    @Override
+                                    public ObservableSource<? extends List<UserEntity>> apply(List<UserEntity> userEntities) throws Exception {
+                                        return Observable.just(userEntities);
+                                    }
+                                });
+                    }
+                }).doOnComplete(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        mCacheIsDirty = false;
+                    }
+                });
+
     }
 
+    @Override
+    public void saveTask(@NonNull UserEntity userEntity) {
+
+    }
+
+    private Observable<List<UserEntity>> getAndCacheLocalTasks() {
+        return mTasksLocalDataSource.getUsers(1, 10)
+                .flatMap(new Function<List<UserEntity>, Observable<List<UserEntity>>>() {
+                    @Override
+                    public Observable<List<UserEntity>> apply(List<UserEntity> userEntities) throws Exception {
+                        return Observable.fromIterable(userEntities)
+                                .doOnNext(new Consumer<UserEntity>() {
+                                    @Override
+                                    public void accept(UserEntity userEntity) throws Exception {
+                                        mCachedTasks.put(userEntity.getId() + "", userEntity);
+                                    }
+                                }).toList()
+                                .flatMapObservable(new Function<List<UserEntity>, ObservableSource<? extends List<UserEntity>>>() {
+                                    @Override
+                                    public ObservableSource<List<UserEntity>> apply(List<UserEntity> userEntities) throws Exception {
+                                        return Observable.just(userEntities);
+                                    }
+                                });
+                    }
+
+                });
+    }
 
 }

@@ -56,6 +56,8 @@ public class BaseActivity<V extends MvpView, P extends MvpPresenter<V>> extends 
         initEvent();
     }
 
+
+
     protected void initEvent() {
 
     }

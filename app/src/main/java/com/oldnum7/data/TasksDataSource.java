@@ -1,6 +1,8 @@
 package com.oldnum7.data;
 
 
+import android.support.annotation.NonNull;
+
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -18,4 +20,7 @@ public interface TasksDataSource {
      * Get an {@link Observable} which will emit a List of {@link UserEntity}.
      */
     Observable<List<UserEntity>> getUsers(int since, int page);
+
+
+    void saveTask(@NonNull UserEntity userEntity);
 }

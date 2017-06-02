@@ -1,5 +1,7 @@
 package com.oldnum7.data.remote;
 
+import android.support.annotation.NonNull;
+
 import com.oldnum7.business.ApiService;
 import com.oldnum7.data.TasksDataSource;
 import com.oldnum7.data.UserEntity;
@@ -7,7 +9,7 @@ import com.oldnum7.data.net.HttpFactory;
 
 import java.util.List;
 
-import io.reactivex.Single;
+import io.reactivex.Observable;
 
 /**
  * <pre>
@@ -37,8 +39,13 @@ public class TasksRemoteDataSource implements TasksDataSource {
     }
 
     @Override
-    public Single<List<UserEntity>> getUsers(int since, int per_page) {
+    public Observable<List<UserEntity>> getUsers(int since, int per_page) {
         mApiService = mHttpFactory.createService(ApiService.class);
         return mApiService.getUsers(since, per_page);
+    }
+
+    @Override
+    public void saveTask(@NonNull UserEntity userEntity) {
+
     }
 }

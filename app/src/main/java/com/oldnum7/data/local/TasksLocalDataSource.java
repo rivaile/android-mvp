@@ -8,7 +8,8 @@ import com.oldnum7.data.UserEntity;
 
 import java.util.List;
 
-import io.reactivex.Single;
+import io.reactivex.Observable;
+
 
 /**
  * <pre>
@@ -35,7 +36,12 @@ public class TasksLocalDataSource implements TasksDataSource {
     }
 
     @Override
-    public Single<List<UserEntity>> getUsers(int since, int page) {
+    public Observable<List<UserEntity>> getUsers(int since, int page) {
         return null;
+    }
+
+    @Override
+    public void saveTask(@NonNull UserEntity userEntity) {
+        //缓存...1.保存数据库 2.file文件。。。
     }
 }
