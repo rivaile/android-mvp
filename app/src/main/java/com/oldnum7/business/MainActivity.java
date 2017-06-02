@@ -55,13 +55,8 @@ public class MainActivity extends BaseActivity<IMainContract.View, IMainContract
 
     @Override
     public void setLoadingIndicator(final boolean active) {
-        
-        mSrRefresh.post(new Runnable() {
-            @Override
-            public void run() {
-                mSrRefresh.setRefreshing(active);
-            }
-        });
+
+        mSrRefresh.post(() -> mSrRefresh.setRefreshing(active));
     }
 
     @Override

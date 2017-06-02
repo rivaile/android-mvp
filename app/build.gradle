@@ -10,7 +10,18 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        jackOptions {
+            enabled true
+        }
+
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -48,7 +59,7 @@ dependencies {
     compile 'com.android.support:support-v4:25.3.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0-RC0'
     //GreenDao
-    
+
     //AndroidUtilCode
     compile 'com.blankj:utilcode:1.6.4'
 }

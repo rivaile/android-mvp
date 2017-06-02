@@ -7,20 +7,12 @@ import com.oldnum7.data.TasksRepository;
 import com.oldnum7.data.UserEntity;
 import com.oldnum7.data.local.TasksLocalDataSource;
 import com.oldnum7.data.remote.TasksRemoteDataSource;
+import com.oldnum7.domain.usecase.GetUsersCase;
 import com.oldnum7.mvp.BaseMvpPresenter;
 
 import java.util.List;
 
-import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
-import io.reactivex.SingleObserver;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Function;
-import io.reactivex.functions.Predicate;
-import io.reactivex.schedulers.Schedulers;
+import io.reactivex.observers.DisposableObserver;
 
 /**
  * author : denglin
@@ -35,11 +27,12 @@ public class MainPresenter extends BaseMvpPresenter<IMainContract.View> implemen
     @NonNull
     private final TasksRepository mTasksRepository = TasksRepository.getInstance(TasksRemoteDataSource.getInstance(), TasksLocalDataSource.getInstance(App.getmContext()));
 
-    private CompositeDisposable mSubscriptions = new CompositeDisposable();
+    private final GetUsersCase getUserListUseCase;
 
     private boolean mFirstLoad = true;
 
     public MainPresenter() {
+        getUserListUseCase = new GetUsersCase();
     }
 
     @Override
@@ -54,7 +47,7 @@ public class MainPresenter extends BaseMvpPresenter<IMainContract.View> implemen
 
     @Override
     public void unsubscribe() {
-        mSubscriptions.clear();
+        getUserListUseCase.dispose();
     }
 
     public void loadData(boolean forceUpdate) {
@@ -76,53 +69,62 @@ public class MainPresenter extends BaseMvpPresenter<IMainContract.View> implemen
             mTasksRepository.refreshTasks();
         }
 
+//        mSubscriptions.clear();
 
-        mSubscriptions.clear();
-
-        Observable<List<UserEntity>> tasks = mTasksRepository
-                .getUsers(10, 10);
-        Observable<UserEntity> userObservable = tasks
-                .flatMap(new Function<List<UserEntity>, ObservableSource<UserEntity>>() {
-                    @Override
-                    public ObservableSource<UserEntity> apply(List<UserEntity> userEntities) throws Exception {
-                        return Observable.fromIterable(userEntities);
-                    }
-                });
-
-        SingleObserver<List<UserEntity>> observer = userObservable
-                .filter(new Predicate<UserEntity>() {
-                    @Override
-                    public boolean test(UserEntity userEntity) throws Exception {
-                        return true;
-                    }
-                })
-//                .doFinally()
-                .doOnTerminate(new Action() {
-                    @Override
-                    public void run() throws Exception {
-                        getView().setLoadingIndicator(false);
-                    }
-                })
-                .toList()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new SingleObserver<List<UserEntity>>() {
-                    @Override
-                    public void onSubscribe(@io.reactivex.annotations.NonNull Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onSuccess(@io.reactivex.annotations.NonNull List<UserEntity> userEntities) {
-                        getView().getUsers(userEntities);
-                    }
-
-                    @Override
-                    public void onError(@io.reactivex.annotations.NonNull Throwable e) {
-
-                    }
-                });
+        //
+//        Observable<List<UserEntity>> tasks = mTasksRepository
+//                .getUsers(10, 10);
+//        Observable<UserEntity> userObservable = tasks
+//                .flatMap(new Function<List<UserEntity>, ObservableSource<UserEntity>>() {
+//                    @Override
+//                    public ObservableSource<UserEntity> apply(List<UserEntity> userEntities) throws Exception {
+//                        return Observable.fromIterable(userEntities);
+//                    }
+//                });
+//
+//        SingleObserver<List<UserEntity>> observer = userObservable
+//                .filter(userEntity -> true)
+////                .doFinally()
+//                .doOnTerminate(() -> getView().setLoadingIndicator(false))
+//                .toList()
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribeWith(new SingleObserver<List<UserEntity>>() {
+//                    @Override
+//                    public void onSubscribe(@io.reactivex.annotations.NonNull Disposable d) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onSuccess(@io.reactivex.annotations.NonNull List<UserEntity> userEntities) {
+//                        getView().getUsers(userEntities);
+//                    }
+//
+//                    @Override
+//                    public void onError(@io.reactivex.annotations.NonNull Throwable e) {
+//
+//                    }
+//                });
 //        mSubscriptions.add(observer.);
+
+
+        getUserListUseCase.execute(new DisposableObserver<List<UserEntity>>() {
+
+            @Override
+            public void onNext(@io.reactivex.annotations.NonNull List<UserEntity> userEntities) {
+
+            }
+
+            @Override
+            public void onError(@io.reactivex.annotations.NonNull Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        }, null);
     }
 
     private void processTasks(@NonNull List<UserEntity> tasks) {
