@@ -2,7 +2,7 @@ package com.oldnum7.domain.usecase;
 
 import com.oldnum7.base.App;
 import com.oldnum7.data.TasksRepository;
-import com.oldnum7.data.UserEntity;
+import com.oldnum7.data.entity.UserEntity;
 import com.oldnum7.data.local.TasksLocalDataSource;
 import com.oldnum7.data.remote.TasksRemoteDataSource;
 
@@ -32,7 +32,7 @@ public class GetUsersCase extends UseCase<List<UserEntity>, GetUsersCase.Params>
     Observable<List<UserEntity>> buildUseCaseObservable(Params params) {
 
         Observable<List<UserEntity>> tasks = mTasksRepository
-                .getUsers(10, 10);
+                .getUsers();
         Observable<UserEntity> userObservable = tasks
                 .flatMap(new Function<List<UserEntity>, ObservableSource<UserEntity>>() {
                     @Override

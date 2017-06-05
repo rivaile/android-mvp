@@ -9,5 +9,12 @@ package com.oldnum7;
  * </pre>
  */
 public class Constants {
-    public static final String HTTP_BASE_URL = "https://api.github.com/";
+
+    public final static int HTTP_SUCCESS = 0;
+
+
+//    public static final String HTTP_BASE_URL = "https://api.github.com/";
+    public static final String HTTP_BASE_URL = "http://192.168.1.176:8080/";
+
+
 }

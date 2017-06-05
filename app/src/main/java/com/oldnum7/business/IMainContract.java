@@ -1,6 +1,6 @@
 package com.oldnum7.business;
 
-import com.oldnum7.data.UserEntity;
+import com.oldnum7.data.entity.UserEntity;
 import com.oldnum7.mvp.BasePresenter;
 import com.oldnum7.mvp.BaseView;
 

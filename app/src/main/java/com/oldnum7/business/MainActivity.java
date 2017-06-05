@@ -7,9 +7,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.oldnum7.R;
-import com.oldnum7.adpter.UserAdapter;
-import com.oldnum7.adpter.base.BaseQuickAdapter;
-import com.oldnum7.data.UserEntity;
+import com.oldnum7.adapter.UserAdapter;
+import com.oldnum7.adapter.base.BaseQuickAdapter;
+import com.oldnum7.data.entity.UserEntity;
 import com.oldnum7.mvp.BaseActivity;
 
 import java.util.List;

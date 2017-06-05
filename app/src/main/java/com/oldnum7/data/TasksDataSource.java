@@ -3,6 +3,8 @@ package com.oldnum7.data;
 
 import android.support.annotation.NonNull;
 
+import com.oldnum7.data.entity.UserEntity;
+
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -21,6 +23,7 @@ public interface TasksDataSource {
      */
     Observable<List<UserEntity>> getUsers(int since, int page);
 
+    Observable<List<UserEntity>> getUsers();
 
     void saveTask(@NonNull UserEntity userEntity);
 }

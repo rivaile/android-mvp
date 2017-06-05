@@ -1,6 +1,7 @@
 package com.oldnum7.business;
 
-import com.oldnum7.data.UserEntity;
+import com.oldnum7.data.entity.HttpResponse;
+import com.oldnum7.data.entity.UserEntity;
 
 import java.util.List;
 
@@ -20,4 +21,7 @@ public interface ApiService {
     //https://api.github.com/users?since=1&per_page=10
     @GET("getUsers")
     Observable<List<UserEntity>> getUsers(@Query("since") int since, @Query("per_page") int per_page);
+
+    @GET("servlet")
+    Observable<HttpResponse<List<UserEntity>>> getUsers();
 }

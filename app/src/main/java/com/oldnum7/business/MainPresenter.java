@@ -3,16 +3,15 @@ package com.oldnum7.business;
 import android.support.annotation.NonNull;
 
 import com.oldnum7.base.App;
+import com.oldnum7.base.HttpObserver;
 import com.oldnum7.data.TasksRepository;
-import com.oldnum7.data.UserEntity;
+import com.oldnum7.data.entity.UserEntity;
 import com.oldnum7.data.local.TasksLocalDataSource;
 import com.oldnum7.data.remote.TasksRemoteDataSource;
 import com.oldnum7.domain.usecase.GetUsersCase;
 import com.oldnum7.mvp.BaseMvpPresenter;
 
 import java.util.List;
-
-import io.reactivex.observers.DisposableObserver;
 
 /**
  * author : denglin
@@ -108,20 +107,28 @@ public class MainPresenter extends BaseMvpPresenter<IMainContract.View> implemen
 //        mSubscriptions.add(observer.);
 
 
-        getUserListUseCase.execute(new DisposableObserver<List<UserEntity>>() {
+//        getUserListUseCase.execute(new DisposableObserver<List<UserEntity>>() {
+//
+//            @Override
+//            public void onNext(@io.reactivex.annotations.NonNull List<UserEntity> userEntities) {
+//
+//            }
+//
+//            @Override
+//            public void onError(@io.reactivex.annotations.NonNull Throwable e) {
+//
+//            }
+//
+//            @Override
+//            public void onComplete() {
+//
+//            }
+//        }, null);
 
+
+        getUserListUseCase.execute(new HttpObserver<List<UserEntity>>() {
             @Override
             public void onNext(@io.reactivex.annotations.NonNull List<UserEntity> userEntities) {
-
-            }
-
-            @Override
-            public void onError(@io.reactivex.annotations.NonNull Throwable e) {
-
-            }
-
-            @Override
-            public void onComplete() {
 
             }
         }, null);

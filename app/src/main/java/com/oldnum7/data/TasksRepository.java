@@ -2,6 +2,8 @@ package com.oldnum7.data;
 
 import android.support.annotation.NonNull;
 
+import com.oldnum7.data.entity.UserEntity;
+
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;

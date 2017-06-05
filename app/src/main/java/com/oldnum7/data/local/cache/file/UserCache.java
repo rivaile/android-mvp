@@ -16,7 +16,7 @@
 package com.oldnum7.data.local.cache.file;
 
 
-import com.oldnum7.data.UserEntity;
+import com.oldnum7.data.entity.UserEntity;
 
 import io.reactivex.Observable;
 

@@ -11,5 +11,6 @@ import com.oldnum7.mvp.MvpPresenter;
  * </pre>
  */
 public interface IMainPresenter extends MvpPresenter<IMainView> {
-    void getUsers(int since, int per_page);
+//    void getUsers(int since, int per_page);
+    void getUsers();
 }
