@@ -30,7 +30,7 @@ import java.util.concurrent.TimeUnit;
  * See also {@link Executors} for a list of factory methods to create common
  * {@link java.util.concurrent.ExecutorService}s for different scenarios.
  */
-public class UseCaseThreadPoolScheduler implements Executor {
+public class ThreadExecutor implements Executor {
 
     private final Handler mHandler = new Handler();
 
@@ -42,7 +42,7 @@ public class UseCaseThreadPoolScheduler implements Executor {
 
     ThreadPoolExecutor mThreadPoolExecutor;
 
-    public UseCaseThreadPoolScheduler() {
+    public ThreadExecutor() {
         mThreadPoolExecutor = new ThreadPoolExecutor(POOL_SIZE, MAX_POOL_SIZE, TIMEOUT,
                 TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(POOL_SIZE));
     }

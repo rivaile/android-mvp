@@ -17,6 +17,10 @@ package com.oldnum7.data.local.cache.file;
 
 import android.content.Context;
 
+import com.oldnum7.data.UserEntity;
+import com.oldnum7.data.local.cache.file.serializer.Serializer;
+import com.oldnum7.utils.ThreadExecutor;
+
 import java.io.File;
 
 import javax.inject.Inject;
@@ -45,7 +49,7 @@ public class UserCacheImpl implements UserCache {
     private final ThreadExecutor threadExecutor;
 
     /**
-     * Constructor of the class {@link UserCacheImpl}.
+     * Constructor of the class {@link UserCache Impl}.
      *
      * @param context     A
      * @param serializer  {@link Serializer} for object serialization.
@@ -78,7 +82,7 @@ public class UserCacheImpl implements UserCache {
                     emitter.onNext(userEntity);
                     emitter.onComplete();
                 } else {
-                    emitter.onError(new UserNotFoundException());
+//                    emitter.onError(new UserNotFoundException());
                 }
             }
         });
@@ -87,8 +91,8 @@ public class UserCacheImpl implements UserCache {
     @Override
     public void put(UserEntity userEntity) {
         if (userEntity != null) {
-            final File userEntityFile = this.buildFile(userEntity.getUserId());
-            if (!isCached(userEntity.getUserId())) {
+            final File userEntityFile = this.buildFile(userEntity.getId());
+            if (!isCached(userEntity.getId())) {
                 final String jsonString = this.serializer.serialize(userEntity, UserEntity.class);
                 this.executeAsynchronously(new CacheWriter(this.fileManager, userEntityFile, jsonString));
                 setLastCacheUpdateTimeMillis();

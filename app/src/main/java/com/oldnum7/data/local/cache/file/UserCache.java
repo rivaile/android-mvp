@@ -15,7 +15,8 @@
  */
 package com.oldnum7.data.local.cache.file;
 
-import com.fernandocejas.android10.sample.data.entity.UserEntity;
+
+import com.oldnum7.data.UserEntity;
 
 import io.reactivex.Observable;
 
