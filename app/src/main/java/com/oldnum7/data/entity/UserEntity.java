@@ -10,10 +10,20 @@ package com.oldnum7.data.entity;
  */
 public class UserEntity {
 
+    private int id;
+
 
     private String headImg;
     private String token;
     private String userName;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getHeadImg() {
         return headImg;

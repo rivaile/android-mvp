@@ -1,5 +1,7 @@
 package com.oldnum7.base;
 
+import android.util.Log;
+
 import io.reactivex.annotations.NonNull;
 import io.reactivex.observers.DisposableObserver;
 
@@ -14,6 +16,8 @@ import io.reactivex.observers.DisposableObserver;
 // TODO: 2017/6/2 封装异常信息
 public class HttpObserver<T> extends DisposableObserver<T> {
 
+    private static final String TAG = "";
+
     @Override
     public void onNext(@NonNull T t) {
         /* no-op */
@@ -22,12 +26,12 @@ public class HttpObserver<T> extends DisposableObserver<T> {
     @Override
     public void onError(@NonNull Throwable e) {
         /*no-op*/
-
+        Log.e(TAG, "onError: " + e.toString());
     }
 
     @Override
     public void onComplete() {
         /* no-op */
-
+        Log.e(TAG, "onComplete: ");
     }
 }

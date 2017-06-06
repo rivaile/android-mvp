@@ -13,7 +13,9 @@ import javax.net.ssl.X509TrustManager;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
@@ -91,9 +93,14 @@ public class HttpFactory {
 //        } else {
 //            logInterceptor.setLevel(CustomHttpLogInterceptor.Level.BASIC);
 //        }
+
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+
         // for test
 //        logInterceptor.setLevel(CustomHttpLogInterceptor.Level.BODY);
-//        interceptors.add(logInterceptor);
+        interceptors.add(logging);
+
         interceptors.addAll(builder.interceptors);
 
         // add Network interceptors
@@ -118,88 +125,7 @@ public class HttpFactory {
         mBaseUrl = Constants.HTTP_BASE_URL;
     }
 
-    /**
-     * 设置HTTPS相关
-     */
-//    private void setSslSocketFactory() {
-//
-//        try {
-//            // 这里直接创建一个不做证书串验证的TrustManager
-//            mX509TrustManager = new X509TrustManager() {
-//                @Override
-//                public void checkClientTrusted(X509Certificate[] chain, String authType)
-//                        throws CertificateException {
-//                }
-//
-//                @Override
-//                public void checkServerTrusted(X509Certificate[] chain, String authType)
-//                        throws CertificateException {
-//
-//                    if (chain == null) {
-//                        throw new IllegalArgumentException("check server X509Certificate is null");
-//                    }
-//
-//                    if (chain.length < 0) {
-//                        throw new IllegalArgumentException("check server X509Certificate is empty");
-//                    }
-//
-//                    for (X509Certificate cert : chain) {
-//
-//                        // 检查服务端证书是否有问题
-//                        cert.checkValidity();
-//
-//                        String certName = "51zhanke.com_release.bks";
-//                        try {
-//                            InputStream in = new BufferedInputStream(BaseApplication.getContext().getAssets().open(certName));
-//                            CertificateFactory certificateFactory = CertificateFactory.getInstance("X.509");
-//                            List<X509Certificate> serverCert = (List<X509Certificate>) certificateFactory.generateCertificates(in);
-//
-//                            // 和App内证书做比对
-//                            for (X509Certificate x509Certificate : serverCert) {
-//                                cert.verify(x509Certificate.getPublicKey());
-//                            }
-//
-//                        } catch (IOException e) {
-//                            e.printStackTrace();
-//                        } catch (NoSuchAlgorithmException e) {
-//                            e.printStackTrace();
-//                        } catch (SignatureException e) {
-//                            e.printStackTrace();
-//                        } catch (NoSuchProviderException e) {
-//                            e.printStackTrace();
-//                        } catch (InvalidKeyException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                }
-//
-//                @Override
-//                public X509Certificate[] getAcceptedIssuers() {
-//                    return new X509Certificate[]{};
-//                }
-//            };
-//
-//            hostnameVerifier = new HostnameVerifier() {
-//                @Override
-//                public boolean verify(String hostname, SSLSession session) {
-//                    // 对Hostname 进行强校验
-//                    if (hostname.equals(session.getPeerHost())) {
-//                        return true;
-//                    } else {
-//                        return false;
-//                    }
-//                }
-//            };
-//
-//            // Install the all-trusting trust manager
-//            final SSLContext sslContext = SSLContext.getInstance("TLS");
-//            sslContext.init(null, new TrustManager[]{mX509TrustManager}, new java.security.SecureRandom());
-//            // Create an ssl socket factory with our all-trusting manager
-//            mSslSocketFactory = sslContext.getSocketFactory();
-//        } catch (Exception e) {
-//            Log.e(TAG, e.getMessage());
-//        }
-//    }
+
     private void createHttpClient() {
 //        File cacheFile = new File(BaseApplication.getContext().getCacheDir(), "app_cache");
 //        Cache cache = new Cache(cacheFile, CACHE_SIZE);
@@ -241,6 +167,7 @@ public class HttpFactory {
         mRetrofit = new Retrofit.Builder()
                 .baseUrl(mBaseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(mOkHttpClient)
                 .build();
     }

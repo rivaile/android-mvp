@@ -10,7 +10,7 @@ package com.oldnum7;
  */
 public class Constants {
 
-    public final static int HTTP_SUCCESS = 0;
+    public final static int HTTP_SUCCESS = 200;
 
 
 //    public static final String HTTP_BASE_URL = "https://api.github.com/";

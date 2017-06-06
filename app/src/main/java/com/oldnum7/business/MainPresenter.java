@@ -40,6 +40,11 @@ public class MainPresenter extends BaseMvpPresenter<IMainContract.View> implemen
     }
 
     @Override
+    public void getUsers() {
+
+    }
+
+    @Override
     public void subscribe() {
         loadData(false);
     }
@@ -125,13 +130,19 @@ public class MainPresenter extends BaseMvpPresenter<IMainContract.View> implemen
 //            }
 //        }, null);
 
-
         getUserListUseCase.execute(new HttpObserver<List<UserEntity>>() {
             @Override
-            public void onNext(@io.reactivex.annotations.NonNull List<UserEntity> userEntities) {
-
+            public void onNext(List<UserEntity> userEntities) {
+                getView().getUsers(userEntities);
             }
+
+//            @Override
+//            public void onComplete() {
+//                super.onComplete();
+//                getView().setLoadingIndicator(false);
+//            }
         }, null);
+
     }
 
     private void processTasks(@NonNull List<UserEntity> tasks) {

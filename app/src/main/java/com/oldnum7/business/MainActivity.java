@@ -1,6 +1,7 @@
 package com.oldnum7.business;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -50,7 +51,14 @@ public class MainActivity extends BaseActivity<IMainContract.View, IMainContract
     @Override
     protected void loadData() {
         showLoading();
-        mMainPresenter.getUsers(mSince, 10);
+//        mMainPresenter.getUsers(mSince, 10);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mMainPresenter.subscribe();
+            }
+        },2000);
+
     }
 
     @Override
@@ -63,16 +71,19 @@ public class MainActivity extends BaseActivity<IMainContract.View, IMainContract
     public void getUsers(List<UserEntity> users) {
         getStatusLayoutManager().showContent();
 
+
+        mUserAdapter.setNewData(users);
+
         if (mSrRefresh.isRefreshing()) {//刷新
             mUserAdapter.setEnableLoadMore(true);
             mSrRefresh.setRefreshing(false);
             mUserAdapter.setNewData(users);
         } else { //不是刷新...
-            if (users.size() < 10) {
-                mUserAdapter.loadMoreEnd(true);
-            }
-            mUserAdapter.addData(users);
-            mUserAdapter.loadMoreComplete();
+//            if (users.size() < 10) {
+//                mUserAdapter.loadMoreEnd(true);
+//            }
+//            mUserAdapter.addData(users);
+//            mUserAdapter.loadMoreComplete();
         }
     }
 
@@ -102,21 +113,24 @@ public class MainActivity extends BaseActivity<IMainContract.View, IMainContract
         mRvList.setLayoutManager(new LinearLayoutManager(this));
         mRvList.hasFixedSize();
         mUserAdapter = new UserAdapter(R.layout.item_user, null);
-        mUserAdapter.setOnLoadMoreListener(this, mRvList);
+//        mUserAdapter.setOnLoadMoreListener(this, mRvList);
         mRvList.setAdapter(mUserAdapter);
     }
 
     @Override
     public void onLoadMoreRequested() {
-        mSince += 10;
-        mMainPresenter.getUsers(mSince, 10);
+//        mSince += 10;
+//        mMainPresenter.getUsers(mSince, 10);
+
     }
 
     @Override
     public void onRefresh() {
-        mUserAdapter.setEnableLoadMore(false);
-        mSince = 1;
-        mMainPresenter.getUsers(mSince, 10);
+//        mUserAdapter.setEnableLoadMore(false);
+//        mSince = 1;
+//        mMainPresenter.getUsers(mSince, 10);
+//        mMainPresenter.getUsers();
+        mMainPresenter.subscribe();
     }
 
     @Override

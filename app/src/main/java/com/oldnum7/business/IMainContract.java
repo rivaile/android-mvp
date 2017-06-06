@@ -33,5 +33,6 @@ public interface IMainContract {
         void loadData(boolean forceUpdate);
 
         void getUsers(int since, int per_page);
+        void getUsers();
     }
 }
