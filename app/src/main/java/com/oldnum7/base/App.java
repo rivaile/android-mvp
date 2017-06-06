@@ -3,6 +3,8 @@ package com.oldnum7.base;
 import android.app.Application;
 import android.content.Context;
 
+import com.blankj.utilcode.util.Utils;
+
 /**
  * <pre>
  *       author : denglin
@@ -18,6 +20,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         this.mContext = this;
+        Utils.init(this);
     }
 
     public static Context getmContext() {

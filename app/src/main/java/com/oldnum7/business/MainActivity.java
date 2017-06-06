@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 
 import com.oldnum7.R;
 import com.oldnum7.adapter.UserAdapter;
-import com.oldnum7.adapter.base.BaseQuickAdapter;
 import com.oldnum7.data.entity.UserEntity;
 import com.oldnum7.mvp.BaseActivity;
 
@@ -17,7 +16,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class MainActivity extends BaseActivity<IMainContract.View, IMainContract.Presenter> implements IMainContract.View, BaseQuickAdapter.RequestLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
+public class MainActivity extends BaseActivity<IMainContract.View, IMainContract.Presenter> implements IMainContract.View, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.rv_list)
     RecyclerView mRvList;
@@ -27,12 +26,13 @@ public class MainActivity extends BaseActivity<IMainContract.View, IMainContract
     private MainPresenter mMainPresenter;
     private UserAdapter mUserAdapter;
 
-    private int mSince = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mMainPresenter.setStatusLayoutManager(getStatusLayoutManager());
     }
 
     @NonNull
@@ -57,7 +57,7 @@ public class MainActivity extends BaseActivity<IMainContract.View, IMainContract
             public void run() {
                 mMainPresenter.subscribe();
             }
-        },2000);
+        }, 2000);
 
     }
 
@@ -71,19 +71,13 @@ public class MainActivity extends BaseActivity<IMainContract.View, IMainContract
     public void getUsers(List<UserEntity> users) {
         getStatusLayoutManager().showContent();
 
-
         mUserAdapter.setNewData(users);
 
         if (mSrRefresh.isRefreshing()) {//刷新
             mUserAdapter.setEnableLoadMore(true);
             mSrRefresh.setRefreshing(false);
             mUserAdapter.setNewData(users);
-        } else { //不是刷新...
-//            if (users.size() < 10) {
-//                mUserAdapter.loadMoreEnd(true);
-//            }
-//            mUserAdapter.addData(users);
-//            mUserAdapter.loadMoreComplete();
+
         }
     }
 
@@ -117,19 +111,10 @@ public class MainActivity extends BaseActivity<IMainContract.View, IMainContract
         mRvList.setAdapter(mUserAdapter);
     }
 
-    @Override
-    public void onLoadMoreRequested() {
-//        mSince += 10;
-//        mMainPresenter.getUsers(mSince, 10);
-
-    }
 
     @Override
     public void onRefresh() {
-//        mUserAdapter.setEnableLoadMore(false);
-//        mSince = 1;
-//        mMainPresenter.getUsers(mSince, 10);
-//        mMainPresenter.getUsers();
+
         mMainPresenter.subscribe();
     }
 

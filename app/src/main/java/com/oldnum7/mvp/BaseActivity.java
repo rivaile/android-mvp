@@ -1,12 +1,18 @@
 package com.oldnum7.mvp;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
+import android.util.AttributeSet;
+import android.view.View;
 import android.widget.LinearLayout;
 
 import com.oldnum7.R;
 import com.oldnum7.status.StatusLayoutManager;
+import com.zhy.autolayout.AutoFrameLayout;
+import com.zhy.autolayout.AutoLinearLayout;
+import com.zhy.autolayout.AutoRelativeLayout;
 
 import butterknife.ButterKnife;
 
@@ -23,6 +29,32 @@ public class BaseActivity<V extends MvpView, P extends MvpPresenter<V>> extends 
     protected StatusLayoutManager statusLayoutManager;
     protected LinearLayout mRootLayout;
 
+
+    private static final String LAYOUT_LINEARLAYOUT = "LinearLayout";
+    private static final String LAYOUT_FRAMELAYOUT = "FrameLayout";
+    private static final String LAYOUT_RELATIVELAYOUT = "RelativeLayout";
+
+
+    @Override
+    public View onCreateView(String name, Context context, AttributeSet attrs) {
+        View view = null;
+        if (name.equals(LAYOUT_FRAMELAYOUT)) {
+            view = new AutoFrameLayout(context, attrs);
+        }
+
+        if (name.equals(LAYOUT_LINEARLAYOUT)) {
+            view = new AutoLinearLayout(context, attrs);
+        }
+
+        if (name.equals(LAYOUT_RELATIVELAYOUT)) {
+            view = new AutoRelativeLayout(context, attrs);
+        }
+
+        if (view != null) return view;
+
+        return super.onCreateView(name, context, attrs);
+    }
+    
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +87,6 @@ public class BaseActivity<V extends MvpView, P extends MvpPresenter<V>> extends 
         loadData();
         initEvent();
     }
-
 
 
     protected void initEvent() {

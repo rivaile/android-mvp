@@ -1,5 +1,7 @@
 package com.oldnum7.domain.usecase;
 
+import android.util.Log;
+
 import com.oldnum7.base.App;
 import com.oldnum7.data.TasksRepository;
 import com.oldnum7.data.entity.UserEntity;
@@ -11,6 +13,7 @@ import java.util.List;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Action;
 import io.reactivex.functions.Function;
 
 /**
@@ -43,18 +46,24 @@ public class GetUsersCase extends UseCase<List<UserEntity>, GetUsersCase.Params>
 
         return userObservable
                 .filter(userEntity -> true)
-//                .doFinally()
-                .doOnTerminate(() -> {
-//                    getView().setLoadingIndicator(false);
-                })
                 .toList()
                 .flatMapObservable(new Function<List<UserEntity>, ObservableSource<List<UserEntity>>>() {
                     @Override
                     public ObservableSource<List<UserEntity>> apply(@NonNull List<UserEntity> userEntities) throws Exception {
                         return Observable.just(userEntities);
                     }
+                }).doOnTerminate(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        Log.e("TAG", "doOnTerminate: ");
+                    }
+                })
+                .doFinally(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        Log.e("TAG", "doFinally: ");
+                    }
                 });
-
     }
 
     public static final class Params {

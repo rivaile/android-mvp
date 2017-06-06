@@ -10,6 +10,7 @@ import com.oldnum7.data.local.TasksLocalDataSource;
 import com.oldnum7.data.remote.TasksRemoteDataSource;
 import com.oldnum7.domain.usecase.GetUsersCase;
 import com.oldnum7.mvp.BaseMvpPresenter;
+import com.oldnum7.status.StatusLayoutManager;
 
 import java.util.List;
 
@@ -27,11 +28,16 @@ public class MainPresenter extends BaseMvpPresenter<IMainContract.View> implemen
     private final TasksRepository mTasksRepository = TasksRepository.getInstance(TasksRemoteDataSource.getInstance(), TasksLocalDataSource.getInstance(App.getmContext()));
 
     private final GetUsersCase getUserListUseCase;
+    private StatusLayoutManager statusLayoutManager;
 
     private boolean mFirstLoad = true;
 
     public MainPresenter() {
         getUserListUseCase = new GetUsersCase();
+    }
+
+    public void setStatusLayoutManager(StatusLayoutManager statusLayoutManager) {
+        this.statusLayoutManager = statusLayoutManager;
     }
 
     @Override
@@ -73,64 +79,8 @@ public class MainPresenter extends BaseMvpPresenter<IMainContract.View> implemen
             mTasksRepository.refreshTasks();
         }
 
-//        mSubscriptions.clear();
 
-        //
-//        Observable<List<UserEntity>> tasks = mTasksRepository
-//                .getUsers(10, 10);
-//        Observable<UserEntity> userObservable = tasks
-//                .flatMap(new Function<List<UserEntity>, ObservableSource<UserEntity>>() {
-//                    @Override
-//                    public ObservableSource<UserEntity> apply(List<UserEntity> userEntities) throws Exception {
-//                        return Observable.fromIterable(userEntities);
-//                    }
-//                });
-//
-//        SingleObserver<List<UserEntity>> observer = userObservable
-//                .filter(userEntity -> true)
-////                .doFinally()
-//                .doOnTerminate(() -> getView().setLoadingIndicator(false))
-//                .toList()
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribeWith(new SingleObserver<List<UserEntity>>() {
-//                    @Override
-//                    public void onSubscribe(@io.reactivex.annotations.NonNull Disposable d) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onSuccess(@io.reactivex.annotations.NonNull List<UserEntity> userEntities) {
-//                        getView().getUsers(userEntities);
-//                    }
-//
-//                    @Override
-//                    public void onError(@io.reactivex.annotations.NonNull Throwable e) {
-//
-//                    }
-//                });
-//        mSubscriptions.add(observer.);
-
-
-//        getUserListUseCase.execute(new DisposableObserver<List<UserEntity>>() {
-//
-//            @Override
-//            public void onNext(@io.reactivex.annotations.NonNull List<UserEntity> userEntities) {
-//
-//            }
-//
-//            @Override
-//            public void onError(@io.reactivex.annotations.NonNull Throwable e) {
-//
-//            }
-//
-//            @Override
-//            public void onComplete() {
-//
-//            }
-//        }, null);
-
-        getUserListUseCase.execute(new HttpObserver<List<UserEntity>>() {
+        getUserListUseCase.execute(new HttpObserver<List<UserEntity>>(statusLayoutManager) {
             @Override
             public void onNext(List<UserEntity> userEntities) {
                 getView().getUsers(userEntities);
@@ -156,23 +106,5 @@ public class MainPresenter extends BaseMvpPresenter<IMainContract.View> implemen
 //            showFilterLabel();
         }
     }
-//    @Override
-//    public void getUsers(int since, int per_page) {
 
-//        Call<List<UserEntity>> call = mUserService.getUsers(since, per_page);
-//        call.enqueue(new Callback<List<UserEntity>>() {
-//            @Override
-//            public void onResponse(Call<List<UserEntity>> call, Response<List<UserEntity>> response) {
-//                Log.e(TAG, "onResponse: " + response.body().toString());
-//                getView().getUsers(response.body());
-//            }
-
-//            @Override
-//            public void onFailure(Call<List<UserEntity>> call, Throwable t) {
-//                Log.e(TAG, "onResponse: " + t.toString());
-//                getView().showNetWorkError();
-//            }
-//        });
-
-//    }
 }
