@@ -10,6 +10,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Inject;
+
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.functions.Action;
@@ -45,6 +47,7 @@ public class TasksRepository implements TasksDataSource {
     boolean mCacheIsDirty = false;
 
     // Prevent direct instantiation.
+    @Inject
     private TasksRepository(@NonNull TasksDataSource tasksRemoteDataSource,
                             @NonNull TasksDataSource tasksLocalDataSource) {
         if (tasksRemoteDataSource == null || tasksLocalDataSource == null) {

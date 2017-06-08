@@ -10,6 +10,8 @@ import com.oldnum7.data.local.cache.rxcache.RxCacheFactory;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import io.reactivex.Observable;
 import io.reactivex.functions.Function;
 import io.rx_cache2.EvictProvider;
@@ -31,15 +33,11 @@ public class TasksLocalDataSource implements TasksDataSource {
     private Observable<Reply<List<UserEntity>>> mUsersCache;
 
     // Prevent direct instantiation.
+    @Inject
     private TasksLocalDataSource(@NonNull Context context) {
-
-    }
-
-    public static TasksLocalDataSource getInstance(@NonNull Context context) {
         if (INSTANCE == null) {
             INSTANCE = new TasksLocalDataSource(context);
         }
-        return INSTANCE;
     }
 
     @Override

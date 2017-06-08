@@ -12,6 +12,8 @@ import com.oldnum7.exception.HttpException;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.ObservableTransformer;
@@ -32,16 +34,14 @@ public class TasksRemoteDataSource implements TasksDataSource {
     private HttpFactory mHttpFactory;
     private ApiService mApiService;
 
-    public static TasksRemoteDataSource getInstance() {
+    // Prevent direct instantiation.
+    @Inject
+    private TasksRemoteDataSource() {
+
         if (INSTANCE == null) {
             INSTANCE = new TasksRemoteDataSource();
+            mHttpFactory = new HttpFactory.Builder().build();
         }
-        return INSTANCE;
-    }
-
-    // Prevent direct instantiation.
-    private TasksRemoteDataSource() {
-        mHttpFactory = new HttpFactory.Builder().build();
     }
 
     @Override
