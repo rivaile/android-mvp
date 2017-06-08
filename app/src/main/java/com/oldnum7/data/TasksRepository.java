@@ -3,6 +3,7 @@ package com.oldnum7.data;
 import android.support.annotation.NonNull;
 
 import com.oldnum7.data.entity.UserEntity;
+import com.oldnum7.data.local.TasksLocalDataSource;
 
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -134,6 +135,7 @@ public class TasksRepository implements TasksDataSource {
 
     @Override
     public Observable<List<UserEntity>> getUsers() {
+        //内存缓存------->本地缓存------->网络缓存
         // Respond immediately with cache if available and not dirty , 内存缓存
         if (mCachedTasks != null && !mCacheIsDirty) {
             Collection<UserEntity> values = mCachedTasks.values();
@@ -175,6 +177,9 @@ public class TasksRepository implements TasksDataSource {
     }
 
     private Observable<List<UserEntity>> getAndSaveRemoteTasks() {
+
+        ((TasksLocalDataSource) mTasksLocalDataSource).saveTask(mTasksRemoteDataSource.getUsers(), false);
+
         return mTasksRemoteDataSource
                 .getUsers()
                 .flatMap(new Function<List<UserEntity>, ObservableSource<List<UserEntity>>>() {

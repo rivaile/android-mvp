@@ -17,6 +17,7 @@ android {
             enabled true
         }
 
+        vectorDrawables.useSupportLibrary = true
     }
 
     compileOptions {
@@ -70,7 +71,7 @@ dependencies {
     compile 'com.github.VictorAlbertos.Jolyglot:gson:0.0.3'
     //AndroidUtilCode
     compile 'com.blankj:utilcode:1.6.4'
-    
+
     //autolayout
     compile 'com.zhy:autolayout:1.4.5'
 }

@@ -1,7 +1,10 @@
 package com.oldnum7.data.net;
 
+import com.oldnum7.BuildConfig;
 import com.oldnum7.Constants;
+import com.oldnum7.base.App;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -11,6 +14,7 @@ import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+import okhttp3.Cache;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -32,7 +36,7 @@ public class HttpFactory {
 
     private long mReadTimeout = 10000;
 
-    private long mWriteTimeout = 1000;
+    private long mWriteTimeout = 10000;
 
     private long mConnectTimeout = 10000;
 
@@ -87,23 +91,25 @@ public class HttpFactory {
         }
 
         // add Application interceptors
-//        CustomHttpLogInterceptor logInterceptor = new CustomHttpLogInterceptor();
-//        if (BuildConfig.DEBUG) {
-//            logInterceptor.setLevel(CustomHttpLogInterceptor.Level.BODY);
-//        } else {
-//            logInterceptor.setLevel(CustomHttpLogInterceptor.Level.BASIC);
-//        }
-
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+        if (BuildConfig.DEBUG) {
+            logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+        } else {
+            logging.setLevel(HttpLoggingInterceptor.Level.BASIC);
+        }
 
-        // for test
-//        logInterceptor.setLevel(CustomHttpLogInterceptor.Level.BODY);
         interceptors.add(logging);
 
+        //有网络的时候直接访问网络...无网的时候走离线缓存
+//        interceptors.add(new OffLineCacheInterceptor());
+//        interceptors.add(new CacheInterceptor());
         interceptors.addAll(builder.interceptors);
 
         // add Network interceptors
+
+        //无络的时候不会执行调用这个拦截器...有网的时候会执行网络缓存...
+//        networkInterceptors.add(new OnLineCacheInterceptor());
+//        networkInterceptors.add(new CacheInterceptor());
         networkInterceptors.addAll(builder.networkInterceptors);
 
         if (null == builder.okHttpClient) {
@@ -127,8 +133,8 @@ public class HttpFactory {
 
 
     private void createHttpClient() {
-//        File cacheFile = new File(BaseApplication.getContext().getCacheDir(), "app_cache");
-//        Cache cache = new Cache(cacheFile, CACHE_SIZE);
+        File cacheFile = new File(App.getmContext().getCacheDir(), "app_cache");
+        Cache cache = new Cache(cacheFile, CACHE_SIZE);
 
         // create OkHttpClient instance
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
@@ -140,6 +146,7 @@ public class HttpFactory {
         builder.connectTimeout(mConnectTimeout, TimeUnit.MILLISECONDS);
         builder.writeTimeout(mWriteTimeout, TimeUnit.MILLISECONDS);
         builder.retryOnConnectionFailure(mRetryOnConnectionFailure);
+        builder.cache(cache);
 
         // add application interceptor
         if (interceptors.size() > 0) {
@@ -263,7 +270,6 @@ public class HttpFactory {
 
             return httpFactory;
         }
-
     }
 
 }

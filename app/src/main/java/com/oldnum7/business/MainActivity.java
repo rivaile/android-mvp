@@ -27,7 +27,6 @@ public class MainActivity extends BaseActivity<IMainContract.View, IMainContract
     private UserAdapter mUserAdapter;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,11 +110,9 @@ public class MainActivity extends BaseActivity<IMainContract.View, IMainContract
         mRvList.setAdapter(mUserAdapter);
     }
 
-
     @Override
     public void onRefresh() {
-
-        mMainPresenter.subscribe();
+        mMainPresenter.loadData(true);
     }
 
     @Override

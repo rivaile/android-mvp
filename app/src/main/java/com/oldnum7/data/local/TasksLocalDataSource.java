@@ -5,10 +5,15 @@ import android.support.annotation.NonNull;
 
 import com.oldnum7.data.TasksDataSource;
 import com.oldnum7.data.entity.UserEntity;
+import com.oldnum7.data.local.cache.rxcache.CacheService;
+import com.oldnum7.data.local.cache.rxcache.RxCacheFactory;
 
 import java.util.List;
 
 import io.reactivex.Observable;
+import io.reactivex.functions.Function;
+import io.rx_cache2.EvictProvider;
+import io.rx_cache2.Reply;
 
 
 /**
@@ -22,6 +27,8 @@ import io.reactivex.Observable;
 public class TasksLocalDataSource implements TasksDataSource {
 
     private static TasksLocalDataSource INSTANCE;
+    private CacheService mCacheService = RxCacheFactory.getInstance().createCacheService(CacheService.class);
+    private Observable<Reply<List<UserEntity>>> mUsersCache;
 
     // Prevent direct instantiation.
     private TasksLocalDataSource(@NonNull Context context) {
@@ -42,12 +49,18 @@ public class TasksLocalDataSource implements TasksDataSource {
 
     @Override
     public Observable<List<UserEntity>> getUsers() {
-        return null;
+        return mUsersCache.map(new Function<Reply<List<UserEntity>>, List<UserEntity>>() {
+            @Override
+            public List<UserEntity> apply(Reply<List<UserEntity>> listReply) throws Exception {
+
+                return listReply.getData();
+            }
+        });
     }
 
     @Override
     public void saveTask(@NonNull UserEntity userEntity) {
-        //缓存...1.保存数据库 2.file文件。。。3. RxCache缓存...
+        //缓存...1.保存数据库 2.file文件。。sp文件...。3. RxCache缓存...
 //        HttpResponse<List<UserEntity>> response = new HttpResponse<>();
 //        response.setMsg("操作成功");
 //        response.setStatus("200");
@@ -59,7 +72,11 @@ public class TasksLocalDataSource implements TasksDataSource {
 //            user.setUserName("第" + i + "个用户");
 //        }
 //        response.getResult().addAll(users);
+
     }
 
+    public void saveTask(Observable<List<UserEntity>> users, Boolean flag) {
+        mUsersCache = mCacheService.getUsersCache(users, new EvictProvider(flag));
+    }
 
 }
