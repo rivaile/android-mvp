@@ -29,8 +29,20 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            signingConfig signingConfigs.release
         }
     }
+
+    signingConfigs {
+        release {
+            storeFile file("oldnum7.jks")
+            storePassword "123456"
+            keyAlias "oldnum7"
+            keyPassword "123456"
+        }
+    }
+
 }
 
 dependencies {
