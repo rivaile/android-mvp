@@ -40,13 +40,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    buildTypes {
-        release {
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
-            minifyEnabled false
-        }
-    }
+
 
     signingConfigs {
         release {
@@ -58,6 +52,14 @@ android {
             keyPassword keystoreProperties['keyPassword']
             storeFile file(keystoreProperties['storeFile'])
             storePassword keystoreProperties['storePassword']
+        }
+    }
+
+    buildTypes {
+        release {
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+            minifyEnabled false
         }
     }
 
@@ -86,7 +88,8 @@ android {
                 //Jenkins打包输出到服务器路径
                 timeNow = BUILD_TIME
                 //BUILD_PATH为服务器输出路径
-                outDirectory = BUILD_PATH
+//                outDirectory = BUILD_PATH
+                outDirectory = 'E:\\'
                 //AutoBuildTest-v1.0.1-xiaomi-release.apk
                 newName = 'AutoBuildTest-v' + APP_VERSION + '-' + variant.productFlavors[0].name + '-' + variant.buildType.name + '.apk'
             } else {
@@ -100,7 +103,7 @@ android {
                     newName = 'AutoBuildTest-v' + APP_VERSION + '-' + variant.productFlavors[0].name + '-' + variant.buildType.name + '.apk'
                 }
             }
-            output.outputFile = new File(outDirectory+'/'+timeNow, newName)
+            output.outputFile = new File(outDirectory + '/' + timeNow, newName)
         }
     }
 }
