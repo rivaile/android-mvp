@@ -36,7 +36,7 @@ public class TasksRemoteDataSource implements TasksDataSource {
 
     // Prevent direct instantiation.
     @Inject
-    private TasksRemoteDataSource() {
+    public TasksRemoteDataSource() {
 
         if (INSTANCE == null) {
             INSTANCE = new TasksRemoteDataSource();

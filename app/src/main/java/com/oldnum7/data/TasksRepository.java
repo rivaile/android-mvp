@@ -48,8 +48,8 @@ public class TasksRepository implements TasksDataSource {
 
     // Prevent direct instantiation.
     @Inject
-    private TasksRepository(@NonNull TasksDataSource tasksRemoteDataSource,
-                            @NonNull TasksDataSource tasksLocalDataSource) {
+    public TasksRepository(@NonNull TasksDataSource tasksRemoteDataSource,
+                           @NonNull TasksDataSource tasksLocalDataSource) {
         if (tasksRemoteDataSource == null || tasksLocalDataSource == null) {
             throw new NullPointerException();
         }

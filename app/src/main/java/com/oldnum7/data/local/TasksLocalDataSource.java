@@ -34,7 +34,7 @@ public class TasksLocalDataSource implements TasksDataSource {
 
     // Prevent direct instantiation.
     @Inject
-    private TasksLocalDataSource(@NonNull Context context) {
+    public TasksLocalDataSource(@NonNull Context context) {
         if (INSTANCE == null) {
             INSTANCE = new TasksLocalDataSource(context);
         }

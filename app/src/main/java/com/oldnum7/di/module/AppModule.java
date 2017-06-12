@@ -1,6 +1,7 @@
 package com.oldnum7.di.module;
 
 import android.app.Application;
+import android.content.Context;
 import android.support.v4.util.ArrayMap;
 
 import com.google.gson.Gson;
@@ -32,6 +33,12 @@ public class AppModule {
 
     @Singleton
     @Provides
+    public Context provideContext() {
+        return mApplication;
+    }
+
+    @Singleton
+    @Provides
     public Map<String, Object> provideGlobalVariable() {
         return new ArrayMap();
     }
@@ -42,5 +49,6 @@ public class AppModule {
         GsonBuilder builder = new GsonBuilder();
         return builder.create();
     }
+
 
 }

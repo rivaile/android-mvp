@@ -26,7 +26,7 @@ import io.reactivex.functions.Function;
  */
 public class GetUsersCase extends UseCase<List<UserEntity>, GetUsersCase.Params> {
 
-    private final TasksRepository mTasksRepository = TasksRepository.getInstance(TasksRemoteDataSource.getInstance(), TasksLocalDataSource.getInstance(App.getmContext()));
+    private final TasksRepository mTasksRepository = TasksRepository.getInstance(new TasksRemoteDataSource(), new TasksLocalDataSource(App.getmContext()));
 
     public GetUsersCase() {
     }

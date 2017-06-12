@@ -3,11 +3,9 @@ package com.oldnum7.di.component;
 import android.content.Context;
 
 import com.google.gson.Gson;
-import com.oldnum7.ActivityManager;
-import com.oldnum7.data.TasksRepository;
 import com.oldnum7.di.module.AppModule;
 
-import java.util.Map;
+import javax.inject.Singleton;
 
 import dagger.Component;
 
@@ -19,17 +17,19 @@ import dagger.Component;
  *       version: 1.0
  * </pre>
  */
+
+@Singleton
 @Component(modules = {AppModule.class})
 public interface AppComponent {
 
     Context getContext();
 
     //全局变量...
-    Map<String, Object> extras();
+//    Map<String, Object> extras();
 
-    TasksRepository getRepository();
-
-    ActivityManager getActivityManager();
+//    TasksRepository getRepository();
+//
+//    ActivityManager getActivityManager();
 
     Gson gson();
 }

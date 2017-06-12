@@ -25,7 +25,7 @@ public class MainPresenter extends BaseMvpPresenter<IMainContract.View> implemen
     private final String TAG = getClass().getSimpleName();
 
     @NonNull
-    private final TasksRepository mTasksRepository = TasksRepository.getInstance(TasksRemoteDataSource.getInstance(), TasksLocalDataSource.getInstance(App.getmContext()));
+    private final TasksRepository mTasksRepository = TasksRepository.getInstance(new TasksRemoteDataSource(), new TasksLocalDataSource(App.getmContext()));
 
     private final GetUsersCase getUserListUseCase;
     private StatusLayoutManager statusLayoutManager;
