@@ -3,6 +3,14 @@ apply plugin: 'com.android.application'
 apply plugin: 'org.greenrobot.greendao' // apply plugin
 
 android {
+    signingConfigs {
+        release {
+            keyAlias 'android'
+            keyPassword '123456'
+            storeFile file('android.jks')
+            storePassword '123456'
+        }
+    }
     compileSdkVersion 25
     buildToolsVersion "25.0.3"
     defaultConfig {
@@ -19,31 +27,28 @@ android {
 
         vectorDrawables.useSupportLibrary = true
     }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
     buildTypes {
         release {
-            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-
+            signingConfig signingConfigs.release
+            minifyEnabled false
         }
     }
 
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
-
     //MaterialDesign
     compile 'com.android.support:design:25.3.1'
     //Retrofit
@@ -51,7 +56,6 @@ dependencies {
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
     compile 'com.squareup.okhttp3:logging-interceptor:3.8.0'
-
     //Rxandroid Rxjava
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile 'io.reactivex.rxjava2:rxjava:2.1.0'
@@ -68,12 +72,11 @@ dependencies {
     //GreenDao
     compile 'org.greenrobot:greendao:3.2.2'
     //RxCache
-    compile "com.github.VictorAlbertos.RxCache:runtime:1.8.0-2.x"
-    compile "io.reactivex.rxjava2:rxjava:2.0.6"
+    compile 'com.github.VictorAlbertos.RxCache:runtime:1.8.0-2.x'
+    compile 'io.reactivex.rxjava2:rxjava:2.0.6'
     compile 'com.github.VictorAlbertos.Jolyglot:gson:0.0.3'
     //AndroidUtilCode
     compile 'com.blankj:utilcode:1.6.4'
-
     //autolayout
     compile 'com.zhy:autolayout:1.4.5'
 }
