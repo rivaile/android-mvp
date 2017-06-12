@@ -48,10 +48,21 @@ android {
 //            keyPassword '123456'
 //            storeFile file('android.jks')
 //            storePassword '123456'
+            //由于本地打包使用的是本机上的KeyStore
+            //而Jenkins打包用的是服务器上的KeyStore
+            //两个路径不一样
+            if ("true".equals(IS_JENKINS)) {
+//                storeFile file("服务器上KeyStore的路径")
+                storeFile file('C:/Users/denglin/Desktop/android.jks')
+            } else {
+//                storeFile file(STORE_FILE_PATH)
+                storeFile file(keystoreProperties['storeFile'])
+            }
             keyAlias keystoreProperties['keyAlias']
             keyPassword keystoreProperties['keyPassword']
-            storeFile file(keystoreProperties['storeFile'])
+//            storeFile file(keystoreProperties['storeFile'])
             storePassword keystoreProperties['storePassword']
+
         }
     }
 
