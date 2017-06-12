@@ -100,7 +100,8 @@ android {
                 timeNow = BUILD_TIME
                 //BUILD_PATH为服务器输出路径
 //                outDirectory = BUILD_PATH
-                outDirectory = 'E:/'
+//                outDirectory = 'E:/'
+                outDirectory = '\\\\192.168.3.80\\移动项目组'
                 //AutoBuildTest-v1.0.1-xiaomi-release.apk
                 newName = 'AutoBuildTest-v' + APP_VERSION + '-' + variant.productFlavors[0].name + '-' + variant.buildType.name + '.apk'
             } else {
