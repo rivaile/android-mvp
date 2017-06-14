@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'org.greenrobot.greendao' // apply plugin
+apply plugin: 'walle'
+
 
 // Create a variable called keystorePropertiesFile, and initialize it to your
 // keystore.properties file, in the rootProject folder.
@@ -17,6 +19,9 @@ def getDate() {
 }
 
 def verCode = 1
+
+
+
 
 android {
 
@@ -53,11 +58,14 @@ android {
             //两个路径不一样
             if ("true".equals(IS_JENKINS)) {
 //                storeFile file("服务器上KeyStore的路径")
+                logger.error("IS_JENKINS:"+IS_JENKINS)
                 storeFile file('C:/Users/denglin/Desktop/android.jks')
             } else {
 //                storeFile file(STORE_FILE_PATH)
+                logger.error("IS_JENKINS:"+IS_JENKINS)
                 storeFile file(keystoreProperties['storeFile'])
             }
+            storeFile file(keystoreProperties['storeFile'])
             keyAlias keystoreProperties['keyAlias']
             keyPassword keystoreProperties['keyPassword']
 //            storeFile file(keystoreProperties['storeFile'])
@@ -115,10 +123,14 @@ android {
                     newName = 'AutoBuildTest-v' + APP_VERSION + '-' + variant.productFlavors[0].name + '-' + variant.buildType.name + '.apk'
                 }
             }
+
+            logger.error("outDirectory:"+outDirectory+"------timeNow-----:"+timeNow+"-----newName-----"+newName)
             output.outputFile = new File(outDirectory + '/' + timeNow, newName)
         }
     }
 }
+
+
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
@@ -158,4 +170,15 @@ dependencies {
     compile 'com.blankj:utilcode:1.6.4'
     //autolayout
     compile 'com.zhy:autolayout:1.4.5'
+    //meituanva下的多渠道打包...
+//    compile 'com.meituan.android.walle:library:1.1.3'
 }
+
+//walle {
+//    // 指定渠道包的输出路径
+//    apkOutputFolder = new File("${project.buildDir}/outputs/channels");
+//    // 定制渠道包的APK的文件名称
+//    apkFileNameFormat = '${appName}-${packageName}-${channel}-${buildType}-v${versionName}-${versionCode}-${buildTime}.apk';
+//    // 渠道配置文件
+//    channelFile = new File("${project.getProjectDir()}/channel")
+//}
