@@ -5,10 +5,10 @@ import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 import com.oldnum7.R;
 import com.oldnum7.adapter.UserAdapter;
+import com.oldnum7.base.App;
 import com.oldnum7.data.entity.UserEntity;
 import com.oldnum7.mvp.BaseActivity;
 
@@ -38,7 +38,10 @@ public class MainActivity extends BaseActivity implements IMainContract.View, Sw
 
     @Override
     protected void setPresenter() {
-
+        DaggerMainComponent.builder()
+                .appComponent(((App) getApplication()).getAppComponent())
+                .mainPresenterModule(new MainPresenterModule(this)).build()
+                .inject(this);
     }
 
     @Override
@@ -46,14 +49,7 @@ public class MainActivity extends BaseActivity implements IMainContract.View, Sw
 
         showLoading();
 
-        Log.e("TAG", "mMainPresenter:------------1 " + mMainPresenter);
 
-        DaggerMainComponent.builder()
-//                .appComponent(((App) getApplication()).getAppComponent())
-                .mainPresenterModule(new MainPresenterModule(this)).build()
-                .inject(this);
-
-        Log.e("TAG", "mMainPresenter: -----------2" + mMainPresenter);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

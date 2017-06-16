@@ -10,6 +10,7 @@ import com.oldnum7.data.local.cache.rxcache.RxCacheFactory;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import io.reactivex.Observable;
 import io.reactivex.functions.Function;
@@ -25,7 +26,7 @@ import io.rx_cache2.Reply;
  *       version: 1.0
  * </pre>
  */
-
+@Singleton
 public class TasksLocalDataSource implements TasksDataSource {
 
     private static TasksLocalDataSource INSTANCE;

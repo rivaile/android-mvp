@@ -3,6 +3,8 @@ package com.oldnum7.di.component;
 import android.content.Context;
 
 import com.google.gson.Gson;
+import com.oldnum7.TasksRepositoryModule;
+import com.oldnum7.data.TasksRepository;
 import com.oldnum7.di.module.ApplicationModule;
 
 import javax.inject.Singleton;
@@ -19,7 +21,7 @@ import dagger.Component;
  */
 
 @Singleton
-@Component(modules = {ApplicationModule.class})
+@Component(modules = {TasksRepositoryModule.class, ApplicationModule.class})
 public interface AppComponent {
 
     Context getContext();
@@ -31,7 +33,7 @@ public interface AppComponent {
 
 //    ActivityManager getActivityManager();
 
-//    TasksRepository getTasksRepository();
+    TasksRepository getTasksRepository();
 
     Gson gson();
 

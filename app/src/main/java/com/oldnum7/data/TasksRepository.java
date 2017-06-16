@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 import io.reactivex.Observable;
@@ -30,7 +31,7 @@ import io.reactivex.functions.Predicate;
  *       version: 1.0
  * </pre>
  */
-
+@Singleton
 public class TasksRepository implements TasksDataSource {
 
 
@@ -51,8 +52,8 @@ public class TasksRepository implements TasksDataSource {
 
     // Prevent direct instantiation.
     @Inject
-    public TasksRepository(TasksRemoteDataSource tasksRemoteDataSource,
-                           TasksLocalDataSource tasksLocalDataSource) {
+    public TasksRepository(@Named("Remote") TasksDataSource tasksRemoteDataSource,
+                           @Named("Local") TasksDataSource tasksLocalDataSource) {
         if (tasksRemoteDataSource == null || tasksLocalDataSource == null) {
             throw new NullPointerException();
         }
@@ -82,7 +83,6 @@ public class TasksRepository implements TasksDataSource {
 //    public static void destroyInstance() {
 //        INSTANCE = null;
 //    }
-
     public void refreshTasks() {
         mCacheIsDirty = true;
     }

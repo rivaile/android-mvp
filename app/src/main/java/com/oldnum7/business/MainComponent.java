@@ -1,5 +1,8 @@
 package com.oldnum7.business;
 
+import com.oldnum7.ActivityScoped;
+import com.oldnum7.di.component.AppComponent;
+
 import dagger.Component;
 
 /**
@@ -11,8 +14,8 @@ import dagger.Component;
  * </pre>
  */
 
-
-@Component(modules = MainPresenterModule.class)
+@ActivityScoped
+@Component(dependencies = AppComponent.class, modules = MainPresenterModule.class)
 public interface MainComponent {
     void inject(MainActivity activity);
 }

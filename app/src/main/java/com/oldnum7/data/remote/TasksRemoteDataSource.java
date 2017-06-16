@@ -13,6 +13,7 @@ import com.oldnum7.exception.HttpException;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
@@ -27,7 +28,7 @@ import io.reactivex.functions.Function;
  *       version: 1.0
  * </pre>
  */
-
+@Singleton
 public class TasksRemoteDataSource implements TasksDataSource {
 
 

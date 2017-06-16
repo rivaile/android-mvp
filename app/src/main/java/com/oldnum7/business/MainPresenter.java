@@ -87,11 +87,6 @@ public class MainPresenter implements IMainContract.Presenter {
                 mMainView.getUsers(userEntities);
             }
 
-//            @Override
-//            public void onComplete() {
-//                super.onComplete();
-//                getView().setLoadingIndicator(false);
-//            }
         }, null);
 
     }
