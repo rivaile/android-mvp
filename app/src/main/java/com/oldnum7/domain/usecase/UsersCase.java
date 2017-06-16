@@ -2,13 +2,12 @@ package com.oldnum7.domain.usecase;
 
 import android.util.Log;
 
-import com.oldnum7.base.App;
 import com.oldnum7.data.TasksRepository;
 import com.oldnum7.data.entity.UserEntity;
-import com.oldnum7.data.local.TasksLocalDataSource;
-import com.oldnum7.data.remote.TasksRemoteDataSource;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
@@ -24,11 +23,14 @@ import io.reactivex.functions.Function;
  *       version: 1.0
  * </pre>
  */
-public class GetUsersCase extends UseCase<List<UserEntity>, GetUsersCase.Params> {
+public class UsersCase extends UseCase<List<UserEntity>, UsersCase.Params> {
 
-    private final TasksRepository mTasksRepository = TasksRepository.getInstance(new TasksRemoteDataSource(), new TasksLocalDataSource(App.getmContext()));
+    @Inject
+    TasksRepository mTasksRepository;
 
-    public GetUsersCase() {
+    @Inject
+    public UsersCase(TasksRepository tasksRepository) {
+        this.mTasksRepository = tasksRepository;
     }
 
     @Override
@@ -64,6 +66,10 @@ public class GetUsersCase extends UseCase<List<UserEntity>, GetUsersCase.Params>
                         Log.e("TAG", "doFinally: ");
                     }
                 });
+    }
+
+    public void refreshTasks() {
+        mTasksRepository.refreshTasks();
     }
 
     public static final class Params {

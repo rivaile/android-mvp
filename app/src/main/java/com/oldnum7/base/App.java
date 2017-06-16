@@ -4,6 +4,9 @@ import android.app.Application;
 import android.content.Context;
 
 import com.blankj.utilcode.util.Utils;
+import com.oldnum7.di.component.AppComponent;
+import com.oldnum7.di.component.DaggerAppComponent;
+import com.oldnum7.di.module.ApplicationModule;
 
 /**
  * <pre>
@@ -16,11 +19,21 @@ import com.blankj.utilcode.util.Utils;
 public class App extends Application {
     private static Context mContext;
 
+    private AppComponent mAppComponent;
+
     @Override
     public void onCreate() {
         super.onCreate();
         this.mContext = this;
         Utils.init(this);
+
+        this.mAppComponent = DaggerAppComponent.builder()
+                .applicationModule(new ApplicationModule(this))
+                .build();
+    }
+    
+    public AppComponent getAppComponent() {
+        return mAppComponent;
     }
 
     public static Context getmContext() {

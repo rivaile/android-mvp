@@ -1,6 +1,5 @@
 package com.oldnum7.data.local;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.oldnum7.data.TasksDataSource;
@@ -26,6 +25,7 @@ import io.rx_cache2.Reply;
  *       version: 1.0
  * </pre>
  */
+
 public class TasksLocalDataSource implements TasksDataSource {
 
     private static TasksLocalDataSource INSTANCE;
@@ -34,10 +34,10 @@ public class TasksLocalDataSource implements TasksDataSource {
 
     // Prevent direct instantiation.
     @Inject
-    public TasksLocalDataSource(@NonNull Context context) {
-        if (INSTANCE == null) {
-            INSTANCE = new TasksLocalDataSource(context);
-        }
+    public TasksLocalDataSource() {
+//        if (INSTANCE == null) {
+//            INSTANCE = new TasksLocalDataSource(context);
+//        }
     }
 
     @Override

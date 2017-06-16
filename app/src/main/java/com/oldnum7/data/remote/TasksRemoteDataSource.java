@@ -27,21 +27,17 @@ import io.reactivex.functions.Function;
  *       version: 1.0
  * </pre>
  */
+
 public class TasksRemoteDataSource implements TasksDataSource {
 
-    private static TasksRemoteDataSource INSTANCE;
 
     private HttpFactory mHttpFactory;
     private ApiService mApiService;
 
     // Prevent direct instantiation.
     @Inject
-    public TasksRemoteDataSource() {
-
-        if (INSTANCE == null) {
-            INSTANCE = new TasksRemoteDataSource();
-            mHttpFactory = new HttpFactory.Builder().build();
-        }
+    TasksRemoteDataSource() {
+        mHttpFactory = new HttpFactory.Builder().build();
     }
 
     @Override

@@ -16,7 +16,7 @@
 
 package com.oldnum7.mvp;
 
-public interface BaseView<T> extends MvpView {
+public interface BaseView<T> {
 
     void setPresenter(T presenter);
 

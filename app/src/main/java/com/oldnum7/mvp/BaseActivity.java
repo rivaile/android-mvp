@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -24,16 +25,14 @@ import butterknife.ButterKnife;
  * version: 1.0
  * </Pre>
  */
-public class BaseActivity<V extends MvpView, P extends MvpPresenter<V>> extends MvpActivity<V, P> {
+public class BaseActivity extends AppCompatActivity {
 
     protected StatusLayoutManager statusLayoutManager;
     protected LinearLayout mRootLayout;
 
-
     private static final String LAYOUT_LINEARLAYOUT = "LinearLayout";
     private static final String LAYOUT_FRAMELAYOUT = "FrameLayout";
     private static final String LAYOUT_RELATIVELAYOUT = "RelativeLayout";
-
 
     @Override
     public View onCreateView(String name, Context context, AttributeSet attrs) {
@@ -54,7 +53,7 @@ public class BaseActivity<V extends MvpView, P extends MvpPresenter<V>> extends 
 
         return super.onCreateView(name, context, attrs);
     }
-    
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,9 +82,14 @@ public class BaseActivity<V extends MvpView, P extends MvpPresenter<V>> extends 
 
         ButterKnife.bind(this);
 
+        setPresenter();
         initViews();
         loadData();
         initEvent();
+    }
+
+    protected void setPresenter() {
+
     }
 
 

@@ -23,11 +23,11 @@ import dagger.Provides;
  * </pre>
  */
 @Module
-public class AppModule {
+public class ApplicationModule {
 
     private Application mApplication;
 
-    public AppModule(Application application) {
+    public ApplicationModule(Application application) {
         this.mApplication = application;
     }
 
@@ -49,6 +49,4 @@ public class AppModule {
         GsonBuilder builder = new GsonBuilder();
         return builder.create();
     }
-
-
 }

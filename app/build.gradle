@@ -93,41 +93,41 @@ android {
 
     }
 
-    //修改生成的apk名字及输出文件夹
-    applicationVariants.all { variant ->
-        variant.outputs.each { output ->
-            //新名字
-            def newName
-            //时间戳
-            def timeNow
-            //输出文件夹
-            def outDirectory
-            //是否为Jenkins打包，输出路径不同
-            if ("true".equals(IS_JENKINS)) {
-                //Jenkins打包输出到服务器路径
-                timeNow = BUILD_TIME
-                //BUILD_PATH为服务器输出路径
-//                outDirectory = BUILD_PATH
-//                outDirectory = 'E:/'
-                outDirectory = '\\\\192.168.3.80\\移动项目组'
-                //AutoBuildTest-v1.0.1-xiaomi-release.apk
-                newName = 'AutoBuildTest-v' + APP_VERSION + '-' + variant.productFlavors[0].name + '-' + variant.buildType.name + '.apk'
-            } else {
-                //本机打包输出在本机路径
-                timeNow = getDate()
-                outDirectory = output.outputFile.getParent()
-                if ('debug'.equals(variant.buildType.name)) {
-                    newName = "AutoBuildTest-v${APP_VERSION}-debug.apk"
-                } else {
-                    //AutoBuildTest-v1.0.1-xiaomi-release.apk
-                    newName = 'AutoBuildTest-v' + APP_VERSION + '-' + variant.productFlavors[0].name + '-' + variant.buildType.name + '.apk'
-                }
-            }
-
-            logger.error("outDirectory:"+outDirectory+"------timeNow-----:"+timeNow+"-----newName-----"+newName)
-            output.outputFile = new File(outDirectory + '/' + timeNow, newName)
-        }
-    }
+//    //修改生成的apk名字及输出文件夹
+//    applicationVariants.all { variant ->
+//        variant.outputs.each { output ->
+//            //新名字
+//            def newName
+//            //时间戳
+//            def timeNow
+//            //输出文件夹
+//            def outDirectory
+//            //是否为Jenkins打包，输出路径不同
+//            if ("true".equals(IS_JENKINS)) {
+//                //Jenkins打包输出到服务器路径
+//                timeNow = BUILD_TIME
+//                //BUILD_PATH为服务器输出路径
+////                outDirectory = BUILD_PATH
+////                outDirectory = 'E:/'
+//                outDirectory = '\\\\192.168.3.80\\移动项目组'
+//                //AutoBuildTest-v1.0.1-xiaomi-release.apk
+//                newName = 'AutoBuildTest-v' + APP_VERSION + '-' + variant.productFlavors[0].name + '-' + variant.buildType.name + '.apk'
+//            } else {
+//                //本机打包输出在本机路径
+//                timeNow = getDate()
+//                outDirectory = output.outputFile.getParent()
+//                if ('debug'.equals(variant.buildType.name)) {
+//                    newName = "AutoBuildTest-v${APP_VERSION}-debug.apk"
+//                } else {
+//                    //AutoBuildTest-v1.0.1-xiaomi-release 11.apk
+//                    newName = 'AutoBuildTest-v' + APP_VERSION + '-' + variant.productFlavors[0].name + '-' + variant.buildType.name + '.apk'
+//                }
+//            }
+//
+//            logger.error("outDirectory:"+outDirectory+"------timeNow-----:"+timeNow+"-----newName-----"+newName)
+//            output.outputFile = new File(outDirectory + '/' + timeNow, newName)
+//        }
+//    }
 }
 
 
@@ -171,7 +171,7 @@ dependencies {
     //autolayout
     compile 'com.zhy:autolayout:1.4.5'
     //meituanva下的多渠道打包...
-//    compile 'com.meituan.android.walle:library:1.1.3'
+    //    compile 'com.meituan.android.walle:library:1.1.3'
 }
 
 //walle {

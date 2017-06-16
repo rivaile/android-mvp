@@ -3,7 +3,7 @@ package com.oldnum7.di.component;
 import android.content.Context;
 
 import com.google.gson.Gson;
-import com.oldnum7.di.module.AppModule;
+import com.oldnum7.di.module.ApplicationModule;
 
 import javax.inject.Singleton;
 
@@ -19,7 +19,7 @@ import dagger.Component;
  */
 
 @Singleton
-@Component(modules = {AppModule.class})
+@Component(modules = {ApplicationModule.class})
 public interface AppComponent {
 
     Context getContext();
@@ -27,9 +27,13 @@ public interface AppComponent {
     //全局变量...
 //    Map<String, Object> extras();
 
-//    TasksRepository getRepository();
-//
+    //    TasksRepository getRepository();
+
 //    ActivityManager getActivityManager();
 
+//    TasksRepository getTasksRepository();
+
     Gson gson();
+
+//    void inject(Activity activity);
 }

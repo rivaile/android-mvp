@@ -2,10 +2,10 @@ package com.oldnum7.business;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.oldnum7.R;
 import com.oldnum7.adapter.UserAdapter;
@@ -14,43 +14,46 @@ import com.oldnum7.mvp.BaseActivity;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 
-public class MainActivity extends BaseActivity<IMainContract.View, IMainContract.Presenter> implements IMainContract.View, SwipeRefreshLayout.OnRefreshListener {
+public class MainActivity extends BaseActivity implements IMainContract.View, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.rv_list)
     RecyclerView mRvList;
     @BindView(R.id.sr_refresh)
     SwipeRefreshLayout mSrRefresh;
 
-    private MainPresenter mMainPresenter;
-    private UserAdapter mUserAdapter;
+    @Inject
+    MainPresenter mMainPresenter;
 
+    private UserAdapter mUserAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mMainPresenter.setStatusLayoutManager(getStatusLayoutManager());
-    }
-
-    @NonNull
-    @Override
-    public IMainContract.Presenter createPresenter() {
-        mMainPresenter = new MainPresenter();
-        return mMainPresenter;
     }
 
     @Override
-    protected void initViews() {
+    protected void setPresenter() {
 
     }
-
 
     @Override
     protected void loadData() {
+
         showLoading();
-//        mMainPresenter.getUsers(mSince, 10);
+
+        Log.e("TAG", "mMainPresenter:------------1 " + mMainPresenter);
+
+        DaggerMainComponent.builder()
+//                .appComponent(((App) getApplication()).getAppComponent())
+                .mainPresenterModule(new MainPresenterModule(this)).build()
+                .inject(this);
+
+        Log.e("TAG", "mMainPresenter: -----------2" + mMainPresenter);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -65,6 +68,7 @@ public class MainActivity extends BaseActivity<IMainContract.View, IMainContract
 
         mSrRefresh.post(() -> mSrRefresh.setRefreshing(active));
     }
+
 
     @Override
     public void getUsers(List<UserEntity> users) {
@@ -93,6 +97,8 @@ public class MainActivity extends BaseActivity<IMainContract.View, IMainContract
 
     @Override
     protected void initEvent() {
+
+
         initAdapter();
         mSrRefresh.setOnRefreshListener(this);
     }
@@ -115,8 +121,9 @@ public class MainActivity extends BaseActivity<IMainContract.View, IMainContract
         mMainPresenter.loadData(true);
     }
 
+
     @Override
-    public void setPresenter(Object presenter) {
+    public void setPresenter(IMainContract.Presenter presenter) {
 
     }
 }

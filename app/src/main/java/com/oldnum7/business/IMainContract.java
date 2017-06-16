@@ -16,7 +16,7 @@ import java.util.List;
  */
 public interface IMainContract {
 
-    interface View extends BaseView {
+    interface View extends BaseView<Presenter> {
         void setLoadingIndicator(boolean active);
 
         void getUsers(List<UserEntity> users);
@@ -28,11 +28,12 @@ public interface IMainContract {
         void showNetWorkError();
     }
 
-    interface Presenter extends BasePresenter<View> {
+    interface Presenter extends BasePresenter {
 
         void loadData(boolean forceUpdate);
 
         void getUsers(int since, int per_page);
+
         void getUsers();
     }
 }

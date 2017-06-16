@@ -2,8 +2,10 @@ package com.oldnum7.data;
 
 import android.support.annotation.NonNull;
 
+import com.oldnum7.ActivityScoped;
 import com.oldnum7.data.entity.UserEntity;
 import com.oldnum7.data.local.TasksLocalDataSource;
+import com.oldnum7.data.remote.TasksRemoteDataSource;
 
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -11,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
@@ -27,9 +30,9 @@ import io.reactivex.functions.Predicate;
  *       version: 1.0
  * </pre>
  */
+
 public class TasksRepository implements TasksDataSource {
 
-    private static TasksRepository INSTANCE = null;
 
     private final TasksDataSource mTasksRemoteDataSource;
 
@@ -48,8 +51,8 @@ public class TasksRepository implements TasksDataSource {
 
     // Prevent direct instantiation.
     @Inject
-    public TasksRepository(@NonNull TasksDataSource tasksRemoteDataSource,
-                           @NonNull TasksDataSource tasksLocalDataSource) {
+    public TasksRepository(TasksRemoteDataSource tasksRemoteDataSource,
+                           TasksLocalDataSource tasksLocalDataSource) {
         if (tasksRemoteDataSource == null || tasksLocalDataSource == null) {
             throw new NullPointerException();
         }
@@ -64,21 +67,21 @@ public class TasksRepository implements TasksDataSource {
      * @param tasksLocalDataSource  the device storage data source
      * @return the {@link TasksRepository} instance
      */
-    public static TasksRepository getInstance(TasksDataSource tasksRemoteDataSource,
-                                              TasksDataSource tasksLocalDataSource) {
-        if (INSTANCE == null) {
-            INSTANCE = new TasksRepository(tasksRemoteDataSource, tasksLocalDataSource);
-        }
-        return INSTANCE;
-    }
+//    public static TasksRepository getInstance(TasksDataSource tasksRemoteDataSource,
+//                                              TasksDataSource tasksLocalDataSource) {
+//        if (INSTANCE == null) {
+//            INSTANCE = new TasksRepository(tasksRemoteDataSource, tasksLocalDataSource);
+//        }
+//        return INSTANCE;
+//    }
 
     /**
      * Used to force {@link #getInstance(TasksDataSource, TasksDataSource)} to create a new instance
      * next time it's called.
      */
-    public static void destroyInstance() {
-        INSTANCE = null;
-    }
+//    public static void destroyInstance() {
+//        INSTANCE = null;
+//    }
 
     public void refreshTasks() {
         mCacheIsDirty = true;

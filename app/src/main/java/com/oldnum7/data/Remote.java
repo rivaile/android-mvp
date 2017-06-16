@@ -13,13 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.oldnum7.data;
 
-package com.oldnum7.mvp;
+import java.lang.annotation.Documented;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
-public interface BasePresenter {
+import javax.inject.Qualifier;
 
-    void subscribe();
-
-    void unsubscribe();
+@Qualifier
+@Documented
+@Retention(RetentionPolicy.RUNTIME)
+public @interface Remote {
 
 }
