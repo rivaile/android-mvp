@@ -170,6 +170,9 @@ dependencies {
     compile 'com.blankj:utilcode:1.6.4'
     //autolayout
     compile 'com.zhy:autolayout:1.4.5'
+    //BaseRecyclerViewAdapterHelper  : http://www.jianshu.com/p/b343fcff51b0
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.18'
+
     //meituanva下的多渠道打包...
     //    compile 'com.meituan.android.walle:library:1.1.3'
 }

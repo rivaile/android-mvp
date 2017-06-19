@@ -5,11 +5,11 @@ import android.support.annotation.Nullable;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
 import com.oldnum7.R;
-import com.oldnum7.data.entity.UserEntity;
-import com.oldnum7.adapter.base.BaseQuickAdapter;
-import com.oldnum7.adapter.base.BaseViewHolder;
 import com.oldnum7.base.App;
+import com.oldnum7.data.entity.UserEntity;
 
 import java.util.List;
 
