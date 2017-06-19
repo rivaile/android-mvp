@@ -1,7 +1,8 @@
-package com.oldnum7.business;
+package com.oldnum7.di.component;
 
 import com.oldnum7.ActivityScoped;
-import com.oldnum7.di.component.AppComponent;
+import com.oldnum7.business.MainActivity;
+import com.oldnum7.di.module.MainPresenterModule;
 
 import dagger.Component;
 
@@ -17,5 +18,6 @@ import dagger.Component;
 @ActivityScoped
 @Component(dependencies = AppComponent.class, modules = MainPresenterModule.class)
 public interface MainComponent {
+    //只能是指定的Activity....
     void inject(MainActivity activity);
 }

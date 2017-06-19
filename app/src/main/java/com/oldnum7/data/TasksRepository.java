@@ -33,8 +33,7 @@ import io.reactivex.functions.Predicate;
  */
 @Singleton
 public class TasksRepository implements TasksDataSource {
-
-
+    
     private final TasksDataSource mTasksRemoteDataSource;
 
     private final TasksDataSource mTasksLocalDataSource;

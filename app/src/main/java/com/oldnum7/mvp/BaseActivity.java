@@ -25,10 +25,12 @@ import butterknife.ButterKnife;
  * version: 1.0
  * </Pre>
  */
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity<P extends BasePresenter> extends AppCompatActivity {
 
     protected StatusLayoutManager statusLayoutManager;
     protected LinearLayout mRootLayout;
+
+
 
     private static final String LAYOUT_LINEARLAYOUT = "LinearLayout";
     private static final String LAYOUT_FRAMELAYOUT = "FrameLayout";

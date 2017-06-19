@@ -10,6 +10,8 @@ import com.oldnum7.R;
 import com.oldnum7.adapter.UserAdapter;
 import com.oldnum7.base.App;
 import com.oldnum7.data.entity.UserEntity;
+import com.oldnum7.di.component.DaggerMainComponent;
+import com.oldnum7.di.module.MainPresenterModule;
 import com.oldnum7.mvp.BaseActivity;
 
 import java.util.List;
@@ -18,17 +20,17 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 
-public class MainActivity extends BaseActivity implements IMainContract.View, SwipeRefreshLayout.OnRefreshListener {
+public class MainActivity extends BaseActivity<MainPresenter> implements IMainContract.View, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.rv_list)
     RecyclerView mRvList;
     @BindView(R.id.sr_refresh)
     SwipeRefreshLayout mSrRefresh;
 
-    @Inject
-    MainPresenter mMainPresenter;
-
     private UserAdapter mUserAdapter;
+
+    @Inject
+    MainPresenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +42,8 @@ public class MainActivity extends BaseActivity implements IMainContract.View, Sw
     protected void setPresenter() {
         DaggerMainComponent.builder()
                 .appComponent(((App) getApplication()).getAppComponent())
-                .mainPresenterModule(new MainPresenterModule(this)).build()
+                .mainPresenterModule(new MainPresenterModule(this))
+                .build()
                 .inject(this);
     }
 
@@ -49,11 +52,10 @@ public class MainActivity extends BaseActivity implements IMainContract.View, Sw
 
         showLoading();
 
-
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                mMainPresenter.subscribe();
+                mPresenter.subscribe();
             }
         }, 2000);
 
@@ -114,9 +116,8 @@ public class MainActivity extends BaseActivity implements IMainContract.View, Sw
 
     @Override
     public void onRefresh() {
-        mMainPresenter.loadData(true);
+        mPresenter.loadData(true);
     }
-
 
     @Override
     public void setPresenter(IMainContract.Presenter presenter) {

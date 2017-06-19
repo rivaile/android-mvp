@@ -1,4 +1,7 @@
-package com.oldnum7.business;
+package com.oldnum7.di.module;
+
+import com.oldnum7.ActivityScoped;
+import com.oldnum7.business.IMainContract;
 
 import dagger.Module;
 import dagger.Provides;
@@ -13,12 +16,13 @@ import dagger.Provides;
  */
 @Module
 public class MainPresenterModule {
-    private final IMainContract.View mView;
+    private IMainContract.View mView;
 
     public MainPresenterModule(IMainContract.View view) {
         this.mView = view;
     }
 
+    @ActivityScoped
     @Provides
     IMainContract.View provideIMainContractView() {
         return mView;
