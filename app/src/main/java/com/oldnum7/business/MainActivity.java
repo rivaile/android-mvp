@@ -1,6 +1,8 @@
 package com.oldnum7.business;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.widget.FrameLayout;
 
@@ -8,7 +10,13 @@ import com.ashokvarma.bottomnavigation.BadgeItem;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.oldnum7.R;
+import com.oldnum7.business.account.Tab3Fragment;
+import com.oldnum7.business.dashborard.Tab2Fragment;
+import com.oldnum7.business.home.Tab1Fragment;
 import com.oldnum7.mvp.BaseActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -20,6 +28,7 @@ public class MainActivity extends BaseActivity {
     FrameLayout mContent;
     @BindView(R.id.bottom_navigation_bar)
     BottomNavigationBar mBottomNavigationBar;
+    private List<Fragment> mFragmentList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,23 +51,43 @@ public class MainActivity extends BaseActivity {
                 .setText("99+");
 
         mBottomNavigationBar
-                .addItem(new BottomNavigationItem(R.drawable.ic_home_black_24dp, "Home").setActiveColor(R.color.orange).setBadgeItem(badgeItem))
-                .addItem(new BottomNavigationItem(R.drawable.ic_dashboard_black_24dp, "Dashboard"))
-                .addItem(new BottomNavigationItem(R.drawable.ic_account_circle_black_24dp, "Account"))
+                .addItem(new BottomNavigationItem(R.drawable.ic_home_black_24dp, "Tab1").setActiveColor(R.color.orange).setBadgeItem(badgeItem))
+                .addItem(new BottomNavigationItem(R.drawable.ic_dashboard_black_24dp, "Tab2"))
+                .addItem(new BottomNavigationItem(R.drawable.ic_account_circle_black_24dp, "Tab3"))
                 .initialise();
 
         mBottomNavigationBar.setTabSelectedListener(mOnTabSelectedListener);
+
+        mFragmentList.clear();
+        mFragmentList.add(0, new Tab1Fragment());
+        mFragmentList.add(1, new Tab2Fragment());
+        mFragmentList.add(2, new Tab3Fragment());
+
+        mBottomNavigationBar.selectTab(0);
     }
 
     private BottomNavigationBar.OnTabSelectedListener mOnTabSelectedListener = new BottomNavigationBar.OnTabSelectedListener() {
         @Override
         public void onTabSelected(int position) {
             Log.d(TAG, "onTabSelected: " + position);
+
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            if (!mFragmentList.get(position).isAdded()) {
+                fragmentTransaction.add(R.id.content, mFragmentList.get(position), mFragmentList.get(position).getClass().getSimpleName());
+            }
+
+            fragmentTransaction.show(mFragmentList.get(position))
+                    .commit();
+
         }
 
         @Override
         public void onTabUnselected(int position) {
             Log.d(TAG, "onTabUnselected: " + position);
+            getSupportFragmentManager().beginTransaction()
+                    .hide(mFragmentList.get(position))
+                    .commit();
+
         }
 
         @Override
@@ -66,4 +95,5 @@ public class MainActivity extends BaseActivity {
             Log.d(TAG, "onTabReselected: " + position);
         }
     };
+
 }
