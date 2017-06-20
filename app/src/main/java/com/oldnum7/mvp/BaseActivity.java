@@ -15,6 +15,8 @@ import com.zhy.autolayout.AutoFrameLayout;
 import com.zhy.autolayout.AutoLinearLayout;
 import com.zhy.autolayout.AutoRelativeLayout;
 
+import javax.inject.Inject;
+
 import butterknife.ButterKnife;
 
 /**
@@ -27,9 +29,11 @@ import butterknife.ButterKnife;
  */
 public class BaseActivity<P extends BasePresenter> extends AppCompatActivity {
 
+    @Inject
+    protected P mPresenter;
+
     protected StatusLayoutManager statusLayoutManager;
     protected LinearLayout mRootLayout;
-
 
 
     private static final String LAYOUT_LINEARLAYOUT = "LinearLayout";

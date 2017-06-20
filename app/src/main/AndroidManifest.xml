@@ -15,7 +15,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".business.MainActivity">
+        <activity android:name=".business.UserActivity"></activity>
+
+        <activity android:name=".Main2Activity"></activity>
+
+        <activity
+            android:name=".business.MainActivity"
+            android:label="@string/title_activity_main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -31,10 +37,6 @@
             android:name="design_height"
             android:value="1280">
         </meta-data>
-
-        <activity android:name=".Main2Activity">
-
-        </activity>
 
         <meta-data
             android:name="UMENG_CHANNEL"

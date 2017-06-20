@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'org.greenrobot.greendao' // apply plugin
 apply plugin: 'walle'
 
-
 // Create a variable called keystorePropertiesFile, and initialize it to your
 // keystore.properties file, in the rootProject folder.
 def keystorePropertiesFile = rootProject.file("keystore.properties")
@@ -58,11 +57,11 @@ android {
             //两个路径不一样
             if ("true".equals(IS_JENKINS)) {
 //                storeFile file("服务器上KeyStore的路径")
-                logger.error("IS_JENKINS:"+IS_JENKINS)
+                logger.error("IS_JENKINS:" + IS_JENKINS)
                 storeFile file('C:/Users/denglin/Desktop/android.jks')
             } else {
 //                storeFile file(STORE_FILE_PATH)
-                logger.error("IS_JENKINS:"+IS_JENKINS)
+                logger.error("IS_JENKINS:" + IS_JENKINS)
                 storeFile file(keystoreProperties['storeFile'])
             }
             storeFile file(keystoreProperties['storeFile'])
@@ -173,6 +172,8 @@ dependencies {
     //BaseRecyclerViewAdapterHelper  : http://www.jianshu.com/p/b343fcff51b0
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.18'
 
+    //BottomNavigation 最新的版本有角标的现实的问题...
+    compile 'com.ashokvarma.android:bottom-navigation-bar:1.3.0'
     //meituanva下的多渠道打包...
     //    compile 'com.meituan.android.walle:library:1.1.3'
 }

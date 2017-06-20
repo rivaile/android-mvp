@@ -1,36 +1,25 @@
 package com.oldnum7.business;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.widget.FrameLayout;
 
+import com.ashokvarma.bottomnavigation.BadgeItem;
+import com.ashokvarma.bottomnavigation.BottomNavigationBar;
+import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.oldnum7.R;
-import com.oldnum7.adapter.UserAdapter;
-import com.oldnum7.base.App;
-import com.oldnum7.data.entity.UserEntity;
-import com.oldnum7.di.component.DaggerMainComponent;
-import com.oldnum7.di.module.MainPresenterModule;
 import com.oldnum7.mvp.BaseActivity;
-
-import java.util.List;
-
-import javax.inject.Inject;
 
 import butterknife.BindView;
 
-public class MainActivity extends BaseActivity<MainPresenter> implements IMainContract.View, SwipeRefreshLayout.OnRefreshListener {
+public class MainActivity extends BaseActivity {
 
-    @BindView(R.id.rv_list)
-    RecyclerView mRvList;
-    @BindView(R.id.sr_refresh)
-    SwipeRefreshLayout mSrRefresh;
+    private String TAG = getClass().getSimpleName();
 
-    private UserAdapter mUserAdapter;
-
-    @Inject
-    MainPresenter mPresenter;
+    @BindView(R.id.content)
+    FrameLayout mContent;
+    @BindView(R.id.bottom_navigation_bar)
+    BottomNavigationBar mBottomNavigationBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,88 +28,42 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainCo
     }
 
     @Override
-    protected void setPresenter() {
-        DaggerMainComponent.builder()
-                .appComponent(((App) getApplication()).getAppComponent())
-                .mainPresenterModule(new MainPresenterModule(this))
-                .build()
-                .inject(this);
-    }
-
-    @Override
-    protected void loadData() {
-
-        showLoading();
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mPresenter.subscribe();
-            }
-        }, 2000);
-
-    }
-
-    @Override
-    public void setLoadingIndicator(final boolean active) {
-
-        mSrRefresh.post(() -> mSrRefresh.setRefreshing(active));
-    }
-
-
-    @Override
-    public void getUsers(List<UserEntity> users) {
-        getStatusLayoutManager().showContent();
-
-        mUserAdapter.setNewData(users);
-
-        if (mSrRefresh.isRefreshing()) {//刷新
-            mUserAdapter.setEnableLoadMore(true);
-            mSrRefresh.setRefreshing(false);
-            mUserAdapter.setNewData(users);
-
-        }
-    }
-
-    @Override
-    public void showLoading() {
-        getStatusLayoutManager().showLoading();
-    }
-
-    @Override
-    public void showError() {
-        getStatusLayoutManager().showError();
-
-    }
-
-    @Override
     protected void initEvent() {
+        mBottomNavigationBar
+                .setMode(BottomNavigationBar.MODE_FIXED);
 
+        mBottomNavigationBar
+                .setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC);
 
-        initAdapter();
-        mSrRefresh.setOnRefreshListener(this);
+        //在MODE_FIXED时的显示有问题...
+        BadgeItem badgeItem = new BadgeItem()
+                .setBorderWidth(2)
+                .setBackgroundColorResource(R.color.red)
+                .setText("99+");
+
+        mBottomNavigationBar
+                .addItem(new BottomNavigationItem(R.drawable.ic_home_black_24dp, "Home").setActiveColor(R.color.orange).setBadgeItem(badgeItem))
+                .addItem(new BottomNavigationItem(R.drawable.ic_dashboard_black_24dp, "Dashboard"))
+                .addItem(new BottomNavigationItem(R.drawable.ic_account_circle_black_24dp, "Account"))
+                .initialise();
+
+        mBottomNavigationBar.setTabSelectedListener(mOnTabSelectedListener);
     }
 
-    @Override
-    public void showNetWorkError() {
-        getStatusLayoutManager().showNetWorkError();
-    }
+    private BottomNavigationBar.OnTabSelectedListener mOnTabSelectedListener = new BottomNavigationBar.OnTabSelectedListener() {
+        @Override
+        public void onTabSelected(int position) {
+            Log.d(TAG, "onTabSelected: " + position);
+        }
 
-    private void initAdapter() {
-        mRvList.setLayoutManager(new LinearLayoutManager(this));
-        mRvList.hasFixedSize();
-        mUserAdapter = new UserAdapter(R.layout.item_user, null);
-//        mUserAdapter.setOnLoadMoreListener(this, mRvList);
-        mRvList.setAdapter(mUserAdapter);
-    }
+        @Override
+        public void onTabUnselected(int position) {
+            Log.d(TAG, "onTabUnselected: " + position);
+        }
 
-    @Override
-    public void onRefresh() {
-        mPresenter.loadData(true);
-    }
-
-    @Override
-    public void setPresenter(IMainContract.Presenter presenter) {
-
-    }
+        @Override
+        public void onTabReselected(int position) {
+            Log.d(TAG, "onTabReselected: " + position);
+        }
+    };
 }
