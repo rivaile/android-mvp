@@ -55,15 +55,15 @@ android {
             //由于本地打包使用的是本机上的KeyStore
             //而Jenkins打包用的是服务器上的KeyStore
             //两个路径不一样
-            if ("true".equals(IS_JENKINS)) {
-//                storeFile file("服务器上KeyStore的路径")
-                logger.error("IS_JENKINS:" + IS_JENKINS)
-                storeFile file('C:/Users/denglin/Desktop/android.jks')
-            } else {
-//                storeFile file(STORE_FILE_PATH)
-                logger.error("IS_JENKINS:" + IS_JENKINS)
-                storeFile file(keystoreProperties['storeFile'])
-            }
+//            if ("true".equals(IS_JENKINS)) {
+////                storeFile file("服务器上KeyStore的路径")
+//                logger.error("IS_JENKINS:" + IS_JENKINS)
+//                storeFile file('C:/Users/denglin/Desktop/android.jks')
+//            } else {
+////                storeFile file(STORE_FILE_PATH)
+//                logger.error("IS_JENKINS:" + IS_JENKINS)
+//                storeFile file(keystoreProperties['storeFile'])
+//            }
             storeFile file(keystoreProperties['storeFile'])
             keyAlias keystoreProperties['keyAlias']
             keyPassword keystoreProperties['keyPassword']
@@ -85,10 +85,11 @@ android {
 
         xiaomi {}
         huawei {}
+        meituan {}
 
-        productFlavors.all { flavor ->
-            flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
-        }
+//        productFlavors.all { flavor ->
+//            flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+//        }
 
     }
 
@@ -175,14 +176,16 @@ dependencies {
     //BottomNavigation 最新的版本有角标的现实的问题...
     compile 'com.ashokvarma.android:bottom-navigation-bar:1.3.0'
     //meituanva下的多渠道打包...
-    //    compile 'com.meituan.android.walle:library:1.1.3'
+    compile 'com.meituan.android.walle:library:1.1.3'
+    //systembartint
+    compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
 }
 
-//walle {
-//    // 指定渠道包的输出路径
-//    apkOutputFolder = new File("${project.buildDir}/outputs/channels");
-//    // 定制渠道包的APK的文件名称
-//    apkFileNameFormat = '${appName}-${packageName}-${channel}-${buildType}-v${versionName}-${versionCode}-${buildTime}.apk';
-//    // 渠道配置文件
-//    channelFile = new File("${project.getProjectDir()}/channel")
-//}
+walle {
+    // 指定渠道包的输出路径
+    apkOutputFolder = new File("${project.buildDir}/outputs/channels");
+    // 名称
+    apkFileNameFormat = '${appName}-${packageName}-${channel}-${buildType}-v${versionName}-${versionCode}-${buildTime}.apk';
+    // 渠道配置文件
+    channelFile = new File("${project.getProjectDir()}/channel")
+}

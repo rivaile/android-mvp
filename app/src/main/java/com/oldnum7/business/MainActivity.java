@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
-import android.widget.FrameLayout;
 
 import com.ashokvarma.bottomnavigation.BadgeItem;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
@@ -24,11 +23,12 @@ public class MainActivity extends BaseActivity {
 
     private String TAG = getClass().getSimpleName();
 
-    @BindView(R.id.content)
-    FrameLayout mContent;
     @BindView(R.id.bottom_navigation_bar)
     BottomNavigationBar mBottomNavigationBar;
+
     private List<Fragment> mFragmentList = new ArrayList<>();
+
+//    private Class[] clazz = new Class[]{Tab1Fragment.class, Tab2Fragment.class, Tab3Fragment.class};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +44,7 @@ public class MainActivity extends BaseActivity {
         mBottomNavigationBar
                 .setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC);
 
-        //在MODE_FIXED时的显示有问题...
+        //在新版本MODE_FIXED时的显示有问题...
         BadgeItem badgeItem = new BadgeItem()
                 .setBorderWidth(2)
                 .setBackgroundColorResource(R.color.red)
@@ -57,6 +57,7 @@ public class MainActivity extends BaseActivity {
                 .initialise();
 
         mBottomNavigationBar.setTabSelectedListener(mOnTabSelectedListener);
+
 
         mFragmentList.clear();
         mFragmentList.add(0, new Tab1Fragment());
@@ -87,7 +88,6 @@ public class MainActivity extends BaseActivity {
             getSupportFragmentManager().beginTransaction()
                     .hide(mFragmentList.get(position))
                     .commit();
-
         }
 
         @Override

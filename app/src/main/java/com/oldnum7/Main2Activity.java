@@ -13,6 +13,10 @@ import com.oldnum7.data.entity.UserEntity;
 import java.io.IOException;
 import java.util.List;
 
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.annotations.NonNull;
 import okhttp3.Cache;
 import okhttp3.CacheControl;
 import okhttp3.Interceptor;
@@ -106,5 +110,14 @@ public class Main2Activity extends AppCompatActivity {
 
             }
         };
+    }
+
+    private void test() {
+        Observable.create(new ObservableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(@NonNull ObservableEmitter<Integer> e) throws Exception {
+
+            }
+        });
     }
 }
