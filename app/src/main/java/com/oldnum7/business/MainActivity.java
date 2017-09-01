@@ -54,6 +54,7 @@ public class MainActivity extends BaseActivity {
                 .addItem(new BottomNavigationItem(R.drawable.ic_home_black_24dp, "Tab1").setActiveColor(R.color.orange).setBadgeItem(badgeItem))
                 .addItem(new BottomNavigationItem(R.drawable.ic_dashboard_black_24dp, "Tab2"))
                 .addItem(new BottomNavigationItem(R.drawable.ic_account_circle_black_24dp, "Tab3"))
+//                .addItem(new BottomNavigationItem(R.drawable.ic_account_circle_black_24dp, "Tab4"))
                 .initialise();
 
         mBottomNavigationBar.setTabSelectedListener(mOnTabSelectedListener);
@@ -63,6 +64,7 @@ public class MainActivity extends BaseActivity {
         mFragmentList.add(0, new Tab1Fragment());
         mFragmentList.add(1, new Tab2Fragment());
         mFragmentList.add(2, new Tab3Fragment());
+//        mFragmentList.add(3, new Tab3Fragment());
 
         mBottomNavigationBar.selectTab(0);
     }

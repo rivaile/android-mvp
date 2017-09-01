@@ -1,8 +1,12 @@
-package com.oldnum7.data.net;
+package com.oldnum7.http;
+
+import android.app.Application;
+import android.content.Context;
 
 import com.oldnum7.BuildConfig;
 import com.oldnum7.Constants;
 import com.oldnum7.base.App;
+import com.oldnum7.http.utils.HttpUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -25,10 +29,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * Http 请求封装
  */
-public class HttpFactory {
+public class HttpManager {
 
-    private static final String TAG = "HttpFactory";
+    private static final String TAG = "HttpManager";
 
+    private static HttpManager sInstance;
+
+    private Application mContext;            //全局上下文
+
+
+    //------------------------------------------------
     private static final long CACHE_SIZE = 1024 * 1024 * 10;
 
     // base url for Http request
@@ -60,7 +70,36 @@ public class HttpFactory {
 
     private Retrofit mRetrofit;
 
-    private HttpFactory(Builder builder) {
+    //----------------------------------------------------------------------------------------------------
+
+    public static HttpManager getInstance() {
+        if (sInstance == null) {
+            synchronized (HttpManager.class) {
+                if (sInstance == null) {
+                    sInstance = new HttpManager();
+                }
+            }
+        }
+        return sInstance;
+    }
+
+    HttpManager() {
+
+    }
+
+    public HttpManager init(Application app) {
+        this.mContext = app;
+        return this;
+    }
+
+    /** 获取全局上下文 */
+    public Context getContext() {
+        HttpUtils.checkNotNull(mContext, "please call HttpManager.getInstance().init() first in application!");
+        return mContext;
+    }
+
+
+    private HttpManager(Builder builder) {
 
         if (null == builder.baseUrl) {
             setBaseUrl();
@@ -264,11 +303,11 @@ public class HttpFactory {
             return this;
         }
 
-        public HttpFactory build() {
+        public HttpManager build() {
 
-            HttpFactory httpFactory = new HttpFactory(this);
+            HttpManager httpManager = new HttpManager(this);
 
-            return httpFactory;
+            return httpManager;
         }
     }
 

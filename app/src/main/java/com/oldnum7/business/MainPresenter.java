@@ -2,7 +2,7 @@ package com.oldnum7.business;
 
 import android.support.annotation.NonNull;
 
-import com.oldnum7.base.HttpObserver;
+import com.oldnum7.http.HttpObserver;
 import com.oldnum7.data.entity.UserEntity;
 import com.oldnum7.domain.usecase.UsersCase;
 import com.oldnum7.status.StatusLayoutManager;
@@ -31,10 +31,8 @@ public class MainPresenter implements IMainContract.Presenter {
 
     @Inject
     MainPresenter(IMainContract.View view, UsersCase usersCase) {
-
         this.mMainView = view;
         this.mUsersCase = usersCase;
-
     }
 
     public void setStatusLayoutManager(StatusLayoutManager statusLayoutManager) {

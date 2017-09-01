@@ -1,8 +1,8 @@
-package com.oldnum7.base;
+package com.oldnum7.http;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.ToastUtils;
-import com.oldnum7.exception.HttpException;
+import com.oldnum7.http.exception.HttpException;
 import com.oldnum7.status.StatusLayoutManager;
 
 import io.reactivex.annotations.NonNull;
@@ -54,7 +54,6 @@ public class HttpObserver<T> extends DisposableObserver<T> {
 
     @Override
     public void onComplete() {
-        statusLayoutManager.showContent();
         onFinally();
     }
 

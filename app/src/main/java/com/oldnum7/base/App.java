@@ -7,6 +7,7 @@ import com.blankj.utilcode.util.Utils;
 import com.oldnum7.di.component.AppComponent;
 import com.oldnum7.di.component.DaggerAppComponent;
 import com.oldnum7.di.module.ApplicationModule;
+import com.oldnum7.http.HttpManager;
 
 /**
  * <pre>
@@ -30,8 +31,10 @@ public class App extends Application {
         this.mAppComponent = DaggerAppComponent.builder()
                 .applicationModule(new ApplicationModule(this))
                 .build();
+        //---------------------------------------------------------
+        HttpManager.getInstance().init(this);
     }
-    
+
     public AppComponent getAppComponent() {
         return mAppComponent;
     }

@@ -1,4 +1,4 @@
-package com.oldnum7.exception;
+package com.oldnum7.http.exception;
 
 /**
  * <pre>
@@ -11,7 +11,6 @@ package com.oldnum7.exception;
 public class HttpException extends RuntimeException {
 
     private static String message;
-
 
     private String error;
 

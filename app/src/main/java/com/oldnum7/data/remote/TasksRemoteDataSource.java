@@ -7,8 +7,8 @@ import com.oldnum7.business.ApiService;
 import com.oldnum7.data.TasksDataSource;
 import com.oldnum7.data.entity.HttpResponse;
 import com.oldnum7.data.entity.UserEntity;
-import com.oldnum7.data.net.HttpFactory;
-import com.oldnum7.exception.HttpException;
+import com.oldnum7.http.HttpManager;
+import com.oldnum7.http.exception.HttpException;
 
 import java.util.List;
 
@@ -32,29 +32,30 @@ import io.reactivex.functions.Function;
 public class TasksRemoteDataSource implements TasksDataSource {
 
 
-    private HttpFactory mHttpFactory;
+    private HttpManager mHttpManager;
     private ApiService mApiService;
 
     // Prevent direct instantiation.
     @Inject
     TasksRemoteDataSource() {
-        mHttpFactory = new HttpFactory.Builder().build();
+        mHttpManager = new HttpManager.Builder().build();
     }
 
     @Override
     public Observable<List<UserEntity>> getUsers(int since, int per_page) {
-        mApiService = mHttpFactory.createService(ApiService.class);
+        mApiService = mHttpManager.createService(ApiService.class);
         return mApiService.getUsers(since, per_page);
     }
 
     @Override
     public Observable<List<UserEntity>> getUsers() {
         //TODO...此处需要做操作,自定义异常...
-        mApiService = mHttpFactory.createService(ApiService.class);
+        mApiService = mHttpManager.createService(ApiService.class);
 
         return mApiService
                 .getUsers()
                 .compose(compose());
+
     }
 
     @Override
