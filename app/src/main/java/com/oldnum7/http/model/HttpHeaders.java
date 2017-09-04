@@ -19,7 +19,7 @@ import android.os.Build;
 import android.text.TextUtils;
 
 
-import com.oldnum7.http.HttpManager;
+import com.oldnum7.http.HttpFactory;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,15 +35,16 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TimeZone;
 
+
 /**
- * ================================================
- * 作    者：jeasonlzy（廖子尧）Github地址：https://github.com/jeasonlzy
- * 版    本：1.0
- * 创建日期：2015/10/10
- * 描    述：请求头的包装类
- * 修订历史：
- * ================================================
+ * <pre>
+ *       author : denglin
+ *       time   : 2017/06/02/17:28
+ *       desc   : 请求头的包装类 header不支持中文，不允许有特殊字符
+ *       version: 1.0
+ * </pre>
  */
+
 public class HttpHeaders implements Serializable {
     private static final long serialVersionUID = 8458647755751403873L;
 
@@ -206,7 +207,7 @@ public class HttpHeaders implements Serializable {
                 Class<?> sysResCls = Class.forName("com.android.internal.R$string");
                 Field webUserAgentField = sysResCls.getDeclaredField("web_user_agent");
                 Integer resId = (Integer) webUserAgentField.get(null);
-                webUserAgent = HttpManager.getInstance().getContext().getString(resId);
+                webUserAgent = HttpFactory.getInstance().getContext().getString(resId);
             } catch (Exception e) {
                 // We have nothing to do
             }

@@ -1,5 +1,8 @@
 package com.oldnum7.http.exception;
 
+import com.oldnum7.data.entity.HttpResponse;
+import com.oldnum7.http.utils.HttpUtils;
+
 /**
  * <pre>
  *       author : denglin
@@ -10,35 +13,43 @@ package com.oldnum7.http.exception;
  */
 public class HttpException extends RuntimeException {
 
-    private static String message;
-
-    private String error;
-
-    private String msg;
-
-    private int status;
-
-    public HttpException() {
-
-    }
-    
-    public HttpException(int status, String msg, String error) {
-        this.error = error;
-        this.status = status;
-        this.msg = msg;
-    }
+    private int code;                               //HTTP status code
+    private String message;                         //HTTP status message
+    private  HttpResponse<?> response;         //The full HTTP response. This may be null if the exception was serialized
 
     public HttpException(String message) {
         super(message);
     }
 
-    public HttpException(String message, Throwable cause) {
-        super(message, cause);
+    public HttpException(HttpResponse<?> response) {
+        super(getMessage(response));
+        this.code = response.getStatus();
+        this.message = response.getMsg();
+        this.response = response;
     }
 
-    public HttpException(Throwable cause) {
-        super(cause);
+    private static String getMessage(HttpResponse<?> response) {
+        HttpUtils.checkNotNull(response, "response == null");
+        return "HTTP " + response.getStatus() + " " + response.getMsg();
     }
 
+    public int code() {
+        return code;
+    }
 
+    public String message() {
+        return message;
+    }
+
+    public HttpResponse<?> response() {
+        return response;
+    }
+
+    public static HttpException NET_ERROR() {
+        return new HttpException("network error! http response code is 404 or 5xx!");
+    }
+
+    public static HttpException COMMON(String message) {
+        return new HttpException(message);
+    }
 }

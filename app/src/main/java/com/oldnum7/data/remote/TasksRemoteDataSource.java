@@ -7,7 +7,7 @@ import com.oldnum7.business.ApiService;
 import com.oldnum7.data.TasksDataSource;
 import com.oldnum7.data.entity.HttpResponse;
 import com.oldnum7.data.entity.UserEntity;
-import com.oldnum7.http.HttpManager;
+import com.oldnum7.http.HttpFactory;
 import com.oldnum7.http.exception.HttpException;
 
 import java.util.List;
@@ -19,6 +19,9 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.functions.Function;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * <pre>
@@ -30,15 +33,13 @@ import io.reactivex.functions.Function;
  */
 @Singleton
 public class TasksRemoteDataSource implements TasksDataSource {
-
-
-    private HttpManager mHttpManager;
+    private HttpFactory mHttpManager;
     private ApiService mApiService;
 
     // Prevent direct instantiation.
     @Inject
     TasksRemoteDataSource() {
-        mHttpManager = new HttpManager.Builder().build();
+//        mHttpManager = new HttpFactory.Builder().build();
     }
 
     @Override
@@ -71,7 +72,7 @@ public class TasksRemoteDataSource implements TasksDataSource {
                     @Override
                     public T apply(HttpResponse<T> response) throws Exception {
                         if (Constants.HTTP_SUCCESS != response.getStatus()) {
-                            throw new HttpException(response.getStatus(), response.getMsg(), response.getError());
+                            throw new HttpException(response);
                         }
                         return response.getResult();
                     }
@@ -94,4 +95,21 @@ public class TasksRemoteDataSource implements TasksDataSource {
 //            });
 //        }
 //    };
+
+
+    public void getTask() {
+        ApiService service = HttpFactory.getInstance().createService(ApiService.class);
+
+        service.getUser().enqueue(new Callback<HttpResponse<List<UserEntity>>>() {
+            @Override
+            public void onResponse(Call<HttpResponse<List<UserEntity>>> call, Response<HttpResponse<List<UserEntity>>> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<HttpResponse<List<UserEntity>>> call, Throwable t) {
+
+            }
+        });
+    }
 }

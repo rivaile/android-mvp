@@ -15,6 +15,13 @@
  */
 package com.oldnum7.http.utils;
 
+import com.oldnum7.http.model.HttpParams;
+
+import java.net.FileNameMap;
+import java.net.URLConnection;
+
+import okhttp3.MediaType;
+
 /**
  * <pre>
  *       author : denglin
@@ -178,16 +185,16 @@ public class HttpUtils {
 //        return false;
 //    }
 //
-//    /** 根据文件名获取MIME类型 */
-//    public static MediaType guessMimeType(String fileName) {
-//        FileNameMap fileNameMap = URLConnection.getFileNameMap();
-//        fileName = fileName.replace("#", "");   //解决文件名中含有#号异常的问题
-//        String contentType = fileNameMap.getContentTypeFor(fileName);
-//        if (contentType == null) {
-//            return HttpParams.MEDIA_TYPE_STREAM;
-//        }
-//        return MediaType.parse(contentType);
-//    }
+    /** 根据文件名获取MIME类型 */
+    public static MediaType guessMimeType(String fileName) {
+        FileNameMap fileNameMap = URLConnection.getFileNameMap();
+        fileName = fileName.replace("#", "");   //解决文件名中含有#号异常的问题
+        String contentType = fileNameMap.getContentTypeFor(fileName);
+        if (contentType == null) {
+            return HttpParams.MEDIA_TYPE_STREAM;
+        }
+        return MediaType.parse(contentType);
+    }
 
     public static <T> T checkNotNull(T object, String message) {
         if (object == null) {

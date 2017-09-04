@@ -4,8 +4,8 @@ import android.support.annotation.NonNull;
 
 import com.oldnum7.data.TasksDataSource;
 import com.oldnum7.data.entity.UserEntity;
-import com.oldnum7.data.local.cache.rxcache.CacheService;
-import com.oldnum7.data.local.cache.rxcache.RxCacheFactory;
+import com.oldnum7.http.cache.rxcache.CacheService;
+import com.oldnum7.http.cache.rxcache.RxCacheFactory;
 
 import java.util.List;
 
@@ -73,7 +73,7 @@ public class TasksLocalDataSource implements TasksDataSource {
 //        response.getResult().addAll(users);
 
     }
-
+    
     public void saveTask(Observable<List<UserEntity>> users, Boolean flag) {
         mUsersCache = mCacheService.getUsersCache(users, new EvictProvider(flag));
     }

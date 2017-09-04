@@ -1,4 +1,4 @@
-package com.oldnum7.data.local.cache.rxcache;
+package com.oldnum7.http.cache.rxcache;
 
 import com.oldnum7.data.entity.UserEntity;
 
