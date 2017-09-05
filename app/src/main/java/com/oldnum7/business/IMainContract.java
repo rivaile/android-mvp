@@ -1,6 +1,5 @@
 package com.oldnum7.business;
 
-import com.oldnum7.data.entity.UserEntity;
 import com.oldnum7.mvp.BasePresenter;
 import com.oldnum7.mvp.BaseView;
 
@@ -19,7 +18,7 @@ public interface IMainContract {
     interface View extends BaseView<Presenter> {
         void setLoadingIndicator(boolean active);
 
-        void getUsers(List<UserEntity> users);
+        void getUsers(List<T> users);
 
         void showLoading();
 

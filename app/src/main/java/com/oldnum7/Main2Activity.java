@@ -8,7 +8,6 @@ import android.view.View;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.oldnum7.business.ApiService;
 import com.oldnum7.data.entity.HttpResponse;
-import com.oldnum7.data.entity.UserEntity;
 
 import java.io.IOException;
 import java.util.List;
@@ -66,14 +65,14 @@ public class Main2Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 retofit.create(ApiService.class)
-                        .getUser().enqueue(new Callback<HttpResponse<List<UserEntity>>>() {
+                        .getUser().enqueue(new Callback<HttpResponse<List<T>>>() {
                     @Override
-                    public void onResponse(Call<HttpResponse<List<UserEntity>>> call, retrofit2.Response<HttpResponse<List<UserEntity>>> response) {
+                    public void onResponse(Call<HttpResponse<List<T>>> call, retrofit2.Response<HttpResponse<List<T>>> response) {
                         Log.e("TAG", "onResponse: " + response);
                     }
 
                     @Override
-                    public void onFailure(Call<HttpResponse<List<UserEntity>>> call, Throwable t) {
+                    public void onFailure(Call<HttpResponse<List<T>>> call, Throwable t) {
                         Log.e("TAG", "onResponse: " + t.toString());
                     }
                 });

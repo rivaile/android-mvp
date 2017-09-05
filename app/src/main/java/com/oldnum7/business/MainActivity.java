@@ -12,7 +12,7 @@ import com.oldnum7.R;
 import com.oldnum7.business.account.Tab3Fragment;
 import com.oldnum7.business.dashborard.Tab2Fragment;
 import com.oldnum7.business.home.Tab1Fragment;
-import com.oldnum7.mvp.BaseActivity;
+import com.oldnum7.base.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;

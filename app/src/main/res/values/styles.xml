@@ -3,9 +3,15 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/colorPrimary</item>           <!--ToolBar的默认颜色..-->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>   <!--状态栏的默认颜色..-->
+        <item name="colorAccent">@color/colorAccent</item>             <!--浮动按钮的默认颜色..-->
+    </style>
+
+    <!--toolbar替代actionbar后必须设置主题为NoActionBar-->
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
 </resources>

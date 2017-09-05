@@ -1,6 +1,5 @@
 package com.oldnum7.business;
 
-import com.oldnum7.data.entity.UserEntity;
 import com.oldnum7.mvp.MvpView;
 
 import java.util.List;
@@ -15,7 +14,7 @@ import java.util.List;
  */
 public interface IMainView extends MvpView {
 
-    void getUsers(List<UserEntity> users);
+    void getUsers(List<T> users);
 
     void showLoading();
 

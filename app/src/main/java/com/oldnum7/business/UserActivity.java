@@ -8,11 +8,10 @@ import android.support.v7.widget.RecyclerView;
 
 import com.oldnum7.R;
 import com.oldnum7.adapter.UserAdapter;
-import com.oldnum7.base.App;
-import com.oldnum7.data.entity.UserEntity;
+import com.oldnum7.App;
 import com.oldnum7.di.component.DaggerMainComponent;
 import com.oldnum7.di.module.MainPresenterModule;
-import com.oldnum7.mvp.BaseActivity;
+import com.oldnum7.base.BaseActivity;
 
 import java.util.List;
 
@@ -66,7 +65,7 @@ public class UserActivity extends BaseActivity<MainPresenter> implements IMainCo
 
 
     @Override
-    public void getUsers(List<UserEntity> users) {
+    public void getUsers(List<T> users) {
         getStatusLayoutManager().showContent();
 
         mUserAdapter.setNewData(users);

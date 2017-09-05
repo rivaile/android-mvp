@@ -93,6 +93,10 @@ public class FileManager {
         return file.exists();
     }
 
+    boolean delete(File file) {
+        return file.delete();
+    }
+
     /**
      * Warning: Deletes the content of a directory.
      * This is an I/O operation and this method executes in the main thread, so it is recommended to

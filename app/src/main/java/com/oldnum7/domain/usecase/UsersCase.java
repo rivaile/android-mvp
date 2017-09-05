@@ -3,7 +3,6 @@ package com.oldnum7.domain.usecase;
 import android.util.Log;
 
 import com.oldnum7.data.TasksRepository;
-import com.oldnum7.data.entity.UserEntity;
 
 import java.util.List;
 
@@ -23,7 +22,7 @@ import io.reactivex.functions.Function;
  *       version: 1.0
  * </pre>
  */
-public class UsersCase extends UseCase<List<UserEntity>, UsersCase.Params> {
+public class UsersCase extends UseCase<List<T>, UsersCase.Params> {
 
     @Inject
     TasksRepository mTasksRepository;
@@ -34,24 +33,23 @@ public class UsersCase extends UseCase<List<UserEntity>, UsersCase.Params> {
     }
 
     @Override
-    Observable<List<UserEntity>> buildUseCaseObservable(Params params) {
+    Observable<List<T>> buildUseCaseObservable(Params params) {
 
-        Observable<List<UserEntity>> tasks = mTasksRepository
+        Observable<List<T>> tasks = mTasksRepository
                 .getUsers();
-        Observable<UserEntity> userObservable = tasks
-                .flatMap(new Function<List<UserEntity>, ObservableSource<UserEntity>>() {
+        Observable<T> userObservable = tasks
+                .flatMap(new Function<List<T>, ObservableSource<T>>() {
                     @Override
-                    public ObservableSource<UserEntity> apply(List<UserEntity> userEntities) throws Exception {
+                    public ObservableSource<T> apply(List<T> userEntities) throws Exception {
                         return Observable.fromIterable(userEntities);
                     }
                 });
 
         return userObservable
-                .filter(userEntity -> true)
                 .toList()
-                .flatMapObservable(new Function<List<UserEntity>, ObservableSource<List<UserEntity>>>() {
+                .flatMapObservable(new Function<List<T>, ObservableSource<List<T>>>() {
                     @Override
-                    public ObservableSource<List<UserEntity>> apply(@NonNull List<UserEntity> userEntities) throws Exception {
+                    public ObservableSource<List<T>> apply(@NonNull List<T> userEntities) throws Exception {
                         return Observable.just(userEntities);
                     }
                 }).doOnTerminate(new Action() {

@@ -3,7 +3,6 @@ package com.oldnum7.business;
 import android.support.annotation.NonNull;
 
 import com.oldnum7.http.callback.HttpObserver;
-import com.oldnum7.data.entity.UserEntity;
 import com.oldnum7.domain.usecase.UsersCase;
 import com.oldnum7.status.StatusLayoutManager;
 
@@ -79,9 +78,9 @@ public class MainPresenter implements IMainContract.Presenter {
             mUsersCase.refreshTasks();
         }
 
-        mUsersCase.execute(new HttpObserver<List<UserEntity>>(statusLayoutManager) {
+        mUsersCase.execute(new HttpObserver<List<T>>(statusLayoutManager) {
             @Override
-            public void onNext(List<UserEntity> userEntities) {
+            public void onNext(List<T> userEntities) {
                 mMainView.getUsers(userEntities);
             }
 
@@ -89,7 +88,7 @@ public class MainPresenter implements IMainContract.Presenter {
 
     }
 
-    private void processTasks(@NonNull List<UserEntity> tasks) {
+    private void processTasks(@NonNull List<T> tasks) {
         if (tasks.isEmpty()) {
             // Show a message indicating there are no tasks for that filter type.
 //            processEmptyTasks();

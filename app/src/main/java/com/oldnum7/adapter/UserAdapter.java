@@ -8,8 +8,7 @@ import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.oldnum7.R;
-import com.oldnum7.base.App;
-import com.oldnum7.data.entity.UserEntity;
+import com.oldnum7.App;
 
 import java.util.List;
 
@@ -21,14 +20,14 @@ import java.util.List;
  *       version: 1.0
  * </pre>
  */
-public class UserAdapter extends BaseQuickAdapter<UserEntity, BaseViewHolder> {
+public class UserAdapter extends BaseQuickAdapter<T, BaseViewHolder> {
 
-    public UserAdapter(@LayoutRes int layoutResId, @Nullable List<UserEntity> data) {
+    public UserAdapter(@LayoutRes int layoutResId, @Nullable List<T> data) {
         super(layoutResId, data);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, UserEntity item) {
+    protected void convert(BaseViewHolder helper, T item) {
 
         Glide.with(App.getmContext())
                 .load(item.getHeadImg())

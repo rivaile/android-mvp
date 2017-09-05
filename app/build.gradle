@@ -196,6 +196,7 @@ dependencies {
     //Android ios  dialog  https://github.com/hss01248/DialogUtil
 //    compile 'com.github.hss01248:DialogUtil:lastest release'
 
+    compile 'org.jetbrains:annotations:15.0'
 }
 
 //walle {
