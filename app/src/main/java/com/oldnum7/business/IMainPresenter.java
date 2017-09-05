@@ -1,6 +1,6 @@
 package com.oldnum7.business;
 
-import com.oldnum7.mvp.MvpPresenter;
+import com.oldnum7.base.mvp.MvpPresenter;
 
 /**
  * <pre>

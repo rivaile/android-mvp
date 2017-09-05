@@ -1,23 +1,20 @@
 package com.oldnum7.base;
 
+import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.oldnum7.R;
-import com.oldnum7.mvp.BasePresenter;
-import com.oldnum7.status.StatusLayoutManager;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
-
-import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 
@@ -29,105 +26,35 @@ import butterknife.ButterKnife;
  * version: 1.0
  * </Pre>
  */
-public class BaseActivity<P extends BasePresenter> extends AppCompatActivity {
-
-    @Inject
-    protected P mPresenter;
-
-    protected StatusLayoutManager statusLayoutManager;
-    protected LinearLayout mRootLayout;
-
-
-//    private static final String LAYOUT_LINEARLAYOUT = "LinearLayout";
-//    private static final String LAYOUT_FRAMELAYOUT = "FrameLayout";
-//    private static final String LAYOUT_RELATIVELAYOUT = "RelativeLayout";
-//    @Override
-//    public View onCreateView(String name, Context context, AttributeSet attrs) {
-//        View view = null;
-//        if (name.equals(LAYOUT_FRAMELAYOUT)) {
-//            view = new AutoFrameLayout(context, attrs);
-//        }
-//
-//        if (name.equals(LAYOUT_LINEARLAYOUT)) {
-//            view = new AutoLinearLayout(context, attrs);
-//        }
-//
-//        if (name.equals(LAYOUT_RELATIVELAYOUT)) {
-//            view = new AutoRelativeLayout(context, attrs);
-//        }
-//
-//        if (view != null) return view;
-//
-//        return super.onCreateView(name, context, attrs);
-//    }
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        super.setContentView(R.layout.activity_base);
-
-        initVariables();
-        initToolbar();
-    }
-
-    public void setContentView(@LayoutRes int layoutResID) {
-//        setContentView(View.inflate(this, layoutResID, null));
-        mRootLayout = (LinearLayout) findViewById(R.id.root_layout);
-        if (mRootLayout == null) {
-            return;
-        }
-
-        statusLayoutManager = StatusLayoutManager.newBuilder(this)
-                .contentView(layoutResID)
-                .emptyDataView(R.layout.activity_empty_data)
-                .errorView(R.layout.activity_error)
-                .loadingView(R.layout.activity_loading)
-                .netWorkErrorView(R.layout.activity_networkerror)
-                .build();
-
-        mRootLayout.addView(statusLayoutManager.getRootLayout());
-
-        ButterKnife.bind(this);
-
-        setPresenter();
-        initViews();
-        loadData();
-        initEvent();
-    }
-
-    protected void setPresenter() {
-
-    }
-
-
-    protected void initEvent() {
-
-    }
-
-
-    protected void loadData() {
-
-    }
-
-    protected void initViews() {
-
-    }
-
-    protected void initVariables() {
-
-    }
-
-    protected void initToolbar() {
-
-    }
-
-    public StatusLayoutManager getStatusLayoutManager() {
-        return statusLayoutManager;
-    }
+public class BaseActivity extends AppCompatActivity {
 
     @SuppressWarnings("unchecked")
     public <T extends View> T findView(int id) {
         return (T) findViewById(id);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        initSystemBarTint();
+    }
+
+    @Override
+    public void setContentView(@LayoutRes int layoutResID) {
+        super.setContentView(layoutResID);
+        ButterKnife.bind(this);
+    }
+
+    @Override
+    public void setContentView(View view) {
+        super.setContentView(view);
+        ButterKnife.bind(this);
+    }
+
+    @Override
+    public void setContentView(View view, ViewGroup.LayoutParams params) {
+        super.setContentView(view, params);
+        ButterKnife.bind(this);
     }
 
     //-------------------------------------------------状态栏管理start--------------------------------------------------------//
@@ -184,6 +111,28 @@ public class BaseActivity<P extends BasePresenter> extends AppCompatActivity {
         getTheme().resolveAttribute(R.attr.colorPrimaryDark, typedValue, true);
         return typedValue.data;
     }
-    //-------------------------------------------------状态栏管理end--------------------------------------------------------//
+
+    //-------------------------------------------------对话框--------------------------------------------------------//
+    public void showToast(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
+
+    private ProgressDialog dialog;
+
+    public void showLoading() {
+        if (dialog != null && dialog.isShowing()) return;
+        dialog = new ProgressDialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        dialog.setMessage("请求网络中...");
+        dialog.show();
+    }
+
+    public void dismissLoading() {
+        if (dialog != null && dialog.isShowing()) {
+            dialog.dismiss();
+        }
+    }
 
 }

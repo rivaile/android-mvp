@@ -1,6 +1,6 @@
 package com.oldnum7.business;
 
-import com.oldnum7.mvp.MvpView;
+import com.oldnum7.base.mvp.MvpView;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.oldnum7.mvp;
+package com.oldnum7.base.mvp;
 
 /**
  * author : denglin

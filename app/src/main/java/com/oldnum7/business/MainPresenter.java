@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.oldnum7.http.callback.HttpObserver;
 import com.oldnum7.domain.usecase.UsersCase;
-import com.oldnum7.status.StatusLayoutManager;
+import com.oldnum7.base.status.StatusLayoutManager;
 
 import java.util.List;
 
@@ -19,7 +19,6 @@ import javax.inject.Inject;
 public class MainPresenter implements IMainContract.Presenter {
 
     private final String TAG = getClass().getSimpleName();
-
 
     private final UsersCase mUsersCase;
     private StatusLayoutManager statusLayoutManager;

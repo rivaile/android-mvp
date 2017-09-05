@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.oldnum7.mvp;
+package com.oldnum7.base.mvp;
 
-public interface BaseView<T> {
+public interface BaseView {
 
-    void setPresenter(T presenter);
+//    void setPresenter(T presenter);
 
 }

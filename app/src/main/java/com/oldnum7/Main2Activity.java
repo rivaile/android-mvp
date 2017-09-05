@@ -2,15 +2,11 @@ package com.oldnum7;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 
 import com.blankj.utilcode.util.NetworkUtils;
-import com.oldnum7.business.ApiService;
-import com.oldnum7.data.entity.HttpResponse;
 
 import java.io.IOException;
-import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -23,8 +19,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -64,18 +58,18 @@ public class Main2Activity extends AppCompatActivity {
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                retofit.create(ApiService.class)
-                        .getUser().enqueue(new Callback<HttpResponse<List<T>>>() {
-                    @Override
-                    public void onResponse(Call<HttpResponse<List<T>>> call, retrofit2.Response<HttpResponse<List<T>>> response) {
-                        Log.e("TAG", "onResponse: " + response);
-                    }
-
-                    @Override
-                    public void onFailure(Call<HttpResponse<List<T>>> call, Throwable t) {
-                        Log.e("TAG", "onResponse: " + t.toString());
-                    }
-                });
+//                retofit.create(ApiService.class)
+//                        .getUser().enqueue(new Callback<HttpResponse<List<T>>>() {
+//                    @Override
+//                    public void onResponse(Call<HttpResponse<List<T>>> call, retrofit2.Response<HttpResponse<List<T>>> response) {
+//                        Log.e("TAG", "onResponse: " + response);
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<HttpResponse<List<T>>> call, Throwable t) {
+//                        Log.e("TAG", "onResponse: " + t.toString());
+//                    }
+//                });
             }
         });
     }

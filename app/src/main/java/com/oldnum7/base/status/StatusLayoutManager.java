@@ -1,4 +1,4 @@
-package com.oldnum7.status;
+package com.oldnum7.base.status;
 
 import android.content.Context;
 import android.support.annotation.LayoutRes;

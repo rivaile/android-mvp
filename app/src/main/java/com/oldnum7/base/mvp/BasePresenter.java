@@ -1,4 +1,4 @@
-package com.oldnum7.mvp;
+package com.oldnum7.base.mvp;
 
 import android.support.annotation.Nullable;
 import android.support.annotation.UiThread;
@@ -15,7 +15,8 @@ import java.lang.ref.WeakReference;
  *      version: 1.0
  * </pre>
  */
-public class BaseMvpPresenter<V extends MvpView> implements MvpPresenter<V> {
+public abstract class BasePresenter<V extends BaseView> implements MvpPresenter<V>,IPresenter{
+
     private WeakReference<V> mViewReference;
 
     @UiThread

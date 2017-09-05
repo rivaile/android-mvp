@@ -1,9 +1,7 @@
 package com.oldnum7.business;
 
-import com.oldnum7.mvp.BasePresenter;
-import com.oldnum7.mvp.BaseView;
-
-import java.util.List;
+import com.oldnum7.base.mvp.BasePresenter;
+import com.oldnum7.base.mvp.BaseView;
 
 /**
  * <pre>
@@ -15,10 +13,10 @@ import java.util.List;
  */
 public interface IMainContract {
 
-    interface View extends BaseView<Presenter> {
+    interface View extends BaseView {
         void setLoadingIndicator(boolean active);
 
-        void getUsers(List<T> users);
+//        void getUsers(List<T> users);
 
         void showLoading();
 
@@ -27,12 +25,12 @@ public interface IMainContract {
         void showNetWorkError();
     }
 
-    interface Presenter extends BasePresenter {
+    abstract class Presenter extends BasePresenter<View> {
 
-        void loadData(boolean forceUpdate);
+        abstract void loadData(boolean forceUpdate);
 
-        void getUsers(int since, int per_page);
+        abstract void getUsers(int since, int per_page);
 
-        void getUsers();
+        abstract void getUsers();
     }
 }

@@ -1,4 +1,4 @@
-package com.oldnum7.mvp;
+package com.oldnum7.base.mvp;
 
 import android.support.annotation.UiThread;
 
@@ -8,7 +8,7 @@ import android.support.annotation.UiThread;
  * desc   :
  * version: 1.0
  */
-public interface MvpPresenter<V extends MvpView> {
+public interface MvpPresenter<V extends BaseView>  {
 
     @UiThread
     void attachView(V view);

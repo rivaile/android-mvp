@@ -18,5 +18,4 @@ public class Constants {
     public static final String APP_RXCACHE = "app_rxcache";
     public static final String APP_CACHE = "app_cache";
 
-
 }

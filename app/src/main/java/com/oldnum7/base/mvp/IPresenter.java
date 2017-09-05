@@ -14,12 +14,17 @@
  * limitations under the License.
  */
 
-package com.oldnum7.mvp;
+package com.oldnum7.base.mvp;
 
-public interface BasePresenter {
-
+public interface IPresenter {
+    /**
+     * subscribe call
+     */
     void subscribe();
 
+    /**
+     * unsubscribe call which is requsting.
+     */
     void unsubscribe();
 
 }
