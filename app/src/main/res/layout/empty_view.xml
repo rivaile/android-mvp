@@ -16,7 +16,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/icon_network_error"
+            android:src="@drawable/empty_nodata"
             android:layout_gravity="center_horizontal"/>
 
         <TextView
@@ -27,17 +27,17 @@
             android:textColor="#999999"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:text="舞台停电了"/>
+            android:text="小品主角配角演员还没到"/>
 
         <Button
-            android:id="@+id/button_retry"
+            android:id="@+id/btn_retry"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#000000"
             android:textSize="14sp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:text="找电工"/>
+            android:text="Call"/>
     </LinearLayout>
 
 </RelativeLayout>

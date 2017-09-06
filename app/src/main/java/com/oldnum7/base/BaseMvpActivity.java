@@ -30,7 +30,6 @@ public class BaseMvpActivity<V extends BaseView, P extends BasePresenter<V>> ext
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getMvpDelegate().onCreate(savedInstanceState);
-
     }
 
 
