@@ -14,8 +14,6 @@ import com.oldnum7.mvp.view.BaseView;
  *
  * @param <V> The type of MvpView
  * @param <P> The type of MvpPresenter
- * @author zuoqx
- * Created at 2016/8/2 16:42
 */
 
 public interface DelegateCallback<V extends BaseView, P extends BasePresenter<V>> {

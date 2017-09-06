@@ -21,7 +21,7 @@ import io.reactivex.annotations.NonNull;
 public class LoginPresenter extends ILoginContract.Presenter {
 
     private LoginCase mLoginCase;
-
+    
     @Inject
     LoginPresenter(LoginCase loginCase) {
         this.mLoginCase = loginCase;

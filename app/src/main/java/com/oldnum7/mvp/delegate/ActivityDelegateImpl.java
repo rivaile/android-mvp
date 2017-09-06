@@ -28,7 +28,6 @@ public class ActivityDelegateImpl<V extends BaseView, P extends BasePresenter<V>
         this.mDelegateCallback = delegateCallback;
     }
 
-
     @Override
     public void onCreate(Bundle bundle) {
         mPresenter = mDelegateCallback.getPresenter();
