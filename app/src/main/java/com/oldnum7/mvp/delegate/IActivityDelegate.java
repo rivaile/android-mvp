@@ -1,4 +1,4 @@
-package com.oldnum7.base.mvp.delegate;
+package com.oldnum7.mvp.delegate;
 
 import android.app.Activity;
 import android.os.Bundle;

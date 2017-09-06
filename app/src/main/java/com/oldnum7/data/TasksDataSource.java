@@ -3,6 +3,8 @@ package com.oldnum7.data;
 
 import android.support.annotation.NonNull;
 
+import com.oldnum7.data.entity.T;
+
 import java.util.List;
 
 import io.reactivex.Observable;

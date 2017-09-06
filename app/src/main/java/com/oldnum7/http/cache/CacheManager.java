@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.oldnum7.http.cache.file;
+package com.oldnum7.http.cache;
 
 import android.content.Context;
 
-import com.oldnum7.http.cache.file.serializer.Serializer;
+import com.oldnum7.http.cache.serializer.Serializer;
 import com.oldnum7.http.exception.CacheException;
 import com.oldnum7.utils.ThreadExecutor;
 

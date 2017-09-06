@@ -2,6 +2,7 @@ package com.oldnum7.data;
 
 import android.support.annotation.NonNull;
 
+import com.oldnum7.data.entity.T;
 import com.oldnum7.data.local.TasksLocalDataSource;
 
 import java.util.Collection;
@@ -73,7 +74,7 @@ public class TasksRepository implements TasksDataSource {
 //    }
 
     /**
-     * Used to force {@link #getInstance(TasksDataSource, TasksDataSource)} to create a new instance
+//     * Used to force {@link #(TasksDataSource, TasksDataSource)} to create a new instance
      * next time it's called.
      */
 //    public static void destroyInstance() {
@@ -193,7 +194,7 @@ public class TasksRepository implements TasksDataSource {
                                     @Override
                                     public void accept(T userEntity) throws Exception {
                                         mTasksLocalDataSource.saveTask(userEntity);
-                                        mCachedTasks.put(userEntity.getUserName() + "", userEntity);
+//                                        mCachedTasks.put(userEntity.getUserName() + "", userEntity);
                                     }
                                 }).toList()
                                 .flatMapObservable(new Function<List<T>, ObservableSource<? extends List<T>>>() {
@@ -227,7 +228,7 @@ public class TasksRepository implements TasksDataSource {
                                     @Override
                                     public void accept(T userEntity) throws Exception {
                                         //存内存...
-                                        mCachedTasks.put(userEntity.getUserName() + "", userEntity);
+//                                        mCachedTasks.put(userEntity.getUserName() + "", userEntity);
                                         //存本地...
                                         mTasksLocalDataSource.saveTask(userEntity);
                                     }

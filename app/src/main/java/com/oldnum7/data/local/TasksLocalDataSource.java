@@ -3,8 +3,7 @@ package com.oldnum7.data.local;
 import android.support.annotation.NonNull;
 
 import com.oldnum7.data.TasksDataSource;
-import com.oldnum7.http.cache.rxcache.CacheService;
-import com.oldnum7.http.cache.rxcache.RxCacheFactory;
+import com.oldnum7.data.entity.T;
 
 import java.util.List;
 
@@ -13,7 +12,6 @@ import javax.inject.Singleton;
 
 import io.reactivex.Observable;
 import io.reactivex.functions.Function;
-import io.rx_cache2.EvictProvider;
 import io.rx_cache2.Reply;
 
 
@@ -29,7 +27,7 @@ import io.rx_cache2.Reply;
 public class TasksLocalDataSource implements TasksDataSource {
 
     private static TasksLocalDataSource INSTANCE;
-    private CacheService mCacheService = RxCacheFactory.getInstance().createCacheService(CacheService.class);
+//    private CacheService mCacheService = RxCacheFactory.getInstance().createCacheService(CacheService.class);
     private Observable<Reply<List<T>>> mUsersCache;
 
     // Prevent direct instantiation.
@@ -74,7 +72,7 @@ public class TasksLocalDataSource implements TasksDataSource {
     }
     
     public void saveTask(Observable<List<T>> users, Boolean flag) {
-        mUsersCache = mCacheService.getUsersCache(users, new EvictProvider(flag));
+//        mUsersCache = mCacheService.getUsersCache(users, new EvictProvider(flag));
     }
 
 }

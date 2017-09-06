@@ -1,4 +1,4 @@
-package com.oldnum7.base;
+package com.oldnum7.mvp.view;
 
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
@@ -11,8 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.oldnum7.R;
-import com.oldnum7.base.mvp.BasePresenter;
-import com.oldnum7.base.status.StatusLayoutManager;
+import com.oldnum7.mvp.persenter.BasePresenter;
+import com.oldnum7.mvp.status.StatusLayoutManager;
 
 /**
  * <pre>

@@ -1,13 +1,13 @@
-package com.oldnum7.base;
+package com.oldnum7.mvp.view;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 
-import com.oldnum7.base.mvp.BasePresenter;
-import com.oldnum7.base.mvp.BaseView;
-import com.oldnum7.base.mvp.delegate.ActivityDelegateImpl;
-import com.oldnum7.base.mvp.delegate.DelegateCallback;
-import com.oldnum7.base.mvp.delegate.IActivityDelegate;
+import com.oldnum7.mvp.base.BaseActivity;
+import com.oldnum7.mvp.delegate.ActivityDelegateImpl;
+import com.oldnum7.mvp.delegate.DelegateCallback;
+import com.oldnum7.mvp.delegate.IActivityDelegate;
+import com.oldnum7.mvp.persenter.BasePresenter;
 
 import javax.inject.Inject;
 

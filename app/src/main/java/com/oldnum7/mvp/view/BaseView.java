@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.oldnum7.base.mvp;
+package com.oldnum7.mvp.view;
 
 public interface BaseView {
 

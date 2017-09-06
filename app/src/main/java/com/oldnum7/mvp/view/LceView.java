@@ -1,8 +1,6 @@
-package com.oldnum7.base;
+package com.oldnum7.mvp.view;
 
 import android.support.annotation.UiThread;
-
-import com.oldnum7.base.mvp.BaseView;
 
 /**
  * Loading-Content-Error (LCE)

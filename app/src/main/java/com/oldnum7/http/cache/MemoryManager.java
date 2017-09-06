@@ -4,9 +4,6 @@ import android.text.TextUtils;
 import android.util.LruCache;
 
 
-import com.oldnum7.http.cache.file.ICache;
-
-
 import io.reactivex.Observable;
 
 

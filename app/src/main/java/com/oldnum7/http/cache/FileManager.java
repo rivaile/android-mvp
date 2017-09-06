@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.oldnum7.http.cache.file;
+package com.oldnum7.http.cache;
 
 import android.content.Context;
 import android.content.SharedPreferences;

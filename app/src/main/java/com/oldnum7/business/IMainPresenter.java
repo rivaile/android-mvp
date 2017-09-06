@@ -1,7 +1,5 @@
 package com.oldnum7.business;
 
-import com.oldnum7.base.mvp.MvpPresenter;
-
 /**
  * <pre>
  *       author : denglin
@@ -10,7 +8,7 @@ import com.oldnum7.base.mvp.MvpPresenter;
  *       version: 1.0
  * </pre>
  */
-public interface IMainPresenter extends MvpPresenter<IMainView> {
+public interface IMainPresenter  {
 //    void getUsers(int since, int per_page);
     void getUsers();
 }

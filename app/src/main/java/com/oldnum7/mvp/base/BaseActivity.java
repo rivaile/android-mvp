@@ -1,4 +1,4 @@
-package com.oldnum7.base;
+package com.oldnum7.mvp.base;
 
 import android.app.ProgressDialog;
 import android.graphics.Color;

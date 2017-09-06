@@ -1,9 +1,9 @@
-package com.oldnum7.base.mvp.delegate;
+package com.oldnum7.mvp.delegate;
 
 import android.os.Bundle;
 
-import com.oldnum7.base.mvp.BasePresenter;
-import com.oldnum7.base.mvp.BaseView;
+import com.oldnum7.mvp.persenter.BasePresenter;
+import com.oldnum7.mvp.view.BaseView;
 
 
 /**
@@ -50,7 +50,7 @@ public class ActivityDelegateImpl<V extends BaseView, P extends BasePresenter<V>
 
     @Override
     public void onPause() {
-        
+
     }
 
     @Override

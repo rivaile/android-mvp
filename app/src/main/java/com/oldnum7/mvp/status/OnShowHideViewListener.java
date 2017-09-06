@@ -1,4 +1,4 @@
-package com.oldnum7.base.status;
+package com.oldnum7.mvp.status;
 
 import android.view.View;
 

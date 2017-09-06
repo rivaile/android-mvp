@@ -1,7 +1,7 @@
 package com.oldnum7.business;
 
-import com.oldnum7.base.mvp.BasePresenter;
-import com.oldnum7.base.mvp.BaseView;
+import com.oldnum7.mvp.persenter.BasePresenter;
+import com.oldnum7.mvp.view.BaseView;
 
 /**
  * <pre>

@@ -1,6 +1,7 @@
 package com.oldnum7.business;
 
 import com.oldnum7.data.entity.HttpResponse;
+import com.oldnum7.data.entity.T;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ import retrofit2.http.Query;
  * <pre>
  *       author : denglin
  *       time   : 2017/05/31/17:35
- *       desc   :
+ *       desc   : 接口管理...
  *       version: 1.0
  * </pre>
  */

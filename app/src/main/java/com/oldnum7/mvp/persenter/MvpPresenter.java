@@ -1,6 +1,8 @@
-package com.oldnum7.base.mvp;
+package com.oldnum7.mvp.persenter;
 
 import android.support.annotation.UiThread;
+
+import com.oldnum7.mvp.view.BaseView;
 
 /**
  * author : denglin

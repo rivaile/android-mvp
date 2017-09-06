@@ -12,7 +12,7 @@ import com.oldnum7.R;
 import com.oldnum7.business.account.Tab3Fragment;
 import com.oldnum7.business.dashborard.Tab2Fragment;
 import com.oldnum7.business.home.Tab1Fragment;
-import com.oldnum7.base.BaseActivity;
+import com.oldnum7.mvp.base.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,9 +34,9 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initEvent();
     }
 
-    @Override
     protected void initEvent() {
         mBottomNavigationBar
                 .setMode(BottomNavigationBar.MODE_FIXED);
