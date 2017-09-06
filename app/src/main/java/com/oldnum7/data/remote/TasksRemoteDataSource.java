@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.oldnum7.business.ApiService;
 import com.oldnum7.data.TasksDataSource;
+import com.oldnum7.data.entity.LoginEntity;
 import com.oldnum7.data.entity.T;
 import com.oldnum7.http.HttpFactory;
 import com.oldnum7.http.Transformer.HttpTransformer;
@@ -31,7 +32,8 @@ public class TasksRemoteDataSource implements TasksDataSource {
     // Prevent direct instantiation.
     @Inject
     TasksRemoteDataSource() {
-//        mHttpManager = new HttpFactory.Builder().build();
+        mHttpManager = HttpFactory.getInstance();
+        mApiService = mHttpManager.createService(ApiService.class);
     }
 
     @Override
@@ -42,7 +44,7 @@ public class TasksRemoteDataSource implements TasksDataSource {
 
     @Override
     public Observable<List<T>> getUsers() {
-        mApiService = mHttpManager.createService(ApiService.class);
+
 
         return mApiService.getUsers().compose(HttpTransformer.expTransformer());
     }
@@ -50,5 +52,11 @@ public class TasksRemoteDataSource implements TasksDataSource {
     @Override
     public void saveTask(@NonNull T userEntity) {
 
+    }
+
+    //--------------------------------------------------------------------//
+    @Override
+    public Observable<LoginEntity> login(String name, String pwd) {
+        return mApiService.login(name,pwd).compose(HttpTransformer.expTransformer());
     }
 }

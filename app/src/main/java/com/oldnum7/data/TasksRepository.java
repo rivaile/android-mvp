@@ -2,6 +2,7 @@ package com.oldnum7.data;
 
 import android.support.annotation.NonNull;
 
+import com.oldnum7.data.entity.LoginEntity;
 import com.oldnum7.data.entity.T;
 import com.oldnum7.data.local.TasksLocalDataSource;
 
@@ -210,7 +211,6 @@ public class TasksRepository implements TasksDataSource {
                         mCacheIsDirty = false;
                     }
                 });
-
     }
 
     @Override
@@ -244,4 +244,9 @@ public class TasksRepository implements TasksDataSource {
                 });
     }
 
+
+    @Override
+    public Observable<LoginEntity> login(String name, String pwd) {
+        return mTasksRemoteDataSource.login(name,pwd);
+    }
 }

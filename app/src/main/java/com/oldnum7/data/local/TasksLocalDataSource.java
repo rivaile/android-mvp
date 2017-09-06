@@ -3,6 +3,7 @@ package com.oldnum7.data.local;
 import android.support.annotation.NonNull;
 
 import com.oldnum7.data.TasksDataSource;
+import com.oldnum7.data.entity.LoginEntity;
 import com.oldnum7.data.entity.T;
 
 import java.util.List;
@@ -70,9 +71,14 @@ public class TasksLocalDataSource implements TasksDataSource {
 //        response.getResult().addAll(users);
 
     }
-    
+
     public void saveTask(Observable<List<T>> users, Boolean flag) {
 //        mUsersCache = mCacheService.getUsersCache(users, new EvictProvider(flag));
+    }
+    
+    @Override
+    public Observable<LoginEntity> login(String name, String pwd) {
+        return null;
     }
 
 }

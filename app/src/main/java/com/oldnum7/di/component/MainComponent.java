@@ -2,6 +2,7 @@ package com.oldnum7.di.component;
 
 import com.oldnum7.ActivityScoped;
 import com.oldnum7.business.UserActivity;
+import com.oldnum7.business.user.LoginActivity;
 import com.oldnum7.di.module.MainPresenterModule;
 
 import dagger.Component;
@@ -20,4 +21,6 @@ import dagger.Component;
 public interface MainComponent {
     //只能是指定的Activity....
     void inject(UserActivity activity);
+
+    void inject(LoginActivity activity);
 }

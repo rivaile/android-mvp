@@ -20,8 +20,6 @@ keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 //def verCode = 1
 
 
-
-
 android {
 
     compileSdkVersion 25
@@ -205,3 +203,4 @@ dependencies {
 //    // 渠道配置文件
 //    channelFile = new File("${project.getProjectDir()}/channel")
 //}
+

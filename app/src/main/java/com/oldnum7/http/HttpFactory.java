@@ -143,6 +143,8 @@ public class HttpFactory {
 //        builder.sslSocketFactory(mSslSocketFactory, mX509TrustManager);
 
         okHttpClient = builder.build();
+
+        createRetrofit();
     }
 
     public HttpFactory init(Application app) {
@@ -277,10 +279,10 @@ public class HttpFactory {
     private void createRetrofit() {
         // create Retrofit.Builder instance
         mRetrofit = new Retrofit.Builder()
-                .baseUrl(mBaseUrl)
+                .baseUrl(Constants.HTTP_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .client(mOkHttpClient)
+                .client(okHttpClient)
                 .build();
     }
 

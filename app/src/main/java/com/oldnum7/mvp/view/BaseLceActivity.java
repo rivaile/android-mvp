@@ -56,16 +56,15 @@ public class BaseLceActivity<V extends LceView, P extends BasePresenter<V>> exte
                 .netWorkErrorView(R.layout.networkerror_view)
                 .build();
 
-        mStatusLayoutManager.getRootLayout().findViewById(R.id.btn_retry).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onErrorViewClicked();
-            }
-        });
-
         rootView.addView(mStatusLayoutManager.getRootLayout(), new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        // TODO: 2017/9/6 错误视图的重新加载...
+//        mStatusLayoutManager.getRootLayout().findViewById(R.id.btn_retry).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                onErrorViewClicked();
+//            }
+//        });
     }
-
 
     protected void initToolbar() {
 

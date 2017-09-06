@@ -3,6 +3,7 @@ package com.oldnum7.data;
 
 import android.support.annotation.NonNull;
 
+import com.oldnum7.data.entity.LoginEntity;
 import com.oldnum7.data.entity.T;
 
 import java.util.List;
@@ -26,4 +27,7 @@ public interface TasksDataSource {
     Observable<List<T>> getUsers();
 
     void saveTask(@NonNull T userEntity);
+
+
+    Observable<LoginEntity> login(String name, String pwd);
 }

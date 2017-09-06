@@ -1,14 +1,18 @@
 package com.oldnum7.business;
 
 import com.oldnum7.data.entity.HttpResponse;
+import com.oldnum7.data.entity.LoginEntity;
 import com.oldnum7.data.entity.T;
 
 import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 /**
@@ -31,5 +35,10 @@ public interface ApiService {
     @Headers("Cache-Control:public,max-age=30")
     @GET("servlet")
     Call<HttpResponse<List<T>>> getUser();
+
+    @FormUrlEncoded
+    @POST("user/login")
+    Observable<HttpResponse<LoginEntity>> login(@Field("loginName") String userName,
+                                          @Field("password") String pwd);
 
 }
