@@ -45,8 +45,8 @@ public class TasksRemoteDataSource implements TasksDataSource {
     @Override
     public Observable<List<T>> getUsers() {
 
-
-        return mApiService.getUsers().compose(HttpTransformer.expTransformer());
+//        return mApiService.getUsers().compose(HttpTransformer.transform());
+        return null;
     }
 
     @Override
@@ -57,6 +57,6 @@ public class TasksRemoteDataSource implements TasksDataSource {
     //--------------------------------------------------------------------//
     @Override
     public Observable<LoginEntity> login(String name, String pwd) {
-        return mApiService.login(name,pwd).compose(HttpTransformer.expTransformer());
+        return mApiService.login(name, pwd).compose(HttpTransformer.<LoginEntity>transform());
     }
 }

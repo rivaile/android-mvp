@@ -120,7 +120,7 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     //-------------------------------------------------对话框--------------------------------------------------------//
-    public void showToast(String msg) {
+    public void showToast(final String msg) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {

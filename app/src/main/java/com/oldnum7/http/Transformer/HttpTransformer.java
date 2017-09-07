@@ -20,7 +20,7 @@ import io.reactivex.functions.Function;
 public class HttpTransformer {
 
 
-    public static <T> ObservableTransformer<HttpResponse<T>, T> expTransformer() {
+    public static <T> ObservableTransformer<HttpResponse<T>, T> transform() {
         return new ObservableTransformer<HttpResponse<T>, T>() {
             @Override
             public ObservableSource<T> apply(Observable<HttpResponse<T>> upstream) {

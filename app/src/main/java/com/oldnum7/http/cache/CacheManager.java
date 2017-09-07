@@ -69,7 +69,7 @@ public class CacheManager implements ICache {
     }
 
     @Override
-    public <T> Observable<T> get(String key, Class<T> clazz) {
+    public <T> Observable<T> get(final String key, final Class<T> clazz) {
         return Observable.create(new ObservableOnSubscribe<T>() {
             @Override
             public void subscribe(ObservableEmitter<T> emitter) throws Exception {
