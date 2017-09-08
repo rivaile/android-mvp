@@ -10,11 +10,14 @@ package com.oldnum7;
  */
 public class Constants {
 
-    public final static int HTTP_SUCCESS = 200;
-    public static final long CACHE_SIZE = 1024 * 1024 * 10;
+    public static final String ANDROID_SECRET_KEY = "288ed3a47865289d552d8643724560ce";
+
+    public final static int HTTP_SUCCESS = 0;
 
     //    public static final String HTTP_BASE_URL = "https://api.github.com/";
-    public static final String HTTP_BASE_URL = "https://wap.rrjc.com/api/";
+//    public static final String HTTP_BASE_URL = "https://wap.rrjc.com/api/";
+    public static final String HTTP_BASE_URL = "https://23mobile.szrrjc.com/api/";
+
     public static final String APP_RXCACHE = "app_rxcache";
     public static final String APP_CACHE = "app_cache";
 

@@ -4,10 +4,12 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
+import com.oldnum7.App;
 import com.oldnum7.BuildConfig;
 import com.oldnum7.Constants;
-import com.oldnum7.App;
+import com.oldnum7.http.interceptor.HttpHeaderInterceptor;
 import com.oldnum7.http.model.HttpHeaders;
 import com.oldnum7.http.model.HttpParams;
 import com.oldnum7.http.utils.HttpUtils;
@@ -109,13 +111,20 @@ public class HttpFactory {
 
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
 
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
+            @Override
+            public void log(String message) {
+                Log.w("okHttp", message);
+            }
+        });
+//        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         if (BuildConfig.DEBUG) {
             loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         } else {
             loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
         }
         builder.addInterceptor(loggingInterceptor);
+        builder.addInterceptor(new HttpHeaderInterceptor());
 
         builder.readTimeout(DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS);
         builder.writeTimeout(DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS);
@@ -204,7 +213,7 @@ public class HttpFactory {
 //        mCacheMode = cacheMode;
 //        return this;
 //    }
-//
+
 //    /** 获取全局的缓存模式 */
 //    public CacheMode getCacheMode() {
 //        return mCacheMode;
