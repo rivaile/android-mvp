@@ -32,16 +32,16 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
-        jackOptions {
-            enabled true
-        }
+//        jackOptions {
+//            enabled true
+//        }
 
         vectorDrawables.useSupportLibrary = true
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
+//    compileOptions {
+//        sourceCompatibility JavaVersion.VERSION_1_8
+//        targetCompatibility JavaVersion.VERSION_1_8
+//    }
 
 
     signingConfigs {
@@ -126,10 +126,7 @@ android {
 //            output.outputFile = new File(outDirectory + '/' + timeNow, newName)
 //        }
 //    }
-//    compileOptions {
-//        targetCompatibility 1.8
-//        sourceCompatibility 1.8
-//    }
+
 }
 
 dependencies {
@@ -192,7 +189,7 @@ dependencies {
     //Android ios  dialog  https://github.com/hss01248/DialogUtil
 //    compile 'com.github.hss01248:DialogUtil:lastest release'
 
-    compile 'org.jetbrains:annotations:15.0'
+//    compile 'org.jetbrains:annotations:15.0'
 }
 
 //walle {
@@ -203,4 +200,3 @@ dependencies {
 //    // 渠道配置文件
 //    channelFile = new File("${project.getProjectDir()}/channel")
 //}
-

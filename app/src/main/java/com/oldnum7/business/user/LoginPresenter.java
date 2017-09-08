@@ -1,6 +1,7 @@
 package com.oldnum7.business.user;
 
 import android.app.Activity;
+import android.util.Log;
 
 import com.oldnum7.data.entity.LoginEntity;
 import com.oldnum7.domain.usecase.LoginCase;
@@ -20,8 +21,10 @@ import io.reactivex.annotations.NonNull;
  */
 public class LoginPresenter extends ILoginContract.Presenter {
 
+    private final String TAG = "TAG";
+
     private LoginCase mLoginCase;
-    
+
     @Inject
     LoginPresenter(LoginCase loginCase) {
         this.mLoginCase = loginCase;
@@ -46,8 +49,33 @@ public class LoginPresenter extends ILoginContract.Presenter {
         mLoginCase.execute(new DialogHttpObserver<LoginEntity>((Activity) view) {
             @Override
             public void onNext(@NonNull LoginEntity loginEntity) {
-
+                Log.e(TAG, "onNext: "+ loginEntity.toString());
             }
-        },new LoginCase.Params(userName,pwd));
+
+            @Override
+            protected void onStart() {
+                super.onStart();
+                Log.e(TAG, "onStart: ");
+            }
+
+            @Override
+            public void onComplete() {
+                super.onComplete();
+                Log.e(TAG, "onComplete: ");
+            }
+
+            @Override
+            public void onFinish() {
+                super.onFinish();
+                Log.e(TAG, "onFinish: ");
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                super.onError(e);
+                Log.e(TAG, "onError: ");
+                e.printStackTrace();
+            }
+        }, new LoginCase.Params(userName, pwd));
     }
 }
