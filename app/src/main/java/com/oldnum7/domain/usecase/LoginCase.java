@@ -2,6 +2,7 @@ package com.oldnum7.domain.usecase;
 
 import com.oldnum7.data.TasksRepository;
 import com.oldnum7.data.entity.LoginEntity;
+import com.oldnum7.utils.Des3;
 
 import javax.inject.Inject;
 
@@ -27,8 +28,13 @@ public class LoginCase extends UseCase<LoginEntity, LoginCase.Params> {
 
     @Override
     Observable<LoginEntity> buildUseCaseObservable(Params params) {
-
-        return mTasksRepository.login(params.userName, params.pwd);
+        String encodePwd = "";
+        try {
+            encodePwd = Des3.encode(params.pwd);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mTasksRepository.login(params.userName, encodePwd);
     }
 
     public static final class Params {

@@ -15,8 +15,8 @@ public class Constants {
     public final static int HTTP_SUCCESS = 0;
 
     //    public static final String HTTP_BASE_URL = "https://api.github.com/";
-//    public static final String HTTP_BASE_URL = "https://wap.rrjc.com/api/";
-    public static final String HTTP_BASE_URL = "https://23mobile.szrrjc.com/api/";
+    public static final String HTTP_BASE_URL = "https://wap.rrjc.com/api/";
+//    public static final String HTTP_BASE_URL = "https://23mobile.szrrjc.com/api/";
 
     public static final String APP_RXCACHE = "app_rxcache";
     public static final String APP_CACHE = "app_cache";
