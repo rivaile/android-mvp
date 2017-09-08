@@ -14,7 +14,7 @@ import okhttp3.Response;
  * <pre>
  *       author : denglin
  *       time   : 2017/06/07/16:35
- *       desc   : 只针Get请求有效...Post请求无效...
+ *       desc   : 只针Get请求有效...Post请求无效...需要设置两个拦截器...
  *       version: 1.0
  * </pre>
  */

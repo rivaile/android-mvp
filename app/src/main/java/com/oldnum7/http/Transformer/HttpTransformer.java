@@ -19,7 +19,12 @@ import io.reactivex.functions.Function;
  */
 public class HttpTransformer {
 
-
+    /**
+     * [200-300]调用
+     * {400-500}直接调用onerror
+     * @param <T>
+     * @return
+     */
     public static <T> ObservableTransformer<HttpResponse<T>, T> transform() {
         return new ObservableTransformer<HttpResponse<T>, T>() {
             @Override
