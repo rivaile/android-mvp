@@ -37,17 +37,18 @@ public class LoginCase extends UseCase<LoginEntity, LoginCase.Params> {
         return mTasksRepository.login(params.userName, encodePwd);
     }
 
-    public static  class Params {
+    public static final  class Params {
 
-        private String userName;
-        private String pwd;
+        private final String userName;
+        private final String pwd;
 
         public Params(String userName, String pwd) {
             this.userName = userName;
             this.pwd = pwd;
         }
+        public static Params params(String userName, String pwd) {
+            return new Params(userName, pwd);
+        }
     }
-    public static LoginCase.Params params(String userName, String pwd) {
-        return new Params(userName, pwd);
-    }
+
 }

@@ -49,7 +49,7 @@ public class LoginPresenter extends ILoginContract.Presenter {
         mLoginCase.execute(new DialogHttpObserver<LoginEntity>((Activity) view) {
             @Override
             public void onNext(@NonNull LoginEntity loginEntity) {
-                Log.e(TAG, "onNext: "+ loginEntity.toString());
+                Log.e(TAG, "onNext: " + loginEntity.toString());
             }
 
             @Override
@@ -76,6 +76,6 @@ public class LoginPresenter extends ILoginContract.Presenter {
                 Log.e(TAG, "onError: ");
                 e.printStackTrace();
             }
-        }, new LoginCase.Params(userName, pwd));
+        }, LoginCase.Params.params(userName, pwd));
     }
 }
