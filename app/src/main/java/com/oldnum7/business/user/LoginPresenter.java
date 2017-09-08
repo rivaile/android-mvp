@@ -40,7 +40,6 @@ public class LoginPresenter extends ILoginContract.Presenter {
 
     }
 
-
     @Override
     void login(String userName, String pwd) {
 
