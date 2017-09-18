@@ -8,6 +8,7 @@ import com.oldnum7.data.entity.LoginEntity;
 import com.oldnum7.data.entity.T;
 import com.oldnum7.http.HttpFactory;
 import com.oldnum7.http.Transformer.HttpTransformer;
+import com.oldnum7.http.interceptor.HttpHeaderInterceptor;
 
 import java.util.List;
 
@@ -26,20 +27,21 @@ import io.reactivex.Observable;
  */
 @Singleton
 public class TasksRemoteDataSource implements TasksDataSource {
-    private HttpFactory mHttpManager;
-    private ApiService mApiService;
+    private final HttpFactory mHttpFactory;
+    private final ApiService mService;
 
     // Prevent direct instantiation.
     @Inject
     TasksRemoteDataSource() {
-        mHttpManager = HttpFactory.getInstance();
-        mApiService = mHttpManager.createService(ApiService.class);
+        mHttpFactory = new HttpFactory.Builder()
+                .setInterceptor(new HttpHeaderInterceptor())
+                .build();
+        mService = mHttpFactory.createService(ApiService.class);
     }
 
     @Override
     public Observable<List<T>> getUsers(int since, int per_page) {
-        mApiService = mHttpManager.createService(ApiService.class);
-        return mApiService.getUsers(since, per_page);
+        return mService.getUsers(since, per_page);
     }
 
     @Override
@@ -57,6 +59,6 @@ public class TasksRemoteDataSource implements TasksDataSource {
     //--------------------------------------------------------------------//
     @Override
     public Observable<LoginEntity> login(String name, String pwd) {
-        return mApiService.login(name, pwd).compose(HttpTransformer.<LoginEntity>transform());
+        return mService.login(name, pwd).compose(HttpTransformer.<LoginEntity>transform());
     }
 }

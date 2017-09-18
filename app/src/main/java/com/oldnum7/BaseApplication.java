@@ -23,7 +23,7 @@ import okhttp3.OkHttpClient;
  *       version: 1.0
  * </pre>
  */
-public class App extends Application {
+public class BaseApplication extends Application {
     private static Context mContext;
 
     private AppComponent mAppComponent;
@@ -39,14 +39,14 @@ public class App extends Application {
                 .build();
         //----------------------------------------------------------------------------------------//
 
-        initHttpManager();
+//        initHttpManager();
     }
 
     public AppComponent getAppComponent() {
         return mAppComponent;
     }
 
-    public static Context getmContext() {
+    public static Context getContext() {
         return mContext;
     }
 
@@ -77,10 +77,10 @@ public class App extends Application {
         builder.writeTimeout(HttpFactory.DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS);     //全局的写入超时时间
         builder.connectTimeout(HttpFactory.DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS);   //全局的连接超时时间
 
-        HttpFactory.getInstance().init(this)                     //必须调用初始化
-//                .setOkHttpClient(builder.build())               //建议设置OkHttpClient，不设置会使用默认的
-                .setRetryCount(3)                               //全局统一超时重连次数，默认为三次，那么最差的情况会请求4次(一次原始请求，三次重连请求)，不需要可以设置为0
-                .addCommonHeaders(headers)                      //全局公共头
-                .addCommonParams(params);                       //全局公共参数
+//        HttpFactory.getInstance().init(this)                     //必须调用初始化
+////                .setOkHttpClient(builder.build())               //建议设置OkHttpClient，不设置会使用默认的
+//                .setRetryCount(3)                               //全局统一超时重连次数，默认为三次，那么最差的情况会请求4次(一次原始请求，三次重连请求)，不需要可以设置为0
+//                .addCommonHeaders(headers)                      //全局公共头
+//                .addCommonParams(params);                       //全局公共参数
     }
 }

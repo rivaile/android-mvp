@@ -6,7 +6,9 @@ import android.util.LruCache;
 
 import io.reactivex.Observable;
 
-
+/**
+ * 这种内存缓存会出现丢失的情况...
+ */
 public class MemoryManager implements ICache {
     private LruCache<String, Object> mLruCache;
     private static MemoryManager sInstance;
@@ -16,7 +18,7 @@ public class MemoryManager implements ICache {
         int cacheSize = maxMemory / 8;
         mLruCache = new LruCache(cacheSize);
     }
-
+    
     public static MemoryManager getInstance() {
         if (sInstance == null) {
             synchronized (MemoryManager.class) {

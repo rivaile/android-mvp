@@ -2,7 +2,11 @@ package com.oldnum7.http.callback;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.util.Log;
 import android.view.Window;
+
+import io.reactivex.annotations.NonNull;
 
 /**
  * <pre>
@@ -12,8 +16,9 @@ import android.view.Window;
  *       version: 1.0
  * </pre>
  */
-public abstract class DialogHttpObserver<T> extends HttpObserver<T> {
+public abstract class DialogHttpObserver<T> extends HttpObserver<T> implements DialogInterface.OnCancelListener {
 
+    private static final String TAG = DialogHttpObserver.class.getSimpleName();
     private ProgressDialog dialog;
 
     private void initDialog(Activity activity) {
@@ -22,6 +27,7 @@ public abstract class DialogHttpObserver<T> extends HttpObserver<T> {
         dialog.setCanceledOnTouchOutside(false);
         dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         dialog.setMessage("请求网络中...");
+        dialog.setOnCancelListener(this);
     }
 
     public DialogHttpObserver(Activity activity) {
@@ -36,10 +42,21 @@ public abstract class DialogHttpObserver<T> extends HttpObserver<T> {
     }
 
     @Override
+    public void onNext(@NonNull T t) {
+
+    }
+
+    @Override
     public void onFinish() {
         //网络请求结束后关闭对话框
         if (dialog != null && dialog.isShowing()) {
             dialog.dismiss();
         }
+    }
+
+    @Override
+    public void onCancel(DialogInterface dialog) {
+        Log.e(TAG, "network has bean canceled...");
+        dispose();
     }
 }

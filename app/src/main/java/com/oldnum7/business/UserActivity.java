@@ -43,7 +43,7 @@ public class UserActivity extends BaseActivity implements IMainContract.View, Sw
 //    @Override
 //    protected void setPresenter() {
 //        DaggerMainComponent.builder()
-//                .appComponent(((App) getApplication()).getAppComponent())
+//                .appComponent(((BaseApplication) getApplication()).getAppComponent())
 //                .mainPresenterModule(new MainPresenterModule(this))
 //                .build()
 //                .inject(this);

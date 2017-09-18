@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.oldnum7.App;
+import com.oldnum7.BaseApplication;
 import com.oldnum7.R;
 import com.oldnum7.data.entity.LoginEntity;
 import com.oldnum7.di.component.DaggerMainComponent;
@@ -44,7 +44,7 @@ public class LoginActivity extends BaseLceActivity<ILoginContract.View, LoginPre
     public LoginPresenter createPresenter() {
 
         DaggerMainComponent.builder()
-                .appComponent(((App) getApplication()).getAppComponent())
+                .appComponent(((BaseApplication) getApplication()).getAppComponent())
 //                .mainPresenterModule(new MainPresenterModule(this))
                 .build()
                 .inject(this);

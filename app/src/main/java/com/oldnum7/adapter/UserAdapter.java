@@ -26,7 +26,7 @@ public class UserAdapter extends BaseQuickAdapter<T, BaseViewHolder> {
     @Override
     protected void convert(BaseViewHolder helper, T item) {
 
-//        Glide.with(App.getmContext())
+//        Glide.with(BaseApplication.getmContext())
 //                .load(item.getHeadImg())
 //                .into((ImageView) helper.getView(R.id.iv_item_avatar));
 //

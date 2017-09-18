@@ -39,12 +39,11 @@ public abstract class HttpObserver<T> extends DisposableObserver<T> {
             e.printStackTrace();
         } else if (e instanceof MalformedJsonException || e instanceof JsonSyntaxException) {
             e.printStackTrace();
-        } else if (e instanceof HttpException) {
+        } else if (e instanceof HttpException) {//此处可以对统一的错误进行处理...
             e.printStackTrace();
         } else {
             e.printStackTrace();
         }
-
 //        if (!NetworkUtils.isConnected()) {
 //            ToastUtils.showLong("网络连接失败...");
 //            onRequestError();

@@ -18,9 +18,6 @@ package com.oldnum7.http.model;
 import android.os.Build;
 import android.text.TextUtils;
 
-
-import com.oldnum7.http.HttpFactory;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -207,7 +204,7 @@ public class HttpHeaders implements Serializable {
                 Class<?> sysResCls = Class.forName("com.android.internal.R$string");
                 Field webUserAgentField = sysResCls.getDeclaredField("web_user_agent");
                 Integer resId = (Integer) webUserAgentField.get(null);
-                webUserAgent = HttpFactory.getInstance().getContext().getString(resId);
+//                webUserAgent = HttpFactory.getInstance().getContext().getString(resId);
             } catch (Exception e) {
                 // We have nothing to do
             }
