@@ -1,6 +1,6 @@
 package com.oldnum7.di.component;
 
-import com.oldnum7.ActivityScoped;
+import com.oldnum7.di.annotation.ActivityScoped;
 import com.oldnum7.business.UserActivity;
 import com.oldnum7.business.user.LoginActivity;
 import com.oldnum7.di.module.MainPresenterModule;

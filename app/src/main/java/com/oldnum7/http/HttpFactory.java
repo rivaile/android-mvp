@@ -1,6 +1,6 @@
 package com.oldnum7.http;
 
-import com.oldnum7.BaseApplication;
+import com.oldnum7.mvp.base.BaseApplication;
 import com.oldnum7.BuildConfig;
 import com.oldnum7.Constants;
 import com.oldnum7.http.cookie.CookieJarImpl;
@@ -34,11 +34,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class HttpFactory {
-    private static final String TAG = "HttpFactory";
     public static final long DEFAULT_MILLISECONDS = 30000;      //默认的超时时间
 
-
-    //------------------------------------------------
     private static final long CACHE_SIZE = 1024 * 1024 * 10;
 
     // base url for Http request
@@ -200,7 +197,7 @@ public class HttpFactory {
     private void createRetrofit() {
         // create Retrofit.Builder instance
         mRetrofit = new Retrofit.Builder()
-                .baseUrl(Constants.HTTP_BASE_URL)
+                .baseUrl(mBaseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(mOkHttpClient)

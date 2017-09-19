@@ -1,5 +1,5 @@
 
-package com.oldnum7;
+package com.oldnum7.di.module;
 
 
 import com.oldnum7.data.TasksDataSource;

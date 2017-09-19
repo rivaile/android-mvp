@@ -18,7 +18,7 @@ import com.oldnum7.mvp.status.StatusLayoutManager;
  * <pre>
  *       author : denglin
  *       time   : 2017/09/05/16:53
- *       desc   : 基础视图的相关封装... Loading-Content-Error (LCE) Activity.
+ *       desc   : Loading-Content-Error (LCE) Activity.
  *       version: 1.0
  * </pre>
  */
@@ -64,6 +64,7 @@ public class BaseLceActivity<V extends LceView, P extends BasePresenter<V>> exte
 //                onErrorViewClicked();
 //            }
 //        });
+        showContent();
     }
 
     protected void initToolbar() {

@@ -1,4 +1,4 @@
-package com.oldnum7;
+package com.oldnum7.di.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;

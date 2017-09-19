@@ -1,6 +1,6 @@
 package com.oldnum7.di.module;
 
-import com.oldnum7.ActivityScoped;
+import com.oldnum7.di.annotation.ActivityScoped;
 import com.oldnum7.business.IMainContract;
 import com.oldnum7.business.user.ILoginContract;
 
@@ -20,7 +20,6 @@ public class MainPresenterModule {
     private IMainContract.View mView1;
     private ILoginContract.View mView;
 
-
     public MainPresenterModule(IMainContract.View view) {
         this.mView1 = view;
     }
@@ -28,7 +27,6 @@ public class MainPresenterModule {
     public MainPresenterModule(ILoginContract.View view) {
         this.mView = view;
     }
-
 
     @ActivityScoped
     @Provides

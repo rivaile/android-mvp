@@ -83,8 +83,7 @@ public class BaseMvpActivity<V extends BaseView, P extends BasePresenter<V>> ext
 
     @NonNull
     @Override
-    public P createPresenter() {
-        return null;
+    public void createPresenter() {
     }
 
     public P getPresenter() {

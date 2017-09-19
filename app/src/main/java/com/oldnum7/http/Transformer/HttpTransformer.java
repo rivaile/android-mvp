@@ -20,8 +20,9 @@ import io.reactivex.functions.Function;
 public class HttpTransformer {
 
     /**
-     * [200-300]调用
-     * {400-500}直接调用onerror
+     * [200-300]call   onNext
+     * {400-500}call   onerror
+     *
      * @param <T>
      * @return
      */

@@ -18,8 +18,6 @@ public class Constants {
     public static final String HTTP_BASE_URL = "https://wap.rrjc.com/api/";
 //    public static final String HTTP_BASE_URL = "https://23mobile.szrrjc.com/api/";
 
-    public static final String APP_RXCACHE = "app_rxcache";
-    public static final String APP_CACHE = "app_cache";
 
     //开发地址...
 

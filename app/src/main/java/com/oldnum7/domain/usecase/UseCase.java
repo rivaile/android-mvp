@@ -19,6 +19,7 @@ public abstract class UseCase<T, Params> {
 
     private final CompositeDisposable disposables;
 
+
     public UseCase() {
         this.disposables = new CompositeDisposable();
     }

@@ -14,38 +14,43 @@ import com.oldnum7.mvp.view.BaseView;
  *
  * @param <V> The type of MvpView
  * @param <P> The type of MvpPresenter
-*/
+ */
 
 public interface DelegateCallback<V extends BaseView, P extends BasePresenter<V>> {
 
     /**
      * Create a presenter instance.
+     *
      * @return the created presenter instance.
      */
     @NonNull
-    P createPresenter();
+    void createPresenter();
 
     /**
      * Get the presenter. If null is returned, then a internally a new presenter instance gets
      * created by calling createPresenter().
+     *
      * @return
      */
     P getPresenter();
 
     /**
      * Sets the presenter instance.
+     *
      * @param presenter
      */
     void setPresenter(P presenter);
 
     /**
      * Get the MvpView for the presenter.
+     *
      * @return The view associated with the presenter.
      */
     V getMvpView();
 
     /**
      * Indicate whether the retain instance feature is enabled by this view or not.
+     *
      * @return true if the view has  enabled retaining, otherwise false.
      * @see #setRetainInstance(boolean)
      */
