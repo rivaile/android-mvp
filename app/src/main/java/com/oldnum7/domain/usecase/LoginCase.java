@@ -1,9 +1,9 @@
 package com.oldnum7.domain.usecase;
 
+import com.oldnum7.App;
+import com.oldnum7.androidlib.utils.Des3;
 import com.oldnum7.data.TasksRepository;
 import com.oldnum7.data.entity.LoginEntity;
-import com.oldnum7.mvp.base.BaseApplication;
-import com.oldnum7.utils.Des3;
 
 import javax.inject.Inject;
 
@@ -23,7 +23,7 @@ public class LoginCase extends UseCase<LoginEntity, LoginCase.Params> {
 
     @Inject
     public LoginCase() {
-        mRepository = BaseApplication.getAppComponent().getRepository();
+        mRepository = App.getAppComponent().getRepository();
     }
 
     @Override

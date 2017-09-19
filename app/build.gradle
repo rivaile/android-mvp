@@ -165,8 +165,6 @@ dependencies {
     compile 'com.github.VictorAlbertos.Jolyglot:gson:0.0.3'
     //AndroidUtilCode
     compile 'com.blankj:utilcode:1.9.0'
-    //autolayout
-    compile 'com.zhy:autolayout:1.4.5'
     //BaseRecyclerViewAdapterHelper  : http://www.jianshu.com/p/b343fcff51b0
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.18'
 
@@ -185,11 +183,12 @@ dependencies {
 
     //IOS  dialog  https://github.com/saiwu-bigkoo/Android-AlertView
     //自定义差...
-    compile 'com.bigkoo:alertview:1.0.3'
-    //Android ios  dialog  https://github.com/hss01248/DialogUtil
-//    compile 'com.github.hss01248:DialogUtil:lastest release'
+//    compile 'com.bigkoo:alertview:1.0.3'
+//    Android ios  dialog  https://github.com/hss01248/DialogUtil
+    compile 'com.github.hss01248:DialogUtil:1.1.6'
 
-//    compile 'org.jetbrains:annotations:15.0'
+    //
+    compile project(path: ':androidlib')
 }
 
 //walle {

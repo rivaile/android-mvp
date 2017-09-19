@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--base view-->
+    <item name="activity_base" type="layout"/>
+
+    <!--lcv view-->
+    <item name="error_view" type="layout"/>
+    <item name="empty_view" type="layout"/>
+    <item name="loading_view" type="layout"/>
+    <item name="net_error_view" type="layout"/>
+
+    <!--tool bar id-->
+    <item name="root_layout" type="id"/>
+    <item name="toolbar" type="id"/>
+    <item name="iv_back" type="id"/>
+    <item name="tv_right" type="id"/>
+    <item name="tv_title" type="id"/>
+
+</resources>

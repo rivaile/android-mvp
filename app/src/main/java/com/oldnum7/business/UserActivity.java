@@ -2,7 +2,8 @@ package com.oldnum7.business;
 
 import android.support.v4.widget.SwipeRefreshLayout;
 
-import com.oldnum7.mvp.base.BaseActivity;
+import com.oldnum7.androidlib.base.BaseActivity;
+
 
 public class UserActivity extends BaseActivity implements IMainContract.View, SwipeRefreshLayout.OnRefreshListener {
     @Override
@@ -31,9 +32,7 @@ public class UserActivity extends BaseActivity implements IMainContract.View, Sw
 //    SwipeRefreshLayout mSrRefresh;
 //
 //    private UserAdapter mUserAdapter;
-//
-//
-//
+
 //    @Override
 //    protected void onCreate(Bundle savedInstanceState) {
 //        super.onCreate(savedInstanceState);

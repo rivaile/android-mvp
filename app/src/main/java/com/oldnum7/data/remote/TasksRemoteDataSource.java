@@ -2,13 +2,14 @@ package com.oldnum7.data.remote;
 
 import android.support.annotation.NonNull;
 
-import com.oldnum7.business.ApiService;
+import com.oldnum7.Constants;
+import com.oldnum7.HttpHeaderInterceptor;
+import com.oldnum7.Transformer.HttpTransformer;
+import com.oldnum7.androidlib.http.HttpFactory;
+import com.oldnum7.data.ApiService;
 import com.oldnum7.data.TasksDataSource;
 import com.oldnum7.data.entity.LoginEntity;
 import com.oldnum7.data.entity.T;
-import com.oldnum7.http.HttpFactory;
-import com.oldnum7.http.Transformer.HttpTransformer;
-import com.oldnum7.http.interceptor.HttpHeaderInterceptor;
 
 import java.util.List;
 
@@ -34,6 +35,7 @@ public class TasksRemoteDataSource implements TasksDataSource {
     @Inject
     TasksRemoteDataSource() {
         mHttpFactory = new HttpFactory.Builder()
+                .setBaseUrl(Constants.HTTP_BASE_URL)
                 .setInterceptor(new HttpHeaderInterceptor())
                 .build();
         mService = mHttpFactory.createService(ApiService.class);

@@ -5,11 +5,11 @@ import android.support.annotation.NonNull;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.oldnum7.App;
 import com.oldnum7.R;
+import com.oldnum7.androidlib.mvp.base.BaseLceActivity;
 import com.oldnum7.data.entity.LoginEntity;
 import com.oldnum7.di.component.DaggerMainComponent;
-import com.oldnum7.mvp.base.BaseApplication;
-import com.oldnum7.mvp.view.BaseLceActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,7 +43,7 @@ public class LoginActivity extends BaseLceActivity<ILoginContract.View, LoginPre
     public void createPresenter() {
 
         DaggerMainComponent.builder()
-                .appComponent(((BaseApplication) getApplication()).getAppComponent())
+                .appComponent(App.getAppComponent())
 //                .mainPresenterModule( new MainPresenterModule(this))
                 .build()
                 .inject(this);

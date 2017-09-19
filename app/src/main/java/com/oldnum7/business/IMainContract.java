@@ -1,7 +1,8 @@
 package com.oldnum7.business;
 
-import com.oldnum7.mvp.persenter.BasePresenter;
-import com.oldnum7.mvp.view.BaseView;
+
+import com.oldnum7.androidlib.mvp.persenter.BasePresenter;
+import com.oldnum7.androidlib.mvp.view.BaseView;
 
 /**
  * <pre>

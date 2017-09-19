@@ -3,9 +3,9 @@ package com.oldnum7.business.user;
 import android.util.Log;
 
 import com.blankj.utilcode.util.ActivityUtils;
+import com.oldnum7.androidlib.http.callback.DialogHttpObserver;
 import com.oldnum7.data.entity.LoginEntity;
 import com.oldnum7.domain.usecase.LoginCase;
-import com.oldnum7.http.callback.DialogHttpObserver;
 
 import javax.inject.Inject;
 
