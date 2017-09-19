@@ -1,6 +1,5 @@
 package com.oldnum7.domain.usecase;
 
-import com.oldnum7.App;
 import com.oldnum7.androidlib.utils.Des3;
 import com.oldnum7.data.TasksRepository;
 import com.oldnum7.data.entity.LoginEntity;
@@ -19,11 +18,11 @@ import io.reactivex.Observable;
  */
 public class LoginCase extends UseCase<LoginEntity, LoginCase.Params> {
 
-    private final TasksRepository mRepository;
+    private TasksRepository mRepository;
 
     @Inject
-    public LoginCase() {
-        mRepository = App.getAppComponent().getRepository();
+    public LoginCase(TasksRepository repository) {
+        this.mRepository = repository;
     }
 
     @Override
@@ -37,7 +36,7 @@ public class LoginCase extends UseCase<LoginEntity, LoginCase.Params> {
         return mRepository.login(params.userName, encodePwd);
     }
 
-    public static final  class Params {
+    public static final class Params {
 
         private final String userName;
         private final String pwd;
