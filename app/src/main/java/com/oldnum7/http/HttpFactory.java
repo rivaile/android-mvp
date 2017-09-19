@@ -3,13 +3,19 @@ package com.oldnum7.http;
 import com.oldnum7.BaseApplication;
 import com.oldnum7.BuildConfig;
 import com.oldnum7.Constants;
+import com.oldnum7.http.cookie.CookieJarImpl;
+import com.oldnum7.http.cookie.store.MemoryCookieStore;
+import com.oldnum7.http.https.HttpsUtils;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import javax.net.ssl.HostnameVerifier;
+
 import okhttp3.Cache;
+import okhttp3.CookieJar;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -47,14 +53,12 @@ public class HttpFactory {
     // 是否失败重连
     private boolean mRetryOnConnectionFailure = true;
 
+    private CookieJar mCookieJar;
+
     // ssl 管理
-//    private SSLSocketFactory mSslSocketFactory;
-//
-//    private TrustManager[] trustAllCerts;
-//
-//    private X509TrustManager mX509TrustManager;
-//
-//    private HostnameVerifier hostnameVerifier;
+    private HttpsUtils.SSLParams mSSLParams;
+    private HostnameVerifier mHostnameVerifier;
+
 
     private List<Interceptor> interceptors = new ArrayList<>();
 
@@ -71,6 +75,27 @@ public class HttpFactory {
         } else {
             this.mBaseUrl = builder.baseUrl;
         }
+
+        if (null == builder.cookieJar) {
+            mCookieJar = new CookieJarImpl(new MemoryCookieStore());
+        } else {
+            this.mCookieJar = builder.cookieJar;
+        }
+
+        if (null == builder.sslParams) {
+            //默认信任所有证书,不安全有风险
+            mSSLParams = HttpsUtils.getSslSocketFactory();
+        } else {
+            this.mSSLParams = builder.sslParams;
+        }
+
+        if (null == builder.hostnameVerifier) {
+            //默认信任所有证书,不安全有风险
+            mHostnameVerifier = HttpsUtils.UnSafeHostnameVerifier;
+        } else {
+            this.mHostnameVerifier = builder.hostnameVerifier;
+        }
+
 
         if (0 < builder.readTimeout) {
             this.mReadTimeout = builder.readTimeout;
@@ -108,14 +133,12 @@ public class HttpFactory {
         } else {
             this.mRetrofit = builder.retrofit;
         }
-
     }
 
     // set base url
     private void setBaseUrl() {
         mBaseUrl = Constants.HTTP_BASE_URL;
     }
-
 
     private void createHttpClient() {
 
@@ -148,6 +171,28 @@ public class HttpFactory {
             }
         }
 
+        //自动管理cookie（或者叫session的保持），以下几种任选其一就行
+//        builder.cookieJar(new CookieJarImpl(new SPCookieStore(BaseApplication.getContext())));            //使用sp保持cookie，如果cookie不过期，则一直有效
+//        builder.cookieJar(new CookieJarImpl(new DBCookieStore(this)));                                     //使用数据库保持cookie，如果cookie不过期，则一直有效
+        //builder.cookieJar(new CookieJarImpl(new MemoryCookieStore()));                                     //使用内存保持cookie，app退出后，cookie消失
+        builder.cookieJar(mCookieJar);
+
+//        //方法一：信任所有证书,不安全有风险
+//        HttpsUtils.SSLParams sslParams1 = HttpsUtils.getSslSocketFactory();
+//        //方法二：自定义信任规则，校验服务端证书
+//        HttpsUtils.SSLParams sslParams2 = HttpsUtils.getSslSocketFactory(new SafeTrustManager());
+//        //方法三：使用预埋证书，校验服务端证书（自签名证书）
+//        HttpsUtils.SSLParams sslParams3 = HttpsUtils.getSslSocketFactory(getAssets().open("srca.cer"));
+//        //方法四：使用bks证书和密码管理客户端证书（双向认证），使用预埋证书，校验服务端证书（自签名证书）
+//        HttpsUtils.SSLParams sslParams4 = HttpsUtils.getSslSocketFactory(getAssets().open("xxx.bks"), "123456", getAssets().open("yyy.cer"));
+//        builder.sslSocketFactory(sslParams1.sSLSocketFactory, sslParams1.trustManager);
+//        //配置https的域名匹配规则，详细看demo的初始化介绍，不需要就不要加入，使用不当会导致https握手失败
+//        builder.mHostnameVerifier(new SafeHostnameVerifier());
+
+        builder.sslSocketFactory(mSSLParams.sSLSocketFactory, mSSLParams.trustManager);
+        //默认不做校验...
+        builder.hostnameVerifier(mHostnameVerifier);
+        //TODO...注:此处证书校验跟系统版本有关系...还需完善...
         mOkHttpClient = builder.build();
     }
 
@@ -189,6 +234,10 @@ public class HttpFactory {
         private OkHttpClient okHttpClient;
         private Retrofit retrofit;
 
+        private boolean retryOnConnectionFailure;
+        private HttpsUtils.SSLParams sslParams;
+        private HostnameVerifier hostnameVerifier;
+        private CookieJar cookieJar;
 
         public Builder() {
         }
@@ -239,9 +288,32 @@ public class HttpFactory {
             return this;
         }
 
+        public Builder setRetryOnConnectionFailure(boolean retryOnConnectionFailure) {
+            this.retryOnConnectionFailure = retryOnConnectionFailure;
+            return this;
+        }
+
+        public Builder setSSLParams(HttpsUtils.SSLParams sslParams) {
+            this.sslParams = sslParams;
+            return this;
+        }
+
+
+        public Builder setHostnameVerifier(HostnameVerifier hostnameVerifier) {
+            this.hostnameVerifier = hostnameVerifier;
+            return this;
+        }
+
+        public Builder setCookieJar(CookieJar cookieJar) {
+            this.cookieJar = cookieJar;
+            return this;
+        }
+
+
         public HttpFactory build() {
             HttpFactory httpFactory = new HttpFactory(this);
             return httpFactory;
         }
     }
+
 }
