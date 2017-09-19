@@ -1,4 +1,4 @@
-package com.oldnum7;
+package com.oldnum7.data;
 
 /**
  * <pre>

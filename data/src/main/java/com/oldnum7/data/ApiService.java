@@ -19,7 +19,7 @@ import retrofit2.http.Query;
  * <pre>
  *       author : denglin
  *       time   : 2017/05/31/17:35
- *       desc   : 接口管理...
+ *       desc   : 接口管理...处理的是最原始的数据...
  *       version: 1.0
  * </pre>
  */
@@ -39,6 +39,6 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("user/login")
     Observable<HttpResponse<LoginEntity>> login(@Field("loginName") String userName,
-                                          @Field("password") String pwd);
+                                                @Field("password") String pwd);
 
 }

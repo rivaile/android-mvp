@@ -2,12 +2,12 @@ package com.oldnum7.data.remote;
 
 import android.support.annotation.NonNull;
 
-import com.oldnum7.Constants;
-import com.oldnum7.HttpHeaderInterceptor;
-import com.oldnum7.Transformer.HttpTransformer;
 import com.oldnum7.androidlib.http.HttpFactory;
 import com.oldnum7.data.ApiService;
+import com.oldnum7.data.Constants;
+import com.oldnum7.data.HttpHeaderInterceptor;
 import com.oldnum7.data.TasksDataSource;
+import com.oldnum7.data.Transformer.HttpTransformer;
 import com.oldnum7.data.entity.LoginEntity;
 import com.oldnum7.data.entity.T;
 

@@ -1,8 +1,8 @@
-package com.oldnum7.Transformer;
+package com.oldnum7.data.Transformer;
 
-import com.oldnum7.Constants;
 import com.oldnum7.androidlib.http.exception.HttpException;
 import com.oldnum7.androidlib.http.model.HttpResponse;
+import com.oldnum7.data.Constants;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
