@@ -1,4 +1,4 @@
-include ':app', ':httpText', ':androidlib', ':data', ':domain'
+include ':app', ':androidlib', ':data', ':domain'
 
 //:app 业务相关的
 //:androidlib 底层库  封装了mvp基类,网络库封装
