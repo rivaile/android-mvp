@@ -12,8 +12,6 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import io.reactivex.Observable;
-import io.reactivex.functions.Function;
-import io.rx_cache2.Reply;
 
 
 /**
@@ -29,7 +27,7 @@ public class TasksLocalDataSource implements TasksDataSource {
 
     private static TasksLocalDataSource INSTANCE;
 //    private CacheService mCacheService = RxCacheFactory.getInstance().createCacheService(CacheService.class);
-    private Observable<Reply<List<T>>> mUsersCache;
+//    private Observable<Reply<List<T>>> mUsersCache;
 
     // Prevent direct instantiation.
     @Inject
@@ -46,13 +44,14 @@ public class TasksLocalDataSource implements TasksDataSource {
 
     @Override
     public Observable<List<T>> getUsers() {
-        return mUsersCache.map(new Function<Reply<List<T>>, List<T>>() {
-            @Override
-            public List<T> apply(Reply<List<T>> listReply) throws Exception {
-
-                return listReply.getData();
-            }
-        });
+//        return mUsersCache.map(new Function<Reply<List<T>>, List<T>>() {
+//            @Override
+//            public List<T> apply(Reply<List<T>> listReply) throws Exception {
+//
+//                return listReply.getData();
+//            }
+//        });
+        return null;
     }
 
     @Override

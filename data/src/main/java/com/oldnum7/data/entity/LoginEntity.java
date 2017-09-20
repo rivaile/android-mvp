@@ -1,8 +1,5 @@
 package com.oldnum7.data.entity;
 
-import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Generated;
-
 /**
  * author : denglin
  * time   : 2017/04/05/17:44
@@ -10,7 +7,7 @@ import org.greenrobot.greendao.annotation.Generated;
  * version: 1.0
  */
 
-@Entity
+
 public class LoginEntity {
 
     private String mobile;
@@ -21,21 +18,7 @@ public class LoginEntity {
     private String userId;
     private String userName;
 
-    @Generated(hash = 939512840)
-    public LoginEntity(String mobile, String roleId, String roleName,
-                       String storeName, String token, String userId, String userName) {
-        this.mobile = mobile;
-        this.roleId = roleId;
-        this.roleName = roleName;
-        this.storeName = storeName;
-        this.token = token;
-        this.userId = userId;
-        this.userName = userName;
-    }
 
-    @Generated(hash = 441342942)
-    public LoginEntity() {
-    }
 
     public String getMobile() {
         return this.mobile;

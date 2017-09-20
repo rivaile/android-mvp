@@ -1,1 +1,6 @@
 include ':app', ':httpText', ':androidlib', ':data', ':domain'
+
+//:app 业务相关的
+//:androidlib 底层库  封装了mvp基类,网络库封装
+//:data 业务数据相关
+//:domain usecase 业务数据自处理

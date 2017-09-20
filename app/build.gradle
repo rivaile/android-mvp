@@ -10,64 +10,29 @@ def keystoreProperties = new Properties()
 // Load your keystore.properties file into the keystoreProperties object.
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
-//jenkins持续集成相关
-//def getDate() {
-//    def date = new Date()
-//    def formattedDate = date.format('yyyy-MM-dd-HH-mm')
-//    return formattedDate
-//}
-//
-//def verCode = 1
-
-
 android {
+    def globalConfiguration = rootProject.extensions.getByName("ext")
 
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    compileSdkVersion globalConfiguration.getAt("androidCompileSdkVersion")
+    buildToolsVersion globalConfiguration.getAt("androidBuildToolsVersion")
     defaultConfig {
-        applicationId "com.oldnum7"
-        minSdkVersion 15
-        targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
-//        jackOptions {
-//            enabled true
-//        }
+        applicationId globalConfiguration.getAt("androidApplicationId")
+        minSdkVersion globalConfiguration.getAt("androidMinSdkVersion")
+        targetSdkVersion globalConfiguration.getAt("androidTargetSdkVersion")
 
-        vectorDrawables.useSupportLibrary = true
+        versionCode globalConfiguration.getAt("androidVersionCode")
+        versionName globalConfiguration.getAt("androidVersionName")
+        testInstrumentationRunner globalConfiguration.getAt("testInstrumentationRunner")
     }
-//    compileOptions {
-//        sourceCompatibility JavaVersion.VERSION_1_8
-//        targetCompatibility JavaVersion.VERSION_1_8
-//    }
 
 
     signingConfigs {
         release {
-//            keyAlias 'android'
-//            keyPassword '123456'
-//            storeFile file('android.jks')
-//            storePassword '123456'
-            //由于本地打包使用的是本机上的KeyStore
-            //而Jenkins打包用的是服务器上的KeyStore
-            //两个路径不一样
-//            if ("true".equals(IS_JENKINS)) {
-////                storeFile file("服务器上KeyStore的路径")
-//                logger.error("IS_JENKINS:" + IS_JENKINS)
-//                storeFile file('C:/Users/denglin/Desktop/android.jks')
-//            } else {
-////                storeFile file(STORE_FILE_PATH)
-//                logger.error("IS_JENKINS:" + IS_JENKINS)
-//                storeFile file(keystoreProperties['storeFile'])
-//            }
             storeFile file(keystoreProperties['storeFile'])
             keyAlias keystoreProperties['keyAlias']
             keyPassword keystoreProperties['keyPassword']
-//            storeFile file(keystoreProperties['storeFile'])
             storePassword keystoreProperties['storePassword']
-
         }
     }
 
@@ -78,58 +43,12 @@ android {
             minifyEnabled false
         }
     }
-
-//    productFlavors {
-//
-//        xiaomi {}
-//        huawei {}
-//        meituan {}
-//
-////        productFlavors.all { flavor ->
-////            flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
-////        }
-//
-//    }
-
-//    //修改生成的apk名字及输出文件夹
-//    applicationVariants.all { variant ->
-//        variant.outputs.each { output ->
-//            //新名字
-//            def newName
-//            //时间戳
-//            def timeNow
-//            //输出文件夹
-//            def outDirectory
-//            //是否为Jenkins打包，输出路径不同
-//            if ("true".equals(IS_JENKINS)) {
-//                //Jenkins打包输出到服务器路径
-//                timeNow = BUILD_TIME
-//                //BUILD_PATH为服务器输出路径
-////                outDirectory = BUILD_PATH
-////                outDirectory = 'E:/'
-//                outDirectory = '\\\\192.168.3.80\\移动项目组'
-//                //AutoBuildTest-v1.0.1-xiaomi-release.apk
-//                newName = 'AutoBuildTest-v' + APP_VERSION + '-' + variant.productFlavors[0].name + '-' + variant.buildType.name + '.apk'
-//            } else {
-//                //本机打包输出在本机路径
-//                timeNow = getDate()
-//                outDirectory = output.outputFile.getParent()
-//                if ('debug'.equals(variant.buildType.name)) {
-//                    newName = "AutoBuildTest-v${APP_VERSION}-debug.apk"
-//                } else {
-//                    //AutoBuildTest-v1.0.1-xiaomi-release 11.apk
-//                    newName = 'AutoBuildTest-v' + APP_VERSION + '-' + variant.productFlavors[0].name + '-' + variant.buildType.name + '.apk'
-//                }
-//            }
-//
-//            logger.error("outDirectory:"+outDirectory+"------timeNow-----:"+timeNow+"-----newName-----"+newName)
-//            output.outputFile = new File(outDirectory + '/' + timeNow, newName)
-//        }
-//    }
-
 }
 
 dependencies {
+
+    def appDependencies = rootProject.ext.appDependencies
+
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
@@ -137,34 +56,20 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
+
+    compile project(path: ':androidlib')
+    compile project(path: ':data')
+    compile project(path: ':domain')
+
     //MaterialDesign
     compile 'com.android.support:design:25.3.1'
-    //Retrofit
-    compile 'com.squareup.retrofit2:retrofit:2.3.0'
-    compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.8.0'
-    //Rxandroid Rxjava
-    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    compile 'io.reactivex.rxjava2:rxjava:2.1.0'
-    //Dagger2
-    compile 'com.google.dagger:dagger:2.11'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
+
+    //Dagger2Compiler
+    annotationProcessor appDependencies.daggerCompiler
     //Butterknife
-    compile 'com.jakewharton:butterknife:8.6.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
-    //Glide
-    compile 'com.github.bumptech.glide:glide:4.0.0-RC0'
-    compile 'com.android.support:support-v4:25.3.1'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0-RC0'
-    //GreenDao
-    compile 'org.greenrobot:greendao:3.2.2'
-    //RxCache
-    compile 'com.github.VictorAlbertos.RxCache:runtime:1.8.0-2.x'
-    compile 'io.reactivex.rxjava2:rxjava:2.0.6'
-    compile 'com.github.VictorAlbertos.Jolyglot:gson:0.0.3'
-    //AndroidUtilCode
-    compile 'com.blankj:utilcode:1.9.0'
+    compile appDependencies.butterknife
+    annotationProcessor appDependencies.butterknifeCompiler
+
     //BaseRecyclerViewAdapterHelper  : http://www.jianshu.com/p/b343fcff51b0
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.18'
 
@@ -172,8 +77,6 @@ dependencies {
     compile 'com.ashokvarma.android:bottom-navigation-bar:1.3.0'
     //meituanva下的多渠道打包...
     compile 'com.meituan.android.walle:library:1.1.3'
-    //systembartint
-    compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
 
     //图片选择器..https://github.com/OLDNUM7/ImageSelector
     compile 'com.yuyh.imgsel:library:1.3.8'
@@ -186,19 +89,4 @@ dependencies {
 //    compile 'com.bigkoo:alertview:1.0.3'
 //    Android ios  dialog  https://github.com/hss01248/DialogUtil
     compile 'com.github.hss01248:DialogUtil:1.1.6'
-
-    //
-    compile project(path: ':androidlib')
-    compile project(path: ':data')
-    compile project(path: ':domain')
-
 }
-
-//walle {
-//    // 指定渠道包的输出路径
-//    apkOutputFolder = new File("${project.buildDir}/outputs/channels");
-//    // 名称
-//    apkFileNameFormat = '${appName}-${packageName}-${channel}-${buildType}-v${versionName}-${versionCode}-${buildTime}.apk';
-//    // 渠道配置文件
-//    channelFile = new File("${project.getProjectDir()}/channel")
-//}
