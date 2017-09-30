@@ -33,5 +33,4 @@ public class UserAdapter extends BaseQuickAdapter<T, BaseViewHolder> {
 //        helper.setText(R.id.tv_item_login, item.getUserName());
 
     }
-
 }

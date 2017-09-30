@@ -22,6 +22,7 @@ public class BaseApplication extends Application {
         mContext = getApplicationContext();
         Utils.init(this);
     }
+
     public static Context getContext() {
         return mContext;
     }

@@ -59,7 +59,6 @@ public class MainActivity extends BaseActivity {
 
         mBottomNavigationBar.setTabSelectedListener(mOnTabSelectedListener);
 
-
         mFragmentList.clear();
         mFragmentList.add(0, new Tab1Fragment());
         mFragmentList.add(1, new Tab2Fragment());
