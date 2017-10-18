@@ -33,7 +33,6 @@ public class BaseMvpActivity<V extends BaseView, P extends BasePresenter<V>> ext
         getMvpDelegate().onCreate(savedInstanceState);
     }
 
-
     @Override
     protected void onStart() {
         super.onStart();

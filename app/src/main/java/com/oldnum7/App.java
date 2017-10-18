@@ -1,9 +1,12 @@
 package com.oldnum7;
 
 import com.oldnum7.androidlib.base.BaseApplication;
-import com.oldnum7.di.component.AppComponent;
-import com.oldnum7.di.component.DaggerAppComponent;
+import com.oldnum7.data.DataRepository;
+import com.oldnum7.di.component.ApplicationComponent;
+import com.oldnum7.di.component.DaggerApplicationComponent;
 import com.oldnum7.di.module.ApplicationModule;
+
+import javax.inject.Inject;
 
 
 /**
@@ -16,18 +19,26 @@ import com.oldnum7.di.module.ApplicationModule;
  */
 public class App extends BaseApplication {
 
-    private static AppComponent mAppComponent;
+    private static ApplicationComponent mAppComponent;
+
+    @Inject
+    DataRepository mDataRepository;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        this.mAppComponent = DaggerAppComponent.builder()
-                .applicationModule(new ApplicationModule(this))
-                .build();
+        this.mAppComponent = DaggerApplicationComponent.builder()
+                .applicationModule(new ApplicationModule(this)).build();
+
+        mAppComponent.inject(this);
     }
 
-    public static AppComponent getAppComponent() {
+    public static ApplicationComponent getComponent() {
         return mAppComponent;
+    }
+
+    public DataRepository getDataRepository() {
+        return mDataRepository;
     }
 }

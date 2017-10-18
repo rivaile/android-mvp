@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Window;
 
 import io.reactivex.annotations.NonNull;
@@ -24,6 +25,7 @@ public abstract class DialogHttpObserver<T> extends HttpObserver<T> implements D
     private void initDialog(Activity activity) {
         dialog = new ProgressDialog(activity);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setGravity(Gravity.CENTER);
         dialog.setCanceledOnTouchOutside(false);
         dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         dialog.setMessage("请求网络中...");

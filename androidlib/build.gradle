@@ -23,8 +23,7 @@ android {
 
 dependencies {
     def androidLibDependencies = rootProject.ext.androidLibDependencies
-
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile "com.android.support:appcompat-v7:$rootProject.ext.appcompat_v7"
     //Retrofit
     compile androidLibDependencies.retrofit
@@ -34,11 +33,9 @@ dependencies {
     //Rxandroid Rxjava
     compile androidLibDependencies.rxJava
     compile androidLibDependencies.rxAndroid
-
     //Dagger2
     compile androidLibDependencies.dagger
-//    annotationProcessor androidLibDependencies.daggerCompiler
-
+    //    annotationProcessor androidLibDependencies.daggerCompiler
     //Glide
     compile androidLibDependencies.glide
     annotationProcessor androidLibDependencies.glideCompiler
@@ -46,6 +43,8 @@ dependencies {
     compile androidLibDependencies.AndroidUtilCode
     //systembartint
     compile androidLibDependencies.systembartint
+
     //android 调试桥...
     compile 'com.facebook.stetho:stetho:1.5.0'
+    compile 'com.android.support:design:25.3.1'
 }

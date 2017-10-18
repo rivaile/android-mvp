@@ -21,14 +21,14 @@ public class TasksRepositoryModule {
     @Singleton
     @Provides
     @Named("Local")
-    TasksDataSource provideTasksLocalDataSource(TasksLocalDataSource dataSource) {
+    TasksDataSource provideLocalDataSource(TasksLocalDataSource dataSource) {
         return dataSource;
     }
 
     @Singleton
     @Provides
     @Named("Remote")
-    TasksDataSource provideTasksRemoteDataSource(TasksRemoteDataSource dataSource) {
+    TasksDataSource provideRemoteDataSource(TasksRemoteDataSource dataSource) {
         return dataSource;
     }
 

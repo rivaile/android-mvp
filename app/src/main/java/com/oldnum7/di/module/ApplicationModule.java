@@ -30,6 +30,11 @@ public class ApplicationModule {
     public ApplicationModule(Application application) {
         this.mApplication = application;
     }
+    
+    @Provides
+    Application provideApplication() {
+        return mApplication;
+    }
 
     @Singleton
     @Provides

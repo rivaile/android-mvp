@@ -2,7 +2,7 @@ package com.oldnum7.domain.usecase;
 
 import android.util.Log;
 
-import com.oldnum7.data.TasksRepository;
+import com.oldnum7.data.DataRepository;
 import com.oldnum7.data.entity.T;
 
 import java.util.List;
@@ -26,10 +26,10 @@ import io.reactivex.functions.Function;
 public class UsersCase extends UseCase<List<T>, UsersCase.Params> {
 
     @Inject
-    TasksRepository mTasksRepository;
+    DataRepository mTasksRepository;
 
     @Inject
-    public UsersCase(TasksRepository tasksRepository) {
+    public UsersCase(DataRepository tasksRepository) {
         this.mTasksRepository = tasksRepository;
     }
 
