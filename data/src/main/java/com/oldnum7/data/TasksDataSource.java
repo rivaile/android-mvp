@@ -28,6 +28,5 @@ public interface TasksDataSource {
 
     void saveTask(@NonNull T userEntity);
 
-
     Observable<LoginEntity> login(String name, String pwd);
 }

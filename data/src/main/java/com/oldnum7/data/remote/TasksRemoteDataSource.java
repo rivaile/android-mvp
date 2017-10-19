@@ -37,6 +37,7 @@ public class TasksRemoteDataSource implements TasksDataSource {
         mHttpFactory = new HttpFactory.Builder()
                 .setBaseUrl(Constants.HTTP_BASE_URL)
                 .setInterceptor(new HttpHeaderInterceptor())
+//                .addNetworkInterceptor(new StethoInterceptor())
                 .build();
         mService = mHttpFactory.createService(ApiService.class);
     }

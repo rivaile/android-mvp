@@ -101,9 +101,6 @@ public class BaseActivity extends AppCompatActivity implements BaseFragment.Call
     }
 
 
-
-
-
     @Override
     public void onFragmentAttached() {
 

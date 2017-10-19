@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.blankj.utilcode.util.Utils;
+import com.facebook.stetho.Stetho;
 
 /**
  * <pre>
@@ -21,6 +22,8 @@ public class BaseApplication extends Application {
         super.onCreate();
         mContext = getApplicationContext();
         Utils.init(this);
+
+        Stetho.initializeWithDefaults(this);
     }
 
     public static Context getContext() {
