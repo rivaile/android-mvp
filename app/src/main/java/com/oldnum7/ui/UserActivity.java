@@ -2,10 +2,10 @@ package com.oldnum7.ui;
 
 import android.support.v4.widget.SwipeRefreshLayout;
 
-import com.oldnum7.androidlib.base.BaseActivity;
+import com.oldnum7.base.BaseAppActivity;
 
 
-public class UserActivity extends BaseActivity implements IMainContract.View, SwipeRefreshLayout.OnRefreshListener {
+public class UserActivity extends BaseAppActivity implements IMainContract.View, SwipeRefreshLayout.OnRefreshListener {
     @Override
     public void onRefresh() {
 
