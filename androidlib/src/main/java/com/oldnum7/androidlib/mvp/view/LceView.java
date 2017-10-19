@@ -9,7 +9,7 @@ import android.support.annotation.UiThread;
  * Created at 2017/9/2 16:26
 */
 
-public interface LceView extends BaseView{
+public interface LceView extends MvpView {
 
     /**
      * Display a loading view while loading data in background.

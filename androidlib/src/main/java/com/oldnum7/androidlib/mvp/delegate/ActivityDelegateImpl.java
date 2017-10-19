@@ -3,7 +3,7 @@ package com.oldnum7.androidlib.mvp.delegate;
 import android.os.Bundle;
 
 import com.oldnum7.androidlib.mvp.persenter.BasePresenter;
-import com.oldnum7.androidlib.mvp.view.BaseView;
+import com.oldnum7.androidlib.mvp.view.MvpView;
 
 
 /**
@@ -13,7 +13,7 @@ import com.oldnum7.androidlib.mvp.view.BaseView;
  *         Created at 2016/8/2 18:00
  */
 
-public class ActivityDelegateImpl<V extends BaseView, P extends BasePresenter<V>>
+public class ActivityDelegateImpl<V extends MvpView, P extends BasePresenter<V>>
         implements IActivityDelegate {
 
     //    protected InternalDelegate<V, P> internalDelegate;

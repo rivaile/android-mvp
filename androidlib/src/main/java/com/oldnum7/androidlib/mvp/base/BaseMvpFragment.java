@@ -11,7 +11,7 @@ import com.oldnum7.androidlib.mvp.delegate.DelegateCallback;
 import com.oldnum7.androidlib.mvp.delegate.FragmentDelegateImpl;
 import com.oldnum7.androidlib.mvp.delegate.IFragmentDelegate;
 import com.oldnum7.androidlib.mvp.persenter.BasePresenter;
-import com.oldnum7.androidlib.mvp.view.BaseView;
+import com.oldnum7.androidlib.mvp.view.MvpView;
 
 import javax.inject.Inject;
 
@@ -23,7 +23,7 @@ import javax.inject.Inject;
  *       version: 1.0
  * </pre>
  */
-public abstract class BaseMvpFragment<V extends BaseView, P extends BasePresenter<V>> extends BaseFragment implements BaseView, DelegateCallback<V, P> {
+public abstract class BaseMvpFragment<V extends MvpView, P extends BasePresenter<V>> extends BaseFragment implements MvpView, DelegateCallback<V, P> {
 
     protected IFragmentDelegate mMvpDelegate;
 

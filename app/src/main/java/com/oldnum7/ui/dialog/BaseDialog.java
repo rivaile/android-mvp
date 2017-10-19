@@ -13,7 +13,7 @@
  * limitations under the License
  */
 
-package com.oldnum7.views.dialog;
+package com.oldnum7.ui.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -32,6 +32,9 @@ import android.view.Window;
 import android.widget.RelativeLayout;
 
 import com.oldnum7.androidlib.base.BaseActivity;
+import com.oldnum7.androidlib.mvp.base.BaseMvpActivity;
+import com.oldnum7.base.BaseAppActivity;
+import com.oldnum7.di.component.ActivityComponent;
 
 import butterknife.Unbinder;
 
@@ -41,99 +44,49 @@ import butterknife.Unbinder;
 
 public abstract class BaseDialog extends DialogFragment implements DialogMvpView {
 
-    private BaseActivity mActivity;
+    private BaseAppActivity mActivity;
     private Unbinder mUnBinder;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof BaseActivity) {
-            BaseActivity mActivity = (BaseActivity) context;
-            this.mActivity = mActivity;
+        if (context instanceof BaseMvpActivity) {
+            BaseAppActivity activity = (BaseAppActivity) context;
+            this.mActivity = activity;
             mActivity.onFragmentAttached();
         }
     }
 
-
+    @Override
     public void showLoading() {
         if (mActivity != null) {
             mActivity.showLoading();
         }
     }
 
-//
-//    public void hideLoading() {
-//        if (mActivity != null) {
-//            mActivity.hideLoading();
-//        }
-//    }
-//
-//
-//    public void onError(String message) {
-//        if (mActivity != null) {
-//            mActivity.onError(message);
-//        }
-//    }
-//
-//
-//    public void onError(@StringRes int resId) {
-//        if (mActivity != null) {
-//            mActivity.onError(resId);
-//        }
-//    }
-//
-//
-//    public void showMessage(String message) {
-//        if (mActivity != null) {
-//            mActivity.showMessage(message);
-//        }
-//    }
-//
-//
-//    public void showMessage(@StringRes int resId) {
-//        if (mActivity != null) {
-//            mActivity.showMessage(resId);
-//        }
-//    }
-//
-//
-//    public boolean isNetworkConnected() {
-//        if (mActivity != null) {
-//            return mActivity.isNetworkConnected();
-//        }
-//        return false;
-//    }
-//
-//    @Override
-//    public void onDetach() {
-//        mActivity = null;
-//        super.onDetach();
-//    }
-//
-//
-//    public void hideKeyboard() {
-//        if (mActivity != null) {
-//            mActivity.hideKeyboard();
-//        }
-//    }
-//
-//
-//    public void openActivityOnTokenExpire() {
-//        if (mActivity != null) {
-//            mActivity.openActivityOnTokenExpire();
-//        }
-//    }
-//
-//    public BaseActivity getBaseActivity() {
-//        return mActivity;
-//    }
-//
-//    public ActivityComponent getActivityComponent() {
-//        if (mActivity != null) {
-//            return mActivity.getActivityComponent();
-//        }
-//        return null;
-//    }
+    @Override
+    public void hideLoading() {
+        if (mActivity != null) {
+            mActivity.hideLoading();
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        mActivity = null;
+        super.onDetach();
+    }
+
+    public BaseActivity getBaseActivity() {
+        return mActivity;
+    }
+
+    public ActivityComponent getActivityComponent() {
+        if (mActivity != null) {
+            return mActivity.getActivityComponent();
+        }
+        return null;
+    }
 
     public void setUnBinder(Unbinder unBinder) {
         mUnBinder = unBinder;
@@ -184,7 +137,7 @@ public abstract class BaseDialog extends DialogFragment implements DialogMvpView
     @Override
     public void dismissDialog(String tag) {
         dismiss();
-//        getBaseActivity().onFragmentDetached(tag);
+        getBaseActivity().onFragmentDetached(tag);
     }
 
     @Override

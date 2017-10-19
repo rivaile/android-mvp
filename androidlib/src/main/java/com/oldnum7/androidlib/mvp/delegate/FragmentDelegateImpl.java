@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.oldnum7.androidlib.mvp.persenter.BasePresenter;
-import com.oldnum7.androidlib.mvp.view.BaseView;
+import com.oldnum7.androidlib.mvp.view.MvpView;
 
 
 /**
@@ -16,7 +16,7 @@ import com.oldnum7.androidlib.mvp.view.BaseView;
  *         Created at 2016/8/2 18:00
  */
 
-public class FragmentDelegateImpl<V extends BaseView, P extends BasePresenter<V>>
+public class FragmentDelegateImpl<V extends MvpView, P extends BasePresenter<V>>
         implements IFragmentDelegate {
 
     //    protected InternalDelegate<V, P> internalDelegate;

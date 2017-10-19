@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.support.annotation.NonNull;
 
 import com.oldnum7.androidlib.mvp.persenter.BasePresenter;
-import com.oldnum7.androidlib.mvp.view.BaseView;
+import com.oldnum7.androidlib.mvp.view.MvpView;
 
 
 /**
@@ -16,7 +16,7 @@ import com.oldnum7.androidlib.mvp.view.BaseView;
  * @param <P> The type of MvpPresenter
  */
 
-public interface DelegateCallback<V extends BaseView, P extends BasePresenter<V>> {
+public interface DelegateCallback<V extends MvpView, P extends BasePresenter<V>> {
 
     /**
      * Create a presenter instance.

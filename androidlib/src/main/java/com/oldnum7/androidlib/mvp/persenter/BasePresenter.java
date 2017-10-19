@@ -3,7 +3,7 @@ package com.oldnum7.androidlib.mvp.persenter;
 import android.support.annotation.Nullable;
 import android.support.annotation.UiThread;
 
-import com.oldnum7.androidlib.mvp.view.BaseView;
+import com.oldnum7.androidlib.mvp.view.MvpView;
 
 import java.lang.ref.WeakReference;
 
@@ -17,7 +17,7 @@ import java.lang.ref.WeakReference;
  *      version: 1.0
  * </pre>
  */
-public abstract class BasePresenter<V extends BaseView> implements MvpPresenter<V>,IPresenter {
+public abstract class BasePresenter<V extends MvpView> implements MvpPresenter<V>,IPresenter {
 
     private WeakReference<V> mViewReference;
 

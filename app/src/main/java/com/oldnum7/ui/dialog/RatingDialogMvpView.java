@@ -13,13 +13,15 @@
  * limitations under the License
  */
 
-package com.oldnum7.views.dialog;
+package com.oldnum7.ui.dialog;
 
 /**
  * Created by janisharali on 24/05/17.
  */
 
-public interface DialogMvpView  {
+public interface RatingDialogMvpView extends DialogMvpView {
 
-    void dismissDialog(String tag);
+    void hideSubmitButton();
+
+    void dismissDialog();
 }

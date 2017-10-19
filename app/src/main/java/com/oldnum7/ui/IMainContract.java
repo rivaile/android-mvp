@@ -2,7 +2,7 @@ package com.oldnum7.ui;
 
 
 import com.oldnum7.androidlib.mvp.persenter.BasePresenter;
-import com.oldnum7.androidlib.mvp.view.BaseView;
+import com.oldnum7.androidlib.mvp.view.MvpView;
 
 /**
  * <pre>
@@ -14,7 +14,7 @@ import com.oldnum7.androidlib.mvp.view.BaseView;
  */
 public interface IMainContract {
 
-    interface View extends BaseView {
+    interface View extends MvpView {
         void setLoadingIndicator(boolean active);
 
 //        void getUsers(List<T> users);

@@ -16,8 +16,14 @@
 
 package com.oldnum7.androidlib.mvp.view;
 
-public interface BaseView {
+public interface MvpView {
 
-//    void setPresenter(T presenter);
+    void showLoading();
+
+    void hideLoading();
+
+    void showToast(String msg);
+
+    void showSnackBar(String msg);
 
 }

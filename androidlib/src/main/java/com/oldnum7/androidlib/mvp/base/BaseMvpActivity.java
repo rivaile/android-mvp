@@ -1,9 +1,17 @@
 package com.oldnum7.androidlib.mvp.base;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
+import android.view.View;
+import android.view.Window;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import com.oldnum7.androidlib.mvp.view.BaseView;
+import com.oldnum7.androidlib.R;
+import com.oldnum7.androidlib.mvp.view.MvpView;
 import com.oldnum7.androidlib.base.BaseActivity;
 import com.oldnum7.androidlib.mvp.delegate.ActivityDelegateImpl;
 import com.oldnum7.androidlib.mvp.delegate.DelegateCallback;
@@ -20,7 +28,7 @@ import javax.inject.Inject;
  *       version: 1.0
  * </pre>
  */
-public class BaseMvpActivity<V extends BaseView, P extends BasePresenter<V>> extends BaseActivity implements BaseView, DelegateCallback<V, P> {
+public class BaseMvpActivity<V extends MvpView, P extends BasePresenter<V>> extends BaseActivity implements MvpView, DelegateCallback<V, P> {
 
     protected IActivityDelegate mMvpDelegate;
 
@@ -119,6 +127,49 @@ public class BaseMvpActivity<V extends BaseView, P extends BasePresenter<V>> ext
             mMvpDelegate = new ActivityDelegateImpl(this);
         }
         return mMvpDelegate;
+    }
+
+    //-------------------------------------------------对话框--------------------------------------------------------//
+
+    private ProgressDialog dialog;
+
+    public void showLoading() {
+        if (dialog != null && dialog.isShowing()) return;
+        dialog = new ProgressDialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        dialog.setMessage("请求网络中...");
+        dialog.show();
+    }
+
+    public void hideLoading() {
+        if (dialog != null && dialog.isShowing()) {
+            dialog.dismiss();
+        }
+    }
+
+    public void showToast(final String msg) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (msg != null) {
+                    Toast.makeText(BaseMvpActivity.this, msg, Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(BaseMvpActivity.this, getString(R.string.some_error), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    public void showSnackBar(String msg) {
+        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),
+                msg, Snackbar.LENGTH_SHORT);
+        View sbView = snackbar.getView();
+        TextView textView = (TextView) sbView
+                .findViewById(android.support.design.R.id.snackbar_text);
+        textView.setTextColor(ContextCompat.getColor(this, R.color.white));
+        snackbar.show();
     }
 
 }

@@ -1,18 +1,13 @@
 package com.oldnum7.androidlib.base;
 
-import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.oldnum7.androidlib.R;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
@@ -105,47 +100,9 @@ public class BaseActivity extends AppCompatActivity implements BaseFragment.Call
         return typedValue.data;
     }
 
-    //-------------------------------------------------对话框--------------------------------------------------------//
-    public void showToast(final String msg) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (msg != null) {
-                    Toast.makeText(BaseActivity.this, msg, Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(BaseActivity.this, getString(R.string.some_error), Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
 
-    private void showSnackBar(String message) {
-        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),
-                message, Snackbar.LENGTH_SHORT);
-        View sbView = snackbar.getView();
-        TextView textView = (TextView) sbView
-                .findViewById(android.support.design.R.id.snackbar_text);
-        textView.setTextColor(ContextCompat.getColor(this, R.color.white));
-        snackbar.show();
-    }
 
-    private ProgressDialog dialog;
 
-    public void showLoading() {
-        if (dialog != null && dialog.isShowing()) return;
-        dialog = new ProgressDialog(this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        dialog.setMessage("请求网络中...");
-        dialog.show();
-    }
-
-    public void dismissLoading() {
-        if (dialog != null && dialog.isShowing()) {
-            dialog.dismiss();
-        }
-    }
 
     @Override
     public void onFragmentAttached() {

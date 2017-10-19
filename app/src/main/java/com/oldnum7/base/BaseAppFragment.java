@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.oldnum7.androidlib.mvp.base.BaseMvpFragment;
 import com.oldnum7.androidlib.mvp.persenter.BasePresenter;
-import com.oldnum7.androidlib.mvp.view.BaseView;
+import com.oldnum7.androidlib.mvp.view.MvpView;
 import com.oldnum7.di.component.ActivityComponent;
 
 import butterknife.Unbinder;
@@ -17,7 +17,7 @@ import butterknife.Unbinder;
  *       version: 1.0
  * </pre>
  */
-public abstract class BaseAppFragment<V extends BaseView, P extends BasePresenter<V>> extends BaseMvpFragment<V, P> {
+public abstract class BaseAppFragment<V extends MvpView, P extends BasePresenter<V>> extends BaseMvpFragment<V, P> {
 
     private Unbinder mUnBinder;
 

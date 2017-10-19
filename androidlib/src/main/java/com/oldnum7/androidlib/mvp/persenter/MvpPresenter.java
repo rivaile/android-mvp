@@ -2,7 +2,7 @@ package com.oldnum7.androidlib.mvp.persenter;
 
 import android.support.annotation.UiThread;
 
-import com.oldnum7.androidlib.mvp.view.BaseView;
+import com.oldnum7.androidlib.mvp.view.MvpView;
 
 /**
  * author : denglin
@@ -10,7 +10,7 @@ import com.oldnum7.androidlib.mvp.view.BaseView;
  * desc   :
  * version: 1.0
  */
-public interface MvpPresenter<V extends BaseView>  {
+public interface MvpPresenter<V extends MvpView>  {
 
     @UiThread
     void attachView(V view);
