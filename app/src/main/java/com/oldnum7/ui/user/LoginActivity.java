@@ -42,7 +42,6 @@ public class LoginActivity extends BaseAppActivity<ILoginContract.View, LoginPre
         getActivityComponent().inject(this);
     }
 
-
     @OnClick(R.id.btn_login)
     public void onViewClicked() {
         showAboutFragment();
@@ -58,7 +57,6 @@ public class LoginActivity extends BaseAppActivity<ILoginContract.View, LoginPre
     public void loginFail() {
 
     }
-
 
     public void showAboutFragment() {
         getSupportFragmentManager()

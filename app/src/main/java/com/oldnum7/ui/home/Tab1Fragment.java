@@ -20,7 +20,7 @@ import com.oldnum7.ui.LazyFragment;
  * </pre>
  */
 public class Tab1Fragment extends LazyFragment {
-    private String TAG = getClass().getSimpleName();
+    public String TAG = getClass().getSimpleName();
 
     // 标志位，标志已经初始化完成。
     private boolean isPrepared;
@@ -114,17 +114,17 @@ public class Tab1Fragment extends LazyFragment {
 
     @Override
     protected void onVisible() {
-        Log.e(TAG, "onVisible: " );
+        Log.e(TAG, "onVisible: ");
     }
 
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        Log.e(TAG, "onHiddenChanged: " +hidden);
+        Log.e(TAG, "onHiddenChanged: " + hidden);
     }
 
     @Override
     protected void onInvisible() {
-        Log.e(TAG, "onInvisible: " );
+        Log.e(TAG, "onInvisible: ");
     }
 }
