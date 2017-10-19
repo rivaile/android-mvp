@@ -18,8 +18,6 @@ public class LoginEntity {
     private String userId;
     private String userName;
 
-
-
     public String getMobile() {
         return this.mobile;
     }

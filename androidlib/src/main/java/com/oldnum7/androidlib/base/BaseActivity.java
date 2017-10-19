@@ -25,7 +25,7 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
  * version: 1.0
  * </Pre>
  */
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends AppCompatActivity implements BaseFragment.Callback{
 
     @SuppressWarnings("unchecked")
     public <T extends View> T findView(int id) {
@@ -147,4 +147,13 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onFragmentAttached() {
+
+    }
+
+    @Override
+    public void onFragmentDetached(String tag) {
+
+    }
 }

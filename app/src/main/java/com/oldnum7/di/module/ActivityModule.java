@@ -4,7 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.oldnum7.di.annotation.ActivityScoped;
 import com.oldnum7.ui.IMainContract;
-import com.oldnum7.ui.user.ILoginContract;
+import com.oldnum7.ui.login.ILoginContract;
 
 import dagger.Module;
 import dagger.Provides;

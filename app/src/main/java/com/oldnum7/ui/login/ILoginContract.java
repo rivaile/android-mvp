@@ -1,4 +1,4 @@
-package com.oldnum7.ui.user;
+package com.oldnum7.ui.login;
 
 import com.oldnum7.androidlib.mvp.persenter.BasePresenter;
 import com.oldnum7.androidlib.mvp.view.LceView;
@@ -38,6 +38,6 @@ public interface ILoginContract {
 //
 //        abstract void getUsers();
 
-        abstract void login(String userName, String pwd);
+        protected abstract void login(String userName, String pwd);
     }
 }

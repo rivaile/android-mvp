@@ -73,7 +73,7 @@ public abstract class BaseFragment extends Fragment {
     }
 
     /**
-     * 如果是通过FragmentTransaction的show和hide的方法来控制显示，调用的是onHiddenChanged.
+     * 如果是通过FragmentTransaction的show和hide的方法来控制显示，调用的是onHiddenChang ed.
      * 若是初始就show的Fragment 为了触发该事件 需要先hide再show
      */
     @Override
@@ -114,4 +114,13 @@ public abstract class BaseFragment extends Fragment {
     public void setTitle(String title) {
         fragmentTitle = title;
     }
+
+
+    public interface Callback {
+
+        void onFragmentAttached();
+
+        void onFragmentDetached(String tag);
+    }
+
 }

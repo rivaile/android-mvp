@@ -1,9 +1,10 @@
 package com.oldnum7.di.component;
 
 import com.oldnum7.di.annotation.ActivityScoped;
-import com.oldnum7.ui.UserActivity;
-import com.oldnum7.ui.user.LoginActivity;
 import com.oldnum7.di.module.ActivityModule;
+import com.oldnum7.ui.UserActivity;
+import com.oldnum7.ui.login.LoginFragment;
+import com.oldnum7.ui.user.LoginActivity;
 
 import dagger.Component;
 
@@ -23,4 +24,7 @@ public interface ActivityComponent {
     void inject(UserActivity activity);
 
     void inject(LoginActivity activity);
+
+    void inject(LoginFragment fragment);
+
 }

@@ -8,7 +8,6 @@ import com.oldnum7.di.module.ApplicationModule;
 
 import javax.inject.Inject;
 
-
 /**
  * <pre>
  *       author : denglin
