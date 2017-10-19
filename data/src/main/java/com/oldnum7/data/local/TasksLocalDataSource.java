@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import com.oldnum7.data.TasksDataSource;
 import com.oldnum7.data.entity.LoginEntity;
 import com.oldnum7.data.entity.T;
+import com.oldnum7.data.entity.VersionEntity;
 
 import java.util.List;
 
@@ -77,6 +78,11 @@ public class TasksLocalDataSource implements TasksDataSource {
     
     @Override
     public Observable<LoginEntity> login(String name, String pwd) {
+        return null;
+    }
+
+    @Override
+    public Observable<VersionEntity> updateVersion(String clientVersion) {
         return null;
     }
 

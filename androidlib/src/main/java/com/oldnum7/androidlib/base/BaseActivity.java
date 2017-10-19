@@ -21,6 +21,7 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
  * </Pre>
  */
 public class BaseActivity extends AppCompatActivity implements BaseFragment.Callback{
+    public String TAG = getClass().getSimpleName();
 
     @SuppressWarnings("unchecked")
     public <T extends View> T findView(int id) {

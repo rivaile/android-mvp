@@ -1,5 +1,6 @@
 package com.oldnum7.androidlib.mvp.base;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -25,7 +26,11 @@ import javax.inject.Inject;
  */
 public abstract class BaseMvpFragment<V extends MvpView, P extends BasePresenter<V>> extends BaseFragment implements MvpView, DelegateCallback<V, P> {
 
+    private BaseMvpActivity mActivity;
+
     protected IFragmentDelegate mMvpDelegate;
+
+    private ProgressDialog mProgressDialog;
 
     @Inject
     protected P mPresenter;
@@ -85,15 +90,23 @@ public abstract class BaseMvpFragment<V extends MvpView, P extends BasePresenter
     }
 
     @Override
-    public void onAttach(Context activity) {
-        super.onAttach(activity);
-        getMvpDelegate().onAttach(activity);
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        getMvpDelegate().onAttach(context);
+
+        if (context instanceof BaseMvpActivity) {
+            BaseMvpActivity activity = (BaseMvpActivity) context;
+            this.mActivity = activity;
+            activity.onFragmentAttached();
+        }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
         getMvpDelegate().onDetach();
+
+        mActivity = null;
     }
 
     @Override
@@ -140,6 +153,36 @@ public abstract class BaseMvpFragment<V extends MvpView, P extends BasePresenter
             mMvpDelegate = new FragmentDelegateImpl(this);
         }
         return mMvpDelegate;
+    }
+
+
+    @Override
+    public void showLoading() {
+        if (mActivity != null) {
+            mActivity.hideLoading();
+            mActivity.showLoading();
+        }
+    }
+
+    @Override
+    public void hideLoading() {
+        if (mActivity != null) {
+            mActivity.hideLoading();
+        }
+    }
+
+    @Override
+    public void showToast(String msg) {
+        if (mActivity != null) {
+            mActivity.showToast(msg);
+        }
+    }
+
+    @Override
+    public void showSnackBar(String msg) {
+        if (mActivity != null) {
+            mActivity.showSnackBar(msg);
+        }
     }
 
 

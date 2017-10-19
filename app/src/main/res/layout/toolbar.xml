@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="50dp"
     android:paddingTop="0dp"
+    android:visibility="gone"
     app:contentInsetEnd="0dp"
     app:contentInsetLeft="0dp"
     app:contentInsetRight="0dp"

@@ -43,6 +43,8 @@ import android.view.ViewGroup;
 
 public abstract class BaseFragment extends Fragment {
 
+    public final String TAG = this.getClass().getSimpleName();
+    
     protected String fragmentTitle;             //fragment标题
     private boolean isVisible;                  //是否可见状态
     private boolean isPrepared;                 //标志位，View已经初始化完成。
@@ -59,7 +61,9 @@ public abstract class BaseFragment extends Fragment {
         return view;
     }
 
-    /** 如果是与ViewPager一起使用，调用的是setUserVisibleHint */
+    /**
+     * 如果是与ViewPager一起使用，调用的是setUserVisibleHint
+     */
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);

@@ -1,15 +1,13 @@
 package com.oldnum7.ui.dashborard;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import com.oldnum7.ui.LazyFragment;
+import com.oldnum7.R;
+import com.oldnum7.base.BaseAppFragment;
 
 /**
  * <pre>
@@ -19,114 +17,31 @@ import com.oldnum7.ui.LazyFragment;
  *       version: 1.0
  * </pre>
  */
-public class Tab2Fragment extends LazyFragment {
-    private String TAG = getClass().getSimpleName();
+public class Tab2Fragment extends BaseAppFragment {
 
-    // 标志位，标志已经初始化完成。
-    private boolean isPrepared;
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        TextView textView = new TextView(getActivity());
-        textView.setText("Tab2Fragment");
-
-        Log.e(TAG, "onCreateView: ");
-
-        //XXX初始化view的各控件
-        isPrepared = true;
-        lazyLoad();
-
-        return textView;
-    }
-
-
-    @Override
-    protected void lazyLoad() {
-        if (!isPrepared || !isVisible) {
-            return;
-        }
-        //填充各控件的数据
-
-        Log.e(TAG, "lazyLoad: ");
+    public static Tab2Fragment newInstance() {
+        Bundle args = new Bundle();
+        Tab2Fragment fragment = new Tab2Fragment();
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        Log.e(TAG, "onAttach: ");
+    protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.fragment_tab2, container, false);
+
+//        ActivityComponent component = getActivityComponent();
+//        if (component != null) {
+//            component.inject(this);
+//            setUnBinder(ButterKnife.bind(this, view));
+//        }
+        return view;
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        Log.e(TAG, "onViewCreated: ");
-    }
+    protected void initData() {
+        Log.e(TAG, "initData: ");
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        Log.e(TAG, "onActivityCreated: ");
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.e(TAG, "onCreate: ");
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        Log.e(TAG, "onResume: ");
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        Log.e(TAG, "onStart: ");
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        Log.e(TAG, "onPause: ");
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        Log.e(TAG, "onDestroyView: ");
-        isPrepared = false;
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        Log.e(TAG, "onDestroy: ");
-    }
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        Log.e(TAG, "setUserVisibleHint: " + isVisibleToUser);
-    }
-
-    @Override
-    protected void onVisible() {
-
-        Log.e(TAG, "onVisible: " );
-    }
-
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        Log.e(TAG, "onHiddenChanged: " +hidden);
-    }
-
-    @Override
-    protected void onInvisible() {
-
-        Log.e(TAG, "onInvisible: " );
     }
 }

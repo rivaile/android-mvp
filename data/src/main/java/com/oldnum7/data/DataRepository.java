@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.oldnum7.data.entity.LoginEntity;
 import com.oldnum7.data.entity.T;
+import com.oldnum7.data.entity.VersionEntity;
 import com.oldnum7.data.local.TasksLocalDataSource;
 
 import java.util.Collection;
@@ -244,9 +245,13 @@ public class DataRepository implements TasksDataSource {
                 });
     }
 
-
     @Override
     public Observable<LoginEntity> login(String name, String pwd) {
         return mTasksRemoteDataSource.login(name, pwd);
+    }
+    
+    @Override
+    public Observable<VersionEntity> updateVersion(String clientVersion) {
+        return mTasksRemoteDataSource.updateVersion(clientVersion);
     }
 }

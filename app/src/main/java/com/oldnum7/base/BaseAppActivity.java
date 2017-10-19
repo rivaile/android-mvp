@@ -52,6 +52,4 @@ public class BaseAppActivity<V extends LceView, P extends BasePresenter<V>> exte
     public void setUnBinder(Unbinder unBinder) {
         mUnBinder = unBinder;
     }
-
-
 }

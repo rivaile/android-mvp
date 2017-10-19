@@ -12,12 +12,11 @@ public class Constants {
 
     public static final String ANDROID_SECRET_KEY = "288ed3a47865289d552d8643724560ce";
 
-    public final static int HTTP_SUCCESS = 200;
+    public final static int HTTP_SUCCESS = 0;
 
     //    public static final String HTTP_BASE_URL = "https://api.github.com/";
     public static final String HTTP_BASE_URL = "https://wap.rrjc.com/api/";
 //    public static final String HTTP_BASE_URL = "https://23mobile.szrrjc.com/api/";
-
 
     //开发地址...
 

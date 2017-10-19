@@ -1,7 +1,5 @@
 package com.oldnum7.base;
 
-import android.content.Context;
-
 import com.oldnum7.androidlib.mvp.base.BaseMvpFragment;
 import com.oldnum7.androidlib.mvp.persenter.BasePresenter;
 import com.oldnum7.androidlib.mvp.view.MvpView;
@@ -30,15 +28,6 @@ public abstract class BaseAppFragment<V extends MvpView, P extends BasePresenter
         return null;
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof BaseAppActivity) {
-            BaseAppActivity activity = (BaseAppActivity) context;
-            this.mActivity = activity;
-            activity.onFragmentAttached();
-        }
-    }
 
     @Override
     public void onDetach() {

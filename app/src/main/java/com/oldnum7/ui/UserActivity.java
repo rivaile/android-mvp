@@ -3,6 +3,8 @@ package com.oldnum7.ui;
 import android.support.v4.widget.SwipeRefreshLayout;
 
 import com.oldnum7.base.BaseAppActivity;
+import com.oldnum7.data.entity.VersionEntity;
+import com.oldnum7.ui.main.IMainContract;
 
 
 public class UserActivity extends BaseAppActivity implements IMainContract.View, SwipeRefreshLayout.OnRefreshListener {
@@ -12,17 +14,22 @@ public class UserActivity extends BaseAppActivity implements IMainContract.View,
     }
 
     @Override
-    public void setLoadingIndicator(boolean active) {
+    public void updateVersion(VersionEntity entity) {
 
     }
 
     @Override
-    public void showError() {
+    public void showUpdateDialog() {
 
     }
 
     @Override
-    public void showNetWorkError() {
+    public void showDownloadDialog() {
+
+    }
+
+    @Override
+    public void installApk(String file) {
 
     }
 

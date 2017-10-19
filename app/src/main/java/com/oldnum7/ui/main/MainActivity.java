@@ -1,26 +1,24 @@
-package com.oldnum7.ui;
+package com.oldnum7.ui.main;
 
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 
 import com.oldnum7.R;
-import com.oldnum7.androidlib.base.BaseActivity;
+import com.oldnum7.base.BaseAppActivity;
+import com.oldnum7.data.entity.VersionEntity;
 import com.oldnum7.ui.account.Tab3Fragment;
 import com.oldnum7.ui.dashborard.Tab2Fragment;
 import com.oldnum7.ui.home.Tab1Fragment;
 import com.roughike.bottombar.BottomBar;
-import com.roughike.bottombar.BottomBarTab;
 import com.roughike.bottombar.OnTabReselectListener;
 import com.roughike.bottombar.OnTabSelectListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseAppActivity<IMainContract.View, MainPresenter> implements IMainContract.View {
 
-    private String TAG = getClass().getSimpleName();
 
     @BindView(R.id.bottomBar)
     BottomBar mBottomBar;
@@ -33,9 +31,15 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+
+        setUnBinder(ButterKnife.bind(this));
 
         initBottomBar();
+
+        getActivityComponent().inject(this);
+
+        mPresenter.updateVersion("1.0.0");
+
     }
 
     protected void initBottomBar() {
@@ -60,7 +64,6 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onTabSelected(@IdRes int tabId) {
 
-                Log.e(TAG, "onTabSelected: " + tabId);
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 switch (tabId) {
                     case R.id.tab1:
@@ -91,11 +94,28 @@ public class MainActivity extends BaseActivity {
         mBottomBar.setOnTabReselectListener(new OnTabReselectListener() {
             @Override
             public void onTabReSelected(int tabId) {
-                Log.e(TAG, "onTabReSelected: " + tabId);
+
             }
         });
+    }
 
-        BottomBarTab nearby = mBottomBar.getTabWithId(R.id.tab1);
-        nearby.setBadgeCount(5);
+    @Override
+    public void updateVersion(VersionEntity entity) {
+
+    }
+
+    @Override
+    public void showUpdateDialog() {
+
+    }
+
+    @Override
+    public void showDownloadDialog() {
+
+    }
+
+    @Override
+    public void installApk(String file) {
+
     }
 }

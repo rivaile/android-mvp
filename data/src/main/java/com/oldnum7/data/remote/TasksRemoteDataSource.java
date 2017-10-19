@@ -1,6 +1,8 @@
 package com.oldnum7.data.remote;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
+
 
 import com.oldnum7.androidlib.http.HttpFactory;
 import com.oldnum7.data.ApiService;
@@ -10,6 +12,7 @@ import com.oldnum7.data.TasksDataSource;
 import com.oldnum7.data.Transformer.HttpTransformer;
 import com.oldnum7.data.entity.LoginEntity;
 import com.oldnum7.data.entity.T;
+import com.oldnum7.data.entity.VersionEntity;
 
 import java.util.List;
 
@@ -17,6 +20,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import io.reactivex.Observable;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 /**
  * <pre>
@@ -28,18 +32,27 @@ import io.reactivex.Observable;
  */
 @Singleton
 public class TasksRemoteDataSource implements TasksDataSource {
-    private final HttpFactory mHttpFactory;
+
     private final ApiService mService;
 
-    // Prevent direct instantiation.
     @Inject
     TasksRemoteDataSource() {
-        mHttpFactory = new HttpFactory.Builder()
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
+            @Override
+            public void log(String message) {
+                Log.i("http", message);
+            }
+        });
+
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        HttpFactory httpFactory = new HttpFactory.Builder()
                 .setBaseUrl(Constants.HTTP_BASE_URL)
                 .setInterceptor(new HttpHeaderInterceptor())
+                .setInterceptor(loggingInterceptor)
 //                .addNetworkInterceptor(new StethoInterceptor())
                 .build();
-        mService = mHttpFactory.createService(ApiService.class);
+        mService = httpFactory.createService(ApiService.class);
     }
 
     @Override
@@ -59,9 +72,14 @@ public class TasksRemoteDataSource implements TasksDataSource {
 
     }
 
-    //--------------------------------------------------------------------//
     @Override
     public Observable<LoginEntity> login(String name, String pwd) {
         return mService.login(name, pwd).compose(HttpTransformer.<LoginEntity>transform());
+    }
+
+    //--------------------------------------------------------------------//
+    @Override
+    public Observable<VersionEntity> updateVersion(String clientVersion) {
+        return mService.updateVersion(clientVersion).compose(HttpTransformer.<VersionEntity>transform());
     }
 }

@@ -3,6 +3,7 @@ package com.oldnum7.data;
 import com.oldnum7.androidlib.http.model.HttpResponse;
 import com.oldnum7.data.entity.LoginEntity;
 import com.oldnum7.data.entity.T;
+import com.oldnum7.data.entity.VersionEntity;
 
 import java.util.List;
 
@@ -40,5 +41,10 @@ public interface ApiService {
     @POST("user/login")
     Observable<HttpResponse<LoginEntity>> login(@Field("loginName") String userName,
                                                 @Field("password") String pwd);
+
+    @FormUrlEncoded
+    @POST("start/data")
+    Observable<HttpResponse<VersionEntity>> updateVersion(@Field("clientVersion") String clientVersion);
+
 
 }

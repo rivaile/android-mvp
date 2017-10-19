@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 
 import com.oldnum7.data.entity.LoginEntity;
 import com.oldnum7.data.entity.T;
+import com.oldnum7.data.entity.VersionEntity;
 
 import java.util.List;
 
@@ -29,4 +30,6 @@ public interface TasksDataSource {
     void saveTask(@NonNull T userEntity);
 
     Observable<LoginEntity> login(String name, String pwd);
+
+    Observable<VersionEntity> updateVersion(String clientVersion);
 }

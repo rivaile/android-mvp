@@ -1,17 +1,15 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>           <!--ToolBar的默认颜色..-->
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>   <!--状态栏的默认颜色..-->
         <item name="colorAccent">@color/colorAccent</item>             <!--浮动按钮的默认颜色..-->
     </style>
 
-    <!--toolbar替代actionbar后必须设置主题为NoActionBar-->
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
+    <style name="AppTheme.FullScreen" >
         <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
     </style>
-
 </resources>
