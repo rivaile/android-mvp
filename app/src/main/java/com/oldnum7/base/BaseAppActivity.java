@@ -2,8 +2,11 @@ package com.oldnum7.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 
 import com.oldnum7.App;
+import com.oldnum7.R;
 import com.oldnum7.androidlib.mvp.base.BaseLceActivity;
 import com.oldnum7.androidlib.mvp.persenter.BasePresenter;
 import com.oldnum7.androidlib.mvp.view.LceView;
@@ -52,5 +55,29 @@ public class BaseAppActivity<V extends LceView, P extends BasePresenter<V>> exte
 
     public void setUnBinder(Unbinder unBinder) {
         mUnBinder = unBinder;
+    }
+
+
+    public void showFragment(int resId, BaseAppFragment fragment, String tag) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .disallowAddToBackStack()
+                .setCustomAnimations(R.anim.slide_left, R.anim.slide_right)
+                .add(resId, fragment, tag)
+                .commit();
+    }
+
+    @Override
+    public void onFragmentDetached(String tag) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        Fragment fragment = fragmentManager.findFragmentByTag(tag);
+        if (fragment != null) {
+            fragmentManager
+                    .beginTransaction()
+                    .disallowAddToBackStack()
+                    .setCustomAnimations(R.anim.slide_left, R.anim.slide_right)
+                    .remove(fragment)
+                    .commitNow();
+        }
     }
 }

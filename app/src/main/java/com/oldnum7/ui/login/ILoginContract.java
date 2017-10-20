@@ -20,7 +20,6 @@ public interface ILoginContract {
 
         void loginFail();
 
-        void showRegisterFragment();
         
     }
 
