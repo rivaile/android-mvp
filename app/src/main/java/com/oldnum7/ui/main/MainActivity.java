@@ -18,8 +18,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends BaseAppActivity<IMainContract.View, MainPresenter> implements IMainContract.View {
-
-
+    
     @BindView(R.id.bottomBar)
     BottomBar mBottomBar;
 

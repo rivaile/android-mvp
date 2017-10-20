@@ -68,5 +68,4 @@ public class LoginActivity extends BaseAppActivity<ILoginContract.View, LoginPre
     public void loginFail() {
 
     }
-
 }

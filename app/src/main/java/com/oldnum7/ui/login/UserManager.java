@@ -1,5 +1,7 @@
 package com.oldnum7.ui.login;
 
+import com.oldnum7.data.entity.LoginEntity;
+
 /**
  * <pre>
  *       author : denglin
@@ -9,4 +11,27 @@ package com.oldnum7.ui.login;
  * </pre>
  */
 public class UserManager {
+
+    public static UserManager getInstance() {
+        return new UserManager();
+    }
+
+    private UserManager() {
+
+    }
+
+    public boolean isLogin() {
+        return false;
+    }
+
+    public String getToken() {
+        return "";
+    }
+
+    public void updateUserState(LoginEntity loginEntity) {
+
+    }
+
+    public void deleteUserState() {
+    }
 }

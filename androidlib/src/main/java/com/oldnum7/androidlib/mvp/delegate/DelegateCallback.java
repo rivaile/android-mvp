@@ -19,7 +19,7 @@ import com.oldnum7.androidlib.mvp.view.MvpView;
 public interface DelegateCallback<V extends MvpView, P extends BasePresenter<V>> {
 
     /**
-     * Create a presenter instance.
+     * Create a presenter instance.must init presenter in this method.
      *
      * @return the created presenter instance.
      */
