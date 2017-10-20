@@ -1,6 +1,8 @@
 package com.oldnum7.ui.login;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,20 +17,21 @@ import com.oldnum7.di.component.ActivityComponent;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 
-public class RegisterFragment extends BaseAppFragment<ILoginContract.View, LoginPresenter> implements ILoginContract.View {
+public class RegisterFragment extends BaseAppFragment<ILoginContract.View, LoginPresenter> implements IRegisterContract.View {
 
     public static final String TAG = "RegisterFragment";
-
     @BindView(R.id.et_name)
     EditText mEtName;
     @BindView(R.id.et_pwd)
     EditText mEtPwd;
     @BindView(R.id.btn_login)
     Button mBtnLogin;
-
     @BindView(R.id.btn_finish)
     Button mBtnFinish;
+    Unbinder unbinder;
+
 
     public static RegisterFragment newInstance() {
         Bundle args = new Bundle();
@@ -39,27 +42,22 @@ public class RegisterFragment extends BaseAppFragment<ILoginContract.View, Login
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_login, container, false);
+        setUnBinder(ButterKnife.bind(this, view));
 
-        ActivityComponent component = getActivityComponent();
-        if (component != null) {
-            component.inject(this);
-            setUnBinder(ButterKnife.bind(this, view));
-        }
         return view;
     }
 
+    @NonNull
     @Override
-    protected void initData() {
+    public void createPresenter() {
+        ActivityComponent component = getActivityComponent();
+        Log.e(TAG, "ActivityComponent: "+component );
 
+        if (component != null) {
+            component.inject(this);
+        }
     }
-
-    @OnClick(R.id.btn_finish)
-    void onNavBackClick() {
-        getBaseActivity().onFragmentDetached(TAG);
-    }
-
 
     @Override
     public void loginSuccess(LoginEntity loginEntity) {
@@ -76,18 +74,12 @@ public class RegisterFragment extends BaseAppFragment<ILoginContract.View, Login
 
     }
 
-    @Override
-    public void showLoading(boolean pullToRefresh) {
-
-    }
-
-    @Override
-    public void showContent() {
-
-    }
-
-    @Override
-    public void showError(String msg, boolean pullToRefresh) {
-
+    @OnClick(R.id.btn_finish)
+    public void onViewClicked() {
+        getBaseActivity().onFragmentDetached(TAG);
     }
 }
+
+
+
+

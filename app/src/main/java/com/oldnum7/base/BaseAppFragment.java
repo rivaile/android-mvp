@@ -1,5 +1,6 @@
 package com.oldnum7.base;
 
+import com.oldnum7.androidlib.base.BaseActivity;
 import com.oldnum7.androidlib.mvp.base.BaseMvpFragment;
 import com.oldnum7.androidlib.mvp.persenter.BasePresenter;
 import com.oldnum7.androidlib.mvp.view.MvpView;
@@ -19,31 +20,29 @@ public abstract class BaseAppFragment<V extends MvpView, P extends BasePresenter
 
     private Unbinder mUnBinder;
 
-    private BaseAppActivity mActivity;
-
     public ActivityComponent getActivityComponent() {
         if (mActivity != null) {
-            return mActivity.getActivityComponent();
+            if (mActivity instanceof BaseAppActivity) {
+                return  ((BaseAppActivity) mActivity).getActivityComponent();
+            }
         }
         return null;
     }
 
-
     @Override
-    public void onDetach() {
+    public void onDestroy() {
         if (mUnBinder != null) {
             mUnBinder.unbind();
         }
-        super.onDetach();
+        super.onDestroy();
     }
+
 
     public void setUnBinder(Unbinder unBinder) {
         mUnBinder = unBinder;
     }
 
-    public BaseAppActivity getBaseActivity() {
+    public BaseActivity getBaseActivity() {
         return mActivity;
     }
-
-
 }

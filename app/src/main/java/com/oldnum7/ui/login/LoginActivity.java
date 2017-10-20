@@ -20,6 +20,7 @@ import butterknife.OnClick;
 
 /**
  * 需要体现模块化的思想...一个模块一个activity...一个功能一个Fragment
+ * antivity 支持LCV view  fragment 暂不需要支持...
  */
 public class LoginActivity extends BaseAppActivity<ILoginContract.View, LoginPresenter> implements ILoginContract.View {
 

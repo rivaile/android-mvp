@@ -26,7 +26,7 @@ import javax.inject.Inject;
  */
 public abstract class BaseMvpFragment<V extends MvpView, P extends BasePresenter<V>> extends BaseFragment implements MvpView, DelegateCallback<V, P> {
 
-    private BaseMvpActivity mActivity;
+    protected BaseMvpActivity mActivity;
 
     protected IFragmentDelegate mMvpDelegate;
 
@@ -92,20 +92,19 @@ public abstract class BaseMvpFragment<V extends MvpView, P extends BasePresenter
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        getMvpDelegate().onAttach(context);
 
         if (context instanceof BaseMvpActivity) {
             BaseMvpActivity activity = (BaseMvpActivity) context;
             this.mActivity = activity;
             activity.onFragmentAttached();
         }
+        getMvpDelegate().onAttach(context);
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
         getMvpDelegate().onDetach();
-
         mActivity = null;
     }
 

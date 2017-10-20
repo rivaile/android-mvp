@@ -164,7 +164,6 @@ public class BaseLceActivity<V extends LceView, P extends BasePresenter<V>> exte
         }
     }
 
-
     public Toolbar getToolbar() {
         return mToolbar;
     }
@@ -204,5 +203,4 @@ public class BaseLceActivity<V extends LceView, P extends BasePresenter<V>> exte
     protected void onErrorViewClicked() {
 
     }
-
 }

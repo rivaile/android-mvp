@@ -87,7 +87,6 @@ public class FragmentDelegateImpl<V extends MvpView, P extends BasePresenter<V>>
 
     }
 
-
     @Override
     public void onDetach() {
         if (mPresenter != null) {

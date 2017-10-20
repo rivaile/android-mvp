@@ -53,8 +53,8 @@ public class Tab1Fragment extends BaseAppFragment {
     }
 
     @Override
-    protected void initData() {
-        Log.e(TAG, "initData: ");
+    protected void initLazyData() {
+        Log.e(TAG, "initLazyData: ");
     }
 
 

@@ -24,7 +24,7 @@ import android.view.ViewGroup;
 
 /**
  * 若把初始化内容放到initData实现,就是采用Lazy方式加载的Fragment
- * 若不需要Lazy加载则initData方法内留空,初始化内容放到initViews即可
+ * 若不需要Lazy加载则initData方法内留空,初始化内容放到initView即可
  * -
  * -注1: 如果是与ViewPager一起使用，调用的是setUserVisibleHint。
  * ------可以调用mViewPager.setOffscreenPageLimit(size),若设置了该属性 则viewpager会缓存指定数量的Fragment
@@ -44,7 +44,7 @@ import android.view.ViewGroup;
 public abstract class BaseFragment extends Fragment {
 
     public final String TAG = this.getClass().getSimpleName();
-    
+
     protected String fragmentTitle;             //fragment标题
     private boolean isVisible;                  //是否可见状态
     private boolean isPrepared;                 //标志位，View已经初始化完成。
@@ -104,12 +104,16 @@ public abstract class BaseFragment extends Fragment {
             return;
         }
         isFirstLoad = false;
-        initData();
+        initLazyData();
     }
 
     protected abstract View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
 
-    protected abstract void initData();
+    /**
+     * viewpager 和 tab栏 懒加载的实现....默认的初始化的方法不在这里实现!!!
+     */
+    protected void initLazyData() {
+    }
 
     public String getTitle() {
         return TextUtils.isEmpty(fragmentTitle) ? "" : fragmentTitle;

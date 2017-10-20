@@ -2,7 +2,6 @@ package com.oldnum7.androidlib.mvp.persenter;
 
 import android.support.annotation.Nullable;
 import android.support.annotation.UiThread;
-import android.util.Log;
 
 import com.oldnum7.androidlib.mvp.view.MvpView;
 
