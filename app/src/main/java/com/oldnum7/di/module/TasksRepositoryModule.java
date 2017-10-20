@@ -18,15 +18,16 @@ import dagger.Provides;
 
 @Module
 public class TasksRepositoryModule {
-    @Singleton
+
     @Provides
+    @Singleton
     @Named("Local")
     TasksDataSource provideLocalDataSource(TasksLocalDataSource dataSource) {
+
         return dataSource;
     }
-
-    @Singleton
     @Provides
+    @Singleton
     @Named("Remote")
     TasksDataSource provideRemoteDataSource(TasksRemoteDataSource dataSource) {
         return dataSource;

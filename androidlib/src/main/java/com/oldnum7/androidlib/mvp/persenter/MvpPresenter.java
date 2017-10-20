@@ -10,7 +10,12 @@ import com.oldnum7.androidlib.mvp.view.MvpView;
  * desc   :
  * version: 1.0
  */
-public interface MvpPresenter<V extends MvpView>  {
+
+/**
+ * Every presenter in the app must either implement this interface or extend BasePresenter
+ * indicating the MvpView type that wants to be attached with.
+ */
+public interface MvpPresenter<V extends MvpView> {
 
     @UiThread
     void attachView(V view);

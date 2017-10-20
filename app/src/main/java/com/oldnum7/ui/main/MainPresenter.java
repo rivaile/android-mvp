@@ -1,7 +1,7 @@
 package com.oldnum7.ui.main;
 
-import com.blankj.utilcode.util.ActivityUtils;
 import com.oldnum7.androidlib.http.callback.DialogHttpObserver;
+import com.oldnum7.androidlib.mvp.persenter.BasePresenter;
 import com.oldnum7.data.entity.VersionEntity;
 import com.oldnum7.domain.usecase.UpdateCase;
 
@@ -13,7 +13,7 @@ import javax.inject.Inject;
  * desc   :
  * version: 1.0
  */
-public class MainPresenter extends IMainContract.Presenter {
+public class MainPresenter extends BasePresenter<IMainContract.View> implements IMainContract.Presenter {
 
     private final UpdateCase mUpdateCase;
 
@@ -23,18 +23,8 @@ public class MainPresenter extends IMainContract.Presenter {
     }
 
     @Override
-    public void subscribe() {
-
-    }
-    @Override
-    public void unsubscribe() {
-
-    }
-
-    @Override
-    void updateVersion(String clientVersion) {
-
-        mUpdateCase.execute(new DialogHttpObserver<VersionEntity>(ActivityUtils.getTopActivity()) {
+    public void updateVersion(String clientVersion) {
+        mUpdateCase.execute(new DialogHttpObserver<VersionEntity>() {
             @Override
             public void onNext(VersionEntity entity) {
                 super.onNext(entity);

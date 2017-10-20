@@ -1,7 +1,6 @@
 package com.oldnum7.ui.main;
 
 
-import com.oldnum7.androidlib.mvp.persenter.BasePresenter;
 import com.oldnum7.androidlib.mvp.view.LceView;
 import com.oldnum7.data.entity.VersionEntity;
 
@@ -25,10 +24,10 @@ public interface IMainContract {
 
         void installApk(String file);
     }
+    
+    interface Presenter {
 
-    abstract class Presenter extends BasePresenter<View> {
-
-        abstract void updateVersion(String clientVersion);
+        void updateVersion(String clientVersion);
 
     }
 }

@@ -30,9 +30,11 @@ public class ActivityDelegateImpl<V extends MvpView, P extends BasePresenter<V>>
 
     @Override
     public void onCreate(Bundle bundle) {
+
         if (mPresenter == null) {
             mDelegateCallback.createPresenter();
         }
+
         mPresenter = mDelegateCallback.getPresenter();
 
         if (mPresenter != null) {

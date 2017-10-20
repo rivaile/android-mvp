@@ -4,11 +4,13 @@ package com.oldnum7.di.component;
 import com.google.gson.Gson;
 import com.oldnum7.App;
 import com.oldnum7.data.DataRepository;
+import com.oldnum7.data.TasksDataSource;
 import com.oldnum7.di.module.ApplicationModule;
 import com.oldnum7.di.module.TasksRepositoryModule;
 
 import java.util.Map;
 
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Component;
@@ -32,9 +34,12 @@ public interface ApplicationComponent {
 
     Gson gson();
 
+    // ActivityComponent 只能获取到 ApplicationComponent 中的元素已经自身Module的元素,不能获取到  ApplicationComponent 依赖的Module元素.
     DataRepository getRepository();
 
-//    TasksLocalDataSource getLoacalRepository();
+    @Named("Local")
+    TasksDataSource getLoacalRepository();
 
-//    TasksRemoteDataSource getRemoteRepository();
+    @Named("Remote")
+    TasksDataSource getRemoteRepository();
 }

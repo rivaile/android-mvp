@@ -44,16 +44,7 @@ public abstract class HttpObserver<T> extends DisposableObserver<T> {
         } else {
             e.printStackTrace();
         }
-//        if (!NetworkUtils.isConnected()) {
-//            ToastUtils.showLong("网络连接失败...");
-//            onRequestError();
-//        } else if (e instanceof HttpException) {
-//            ToastUtils.showLong(e.getMessage());
-//            onRequestFailure();
-//        } else {
-//            ToastUtils.showLong("服务器小情绪...");
-//            onRequestFailure();
-//        }
+
         onFinish();
     }
 

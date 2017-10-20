@@ -11,15 +11,14 @@ import com.oldnum7.R;
 import com.oldnum7.base.BaseAppFragment;
 import com.oldnum7.data.entity.LoginEntity;
 import com.oldnum7.di.component.ActivityComponent;
-import com.oldnum7.ui.user.LoginPresenter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class LoginFragment extends BaseAppFragment<ILoginContract.View, LoginPresenter> implements ILoginContract.View {
+public class RegisterFragment extends BaseAppFragment<ILoginContract.View, LoginPresenter> implements ILoginContract.View {
 
-    public static final String TAG = "LoginFragment";
+    public static final String TAG = "RegisterFragment";
 
     @BindView(R.id.et_name)
     EditText mEtName;
@@ -31,9 +30,9 @@ public class LoginFragment extends BaseAppFragment<ILoginContract.View, LoginPre
     @BindView(R.id.btn_finish)
     Button mBtnFinish;
 
-    public static LoginFragment newInstance() {
+    public static RegisterFragment newInstance() {
         Bundle args = new Bundle();
-        LoginFragment fragment = new LoginFragment();
+        RegisterFragment fragment = new RegisterFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -51,14 +50,29 @@ public class LoginFragment extends BaseAppFragment<ILoginContract.View, LoginPre
         return view;
     }
 
+    @Override
+    protected void initData() {
+
+    }
 
     @OnClick(R.id.btn_finish)
     void onNavBackClick() {
         getBaseActivity().onFragmentDetached(TAG);
     }
 
+
     @Override
-    protected void initData() {
+    public void loginSuccess(LoginEntity loginEntity) {
+
+    }
+
+    @Override
+    public void loginFail() {
+
+    }
+
+    @Override
+    public void showRegisterFragment() {
 
     }
 
@@ -74,36 +88,6 @@ public class LoginFragment extends BaseAppFragment<ILoginContract.View, LoginPre
 
     @Override
     public void showError(String msg, boolean pullToRefresh) {
-
-    }
-
-    @Override
-    public void loginSuccess(LoginEntity loginEntity) {
-
-    }
-
-    @Override
-    public void loginFail() {
-
-    }
-
-    @Override
-    public void showLoading() {
-
-    }
-
-    @Override
-    public void hideLoading() {
-
-    }
-
-    @Override
-    public void showToast(String msg) {
-
-    }
-
-    @Override
-    public void showSnackBar(String msg) {
 
     }
 }

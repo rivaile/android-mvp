@@ -1,12 +1,13 @@
 package com.oldnum7;
 
+import android.util.Log;
+
 import com.oldnum7.androidlib.base.BaseApplication;
 import com.oldnum7.data.DataRepository;
+import com.oldnum7.data.TasksDataSource;
 import com.oldnum7.di.component.ApplicationComponent;
 import com.oldnum7.di.component.DaggerApplicationComponent;
 import com.oldnum7.di.module.ApplicationModule;
-
-import javax.inject.Inject;
 
 /**
  * <pre>
@@ -20,8 +21,16 @@ public class App extends BaseApplication {
 
     private static ApplicationComponent mAppComponent;
 
-    @Inject
+//    @Inject
     DataRepository mDataRepository;
+
+//    @Inject
+//    @Named("Remote")
+    TasksDataSource mTasksLocalDataSource;
+
+//    @Inject
+//    @Named("Local")
+    TasksDataSource mTasksRemoteDataSource;
 
     @Override
     public void onCreate() {
@@ -31,6 +40,12 @@ public class App extends BaseApplication {
                 .applicationModule(new ApplicationModule(this)).build();
 
         mAppComponent.inject(this);
+
+
+        Log.e("APP", "DataRepository: "+mDataRepository);
+        Log.e("APP", "tasksRemoteDataSource: "+mTasksRemoteDataSource);
+        Log.e("APP", "tasksLocalDataSource: "+mTasksLocalDataSource);
+
     }
 
     public static ApplicationComponent getComponent() {

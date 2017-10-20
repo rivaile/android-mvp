@@ -2,12 +2,9 @@ package com.oldnum7.di.module;
 
 import android.support.v7.app.AppCompatActivity;
 
-import com.oldnum7.di.annotation.ActivityScoped;
-import com.oldnum7.ui.main.IMainContract;
-import com.oldnum7.ui.login.ILoginContract;
-
 import dagger.Module;
 import dagger.Provides;
+import io.reactivex.disposables.CompositeDisposable;
 
 /**
  * <pre>
@@ -20,25 +17,16 @@ import dagger.Provides;
 @Module
 public class ActivityModule {
 
-    private IMainContract.View mView1;
-    private ILoginContract.View mView;
+
     private AppCompatActivity mActivity;
 
     public ActivityModule(AppCompatActivity activity) {
         this.mActivity = activity;
     }
 
-    @ActivityScoped
     @Provides
-    IMainContract.View provideIMainContractView() {
-        return mView1;
-    }
-
-
-    @ActivityScoped
-    @Provides
-    ILoginContract.View provideILoginContractView() {
-        return mView;
+    CompositeDisposable provideCompositeDisposable() {
+        return new CompositeDisposable();
     }
 
 }

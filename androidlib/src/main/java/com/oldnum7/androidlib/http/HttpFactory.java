@@ -14,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 import javax.net.ssl.HostnameVerifier;
 
 import okhttp3.Cache;
+import okhttp3.Call;
 import okhttp3.CookieJar;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -289,7 +290,6 @@ public class HttpFactory {
             return this;
         }
 
-
         public Builder setHostnameVerifier(HostnameVerifier hostnameVerifier) {
             this.hostnameVerifier = hostnameVerifier;
             return this;
@@ -304,6 +304,31 @@ public class HttpFactory {
         public HttpFactory build() {
             HttpFactory httpFactory = new HttpFactory(this);
             return httpFactory;
+        }
+    }
+
+    /**
+     * 取消所有请求请求
+     */
+    public void cancelAll() {
+        for (Call call : getOkhttpClient().dispatcher().queuedCalls()) {
+            call.cancel();
+        }
+        for (Call call : getOkhttpClient().dispatcher().runningCalls()) {
+            call.cancel();
+        }
+    }
+
+    /**
+     * 取消所有请求请求
+     */
+    public static void cancelAll(OkHttpClient client) {
+        if (client == null) return;
+        for (Call call : client.dispatcher().queuedCalls()) {
+            call.cancel();
+        }
+        for (Call call : client.dispatcher().runningCalls()) {
+            call.cancel();
         }
     }
 

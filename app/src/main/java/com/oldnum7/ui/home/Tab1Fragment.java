@@ -1,14 +1,22 @@
 package com.oldnum7.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.oldnum7.R;
 import com.oldnum7.base.BaseAppFragment;
-import com.oldnum7.ui.login.LoginFragment;
+import com.oldnum7.ui.login.LoginActivity;
+import com.oldnum7.ui.login.RegisterFragment;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 
 /**
  * <pre>
@@ -20,9 +28,13 @@ import com.oldnum7.ui.login.LoginFragment;
  */
 public class Tab1Fragment extends BaseAppFragment {
 
-    public static LoginFragment newInstance() {
+    @BindView(R.id.btn_login)
+    Button mBtnLogin;
+    Unbinder unbinder;
+
+    public static RegisterFragment newInstance() {
         Bundle args = new Bundle();
-        LoginFragment fragment = new LoginFragment();
+        RegisterFragment fragment = new RegisterFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -35,7 +47,7 @@ public class Tab1Fragment extends BaseAppFragment {
 //        ActivityComponent component = getActivityComponent();
 //        if (component != null) {
 //            component.inject(this);
-//            setUnBinder(ButterKnife.bind(this, view));
+        setUnBinder(ButterKnife.bind(this, view));
 //        }
         return view;
     }
@@ -43,5 +55,12 @@ public class Tab1Fragment extends BaseAppFragment {
     @Override
     protected void initData() {
         Log.e(TAG, "initData: ");
+    }
+
+
+    @OnClick(R.id.btn_login)
+    public void onViewClicked() {
+        Intent intent = LoginActivity.getStartIntent(getActivity());
+        startActivity(intent);
     }
 }

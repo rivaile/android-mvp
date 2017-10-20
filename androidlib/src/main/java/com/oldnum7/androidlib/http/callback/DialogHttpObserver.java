@@ -3,9 +3,10 @@ package com.oldnum7.androidlib.http.callback;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Window;
+
+import com.blankj.utilcode.util.ActivityUtils;
 
 import io.reactivex.annotations.NonNull;
 
@@ -32,8 +33,8 @@ public abstract class DialogHttpObserver<T> extends HttpObserver<T> implements D
         dialog.setOnCancelListener(this);
     }
 
-    public DialogHttpObserver(Activity activity) {
-        initDialog(activity);
+    public DialogHttpObserver() {
+        initDialog(ActivityUtils.getTopActivity());
     }
 
     @Override
@@ -58,7 +59,6 @@ public abstract class DialogHttpObserver<T> extends HttpObserver<T> implements D
 
     @Override
     public void onCancel(DialogInterface dialog) {
-        Log.e(TAG, "network has bean canceled...");
         dispose();
     }
 }

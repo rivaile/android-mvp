@@ -28,12 +28,13 @@ public class BaseAppActivity<V extends LceView, P extends BasePresenter<V>> exte
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
+        //need frist init ..
         mActivityComponent = DaggerActivityComponent.builder()
                 .activityModule(new ActivityModule(this))
                 .applicationComponent(((App) getApplication()).getComponent())
                 .build();
+
+        super.onCreate(savedInstanceState);
     }
 
     @Override

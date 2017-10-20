@@ -1,7 +1,5 @@
 package com.oldnum7.domain.usecase;
 
-import android.util.Log;
-
 import com.oldnum7.data.DataRepository;
 import com.oldnum7.data.entity.VersionEntity;
 
@@ -28,7 +26,6 @@ public class UpdateCase extends UseCase<VersionEntity, UpdateCase.Params> {
 
     @Override
     Observable<VersionEntity> buildUseCaseObservable(Params params) {
-        Log.e("TAG", "buildUseCaseObservable: "+ mRepository);
         return mRepository.updateVersion(params.clientVersion);
     }
 

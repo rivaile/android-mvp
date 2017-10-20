@@ -2,10 +2,13 @@ package com.oldnum7.androidlib.mvp.persenter;
 
 import android.support.annotation.Nullable;
 import android.support.annotation.UiThread;
+import android.util.Log;
 
 import com.oldnum7.androidlib.mvp.view.MvpView;
 
 import java.lang.ref.WeakReference;
+
+import io.reactivex.disposables.CompositeDisposable;
 
 /**
  * <pre>
@@ -17,9 +20,13 @@ import java.lang.ref.WeakReference;
  *      version: 1.0
  * </pre>
  */
-public abstract class BasePresenter<V extends MvpView> implements MvpPresenter<V>,IPresenter {
+public abstract class BasePresenter<V extends MvpView> implements MvpPresenter<V>, IPresenter {
+
+    public final String TAG = this.getClass().getSimpleName();
 
     private WeakReference<V> mViewReference;
+
+    private CompositeDisposable mCompositeDisposable;
 
     @UiThread
     @Override
@@ -63,4 +70,23 @@ public abstract class BasePresenter<V extends MvpView> implements MvpPresenter<V
         return mViewReference != null && mViewReference.get() != null;
     }
 
+    @Override
+    public void subscribe() {
+
+    }
+
+
+    public CompositeDisposable getCompositeDisposable() {
+        if (mCompositeDisposable == null) {
+            mCompositeDisposable = new CompositeDisposable();
+        }
+        return mCompositeDisposable;
+    }
+
+    @Override
+    public void unsubscribe() {
+        if (mCompositeDisposable != null) {
+            mCompositeDisposable.dispose();
+        }
+    }
 }

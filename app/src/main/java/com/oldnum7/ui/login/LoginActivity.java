@@ -1,23 +1,26 @@
-package com.oldnum7.ui.user;
+package com.oldnum7.ui.login;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.oldnum7.R;
 import com.oldnum7.base.BaseAppActivity;
 import com.oldnum7.data.entity.LoginEntity;
-import com.oldnum7.ui.login.ILoginContract;
-import com.oldnum7.ui.login.LoginFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * 需要体现模块化的思想...一个模块一个activity...一个功能一个Fragment
+ */
 public class LoginActivity extends BaseAppActivity<ILoginContract.View, LoginPresenter> implements ILoginContract.View {
 
     @BindView(R.id.et_name)
@@ -36,16 +39,25 @@ public class LoginActivity extends BaseAppActivity<ILoginContract.View, LoginPre
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         setUnBinder(ButterKnife.bind(this));
+    }
 
+    @NonNull
+    @Override
+    public void createPresenter() {
         getActivityComponent().inject(this);
     }
 
-    @OnClick(R.id.btn_login)
-    public void onViewClicked() {
-        showAboutFragment();
-//        mPresenter.login(mEtName.getText().toString(), mEtPwd.getText().toString());
+    @OnClick({R.id.btn_register, R.id.btn_login})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.btn_login:
+                mPresenter.login(mEtName.getText().toString(), mEtPwd.getText().toString());
+                break;
+            case R.id.btn_register:
+                showRegisterFragment();
+                break;
+        }
     }
 
     @Override
@@ -58,12 +70,13 @@ public class LoginActivity extends BaseAppActivity<ILoginContract.View, LoginPre
 
     }
 
-    public void showAboutFragment() {
+    @Override
+    public void showRegisterFragment() {
         getSupportFragmentManager()
                 .beginTransaction()
                 .disallowAddToBackStack()
                 .setCustomAnimations(R.anim.slide_left, R.anim.slide_right)
-                .add(R.id.fl_login, LoginFragment.newInstance(), LoginFragment.TAG)
+                .add(R.id.fl_login, RegisterFragment.newInstance(), RegisterFragment.TAG)
                 .commit();
     }
 
