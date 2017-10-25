@@ -41,7 +41,7 @@ import okio.Buffer;
  *       time   : 2017/06/05/19:29
  *       desc   : 服务器加密认证: http://www.cnblogs.com/bestzrz/archive/2011/09/03/2164620.html
  *       1. header传输: timeStamp,token,formBody 排序后,以=&形式连接,用给定的ANDROID_SECRET_KEY(约定的)用Mac sha256 加密->base64加密,生成signkey ,放在header里传输,header里面还有其他的字段...
- *       2. params传输: 将所有的参数加密成key,拼接在url后...timeline,uuid,token,ANDROID_SECRET_KEY,以=&形式连接,用md5加密,作为一个signRrjcMsg,在以=&形式连接其他参数,uuid,version,表单的参数等,
+ *       2. params传输: 将所有的参数加密成key,拼接在url后...timeline,uuid,token,ANDROID_SECRET_KEY,以=&形式连接,用md5加密,作为一个signMsg,在以=&形式连接其他参数,uuid,version,表单的参数等,
  *       转换成jsonString文本,用Des3指定的秘钥加密,以下形式.url?key = "-------"拼接; 该方式服务端不规范...
  *       version: 1.0
  * </pre>
