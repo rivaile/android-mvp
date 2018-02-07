@@ -23,7 +23,7 @@ public abstract class BaseAppFragment<V extends MvpView, P extends BasePresenter
     public ActivityComponent getActivityComponent() {
         if (mActivity != null) {
             if (mActivity instanceof BaseAppActivity) {
-                return  ((BaseAppActivity) mActivity).getActivityComponent();
+                return ((BaseAppActivity) mActivity).getActivityComponent();
             }
         }
         return null;

@@ -54,7 +54,6 @@ ext {
 
     appDependencies = [
             daggerCompiler     : "com.google.dagger:dagger-compiler:${daggerVersion}",
-
             butterknife        : "com.jakewharton:butterknife:${butterknifeVersion}",
             butterknifeCompiler: "com.jakewharton:butterknife-compiler:${butterknifeVersion}",
     ]

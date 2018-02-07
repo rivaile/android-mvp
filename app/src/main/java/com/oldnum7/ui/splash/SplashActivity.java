@@ -43,4 +43,10 @@ public class SplashActivity extends BaseAppActivity implements ViewPropertyAnima
     public void onAnimationCancel(View view) {
 
     }
+
+    @Override
+    protected void onDestroy() {
+        mIvSplash.clearAnimation();
+        super.onDestroy();
+    }
 }

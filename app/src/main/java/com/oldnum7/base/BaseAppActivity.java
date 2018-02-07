@@ -57,11 +57,11 @@ public class BaseAppActivity<V extends LceView, P extends BasePresenter<V>> exte
         mUnBinder = unBinder;
     }
 
-
     public void showFragment(int resId, BaseAppFragment fragment, String tag) {
         getSupportFragmentManager()
                 .beginTransaction()
-                .disallowAddToBackStack()
+//                .disallowAddToBackStack()
+                .addToBackStack(tag)
                 .setCustomAnimations(R.anim.slide_left, R.anim.slide_right)
                 .add(resId, fragment, tag)
                 .commit();

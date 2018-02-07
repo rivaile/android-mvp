@@ -11,7 +11,6 @@ import android.widget.Button;
 import com.oldnum7.R;
 import com.oldnum7.base.BaseAppFragment;
 import com.oldnum7.ui.login.LoginActivity;
-import com.oldnum7.ui.login.RegisterFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,9 +31,9 @@ public class Tab1Fragment extends BaseAppFragment {
     Button mBtnLogin;
     Unbinder unbinder;
 
-    public static RegisterFragment newInstance() {
+    public static Tab1Fragment newInstance() {
         Bundle args = new Bundle();
-        RegisterFragment fragment = new RegisterFragment();
+        Tab1Fragment fragment = new Tab1Fragment();
         fragment.setArguments(args);
         return fragment;
     }

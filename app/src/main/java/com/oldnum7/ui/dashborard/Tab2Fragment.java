@@ -18,7 +18,6 @@ import com.oldnum7.base.BaseAppFragment;
  * </pre>
  */
 public class Tab2Fragment extends BaseAppFragment {
-
     public static Tab2Fragment newInstance() {
         Bundle args = new Bundle();
         Tab2Fragment fragment = new Tab2Fragment();

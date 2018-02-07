@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -41,7 +42,7 @@ import android.view.ViewGroup;
  * </Pre>
  */
 
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment implements View.OnTouchListener{
 
     public final String TAG = this.getClass().getSimpleName();
 
@@ -56,6 +57,7 @@ public abstract class BaseFragment extends Fragment {
         this.inflater = inflater;
         isFirstLoad = true;
         View view = initView(inflater, container, savedInstanceState);
+        view.setClickable(true);//防止点击事件透传!
         isPrepared = true;
         lazyLoad();
         return view;
@@ -131,4 +133,8 @@ public abstract class BaseFragment extends Fragment {
         void onFragmentDetached(String tag);
     }
 
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        return false;
+    }
 }
